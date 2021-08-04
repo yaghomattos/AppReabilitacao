@@ -14,7 +14,6 @@ export const Login = () => {
   Parse.User._clearCache();
 
   const [CPF, setCPF] = useState('');
-  var id = '';
 
   const navigation = useNavigation();
 
@@ -25,7 +24,7 @@ export const Login = () => {
       verify = response;
     });
     if (verify !== false) {
-      navigation.navigate('Home', id);
+      navigation.navigate('Home', verify);
     } else Alert.alert('Error ! User not found');
   }
 
