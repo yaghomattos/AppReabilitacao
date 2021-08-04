@@ -10,12 +10,13 @@ import { Login } from './src/screens/Login';
 import { Home } from './src/screens/Home';
 import { Monitoring } from './src/screens/Monitoring';
 import { ListSelectExercises } from './src/screens/ListSelectExercises';
+import { Player } from './src/screens/Player';
 
 Parse.initialize(
-  'm0GlXlzavxfoYkdEfQOfcvg3P57xCrcQDhTwJ0O8',
-  'fKv7jVaceov8sgadLXeGa6HFpPS3UrUOrpCyAhjw'
+  'mZ19CetKStaIV82Fqx1ZOgKc5HXs8cEuoY8B1igk',
+  'X841DiHGWSe4Pac6DgbzQxt96xqMaXzcOZR4mhN1'
 );
-Parse.serverURL = 'https://reabilitacao.b4a.io/';
+Parse.serverURL = 'https://reab.b4a.io/';
 Parse.setAsyncStorage(AsyncStorage);
 Parse.enableLocalDatastore();
 
@@ -30,6 +31,7 @@ const App = () => {
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="ListSelectExercises" component={ListSelectExercises} />
         <Stack.Screen name="Monitoring" component={Monitoring} />
+        <Stack.Screen name="Player" component={Player} />
       </Stack.Navigator>
     </NavigationContainer>
   );
