@@ -1,33 +1,19 @@
 import Parse from 'parse/react-native.js';
 
-export async function createPatient(name) {
-  const newPatient = new Parse.Object('Patient');
-  newPatient.set('name', name);
+export async function readPatient(CPF) {
+  const CPFValue = CPF;
+  var query = new Parse.Query('Patient');
+  query.equalTo('CPF', CPFValue);
 
   try {
-    const result = await newPatient.save();
-    console.log('Patient created', result);
-  } catch (error) {
-    console.error('Error while creating Patient: ', error);
-  }
-}
-
-export async function readPatient(name) {
-  const Patient = Parse.Object.extend('Patient');
-  const query = new Parse.Query(Patient);
-  let count = 0;
-  query.equalTo('name', name);
-  try {
-    const results = await query.find();
-    for (const object of results) {
-      const name = object.get('name');
-      console.log(name);
-      count++;
+    const queryResults = await query.find();
+    if (queryResults[0].id !== undefined) {
+      return queryResults[0].id;
     }
-    return count;
+    return false;
   } catch (error) {
-    console.error('Error while fetching Patient', error);
-    return count;
+    console.log('Error fetch patient: ' + error.code + ' ' + error.message);
+    return false;
   }
 }
 
