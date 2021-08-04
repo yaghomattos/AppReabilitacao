@@ -5,24 +5,33 @@ import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { ToChat } from '../routes/ToChat';
 import { ToListSelectExercises } from '../routes/ToListSelectExercises';
 import { ToMonitoring } from '../routes/ToMonitoring';
+import { Logout } from '../components/Logout';
+import AuthContext from '../components/context/auth';
 
 import Styles from '../components/Styles';
 
-export function Home() {
+export function Home(id) {
+  const patientId = id.route.params;
+  
   return (
     <>
-      <StatusBar />
-      <SafeAreaView style={Styles.login_container}>
-        <View style={Styles.login_header}>
-          <Text style={Styles.login_header_text}>
-            <Text style={Styles.login_header_text_bold}>{'AppReabilitação - '}</Text>
-            {'Paciente'}
-          </Text>
-        </View>
-        <ToListSelectExercises />
-        <ToMonitoring />
-        <ToChat />
-      </SafeAreaView>
+      <AuthContext.Provider value={{id: patientId}}>
+        <StatusBar />
+        <SafeAreaView style={Styles.login_container}>
+          <View style={Styles.login_header}>
+            <Text style={Styles.login_header_text}>
+              <Text style={Styles.login_header_text_bold}>
+                {'AppReabilitação - '}
+              </Text>
+              {'Paciente'}
+            </Text>
+          </View>
+          <ToListSelectExercises />
+          <ToMonitoring />
+          <ToChat />
+          <Logout />
+        </SafeAreaView>
+      </AuthContext.Provider>
     </>
   );
 }
