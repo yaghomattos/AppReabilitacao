@@ -6,7 +6,7 @@ import { ToChat } from '../routes/ToChat';
 import { ToListSelectExercises } from '../routes/ToListSelectExercises';
 import { ToMonitoring } from '../routes/ToMonitoring';
 import { Logout } from '../components/Logout';
-import AuthContext from '../components/context/auth';
+import AuthContext from '../components/context/Auth';
 
 import Styles from '../components/Styles';
 

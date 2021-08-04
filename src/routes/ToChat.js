@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Styles from '../components/Styles';
-import AuthContext from '../components/context/auth';
+import AuthContext from '../components/context/Auth';
 
 export const ToChat = () => {
   const navigation = useNavigation();
