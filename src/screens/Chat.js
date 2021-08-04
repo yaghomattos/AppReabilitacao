@@ -11,13 +11,13 @@ export function Chat(props) {
   var toAdmin = {
     __type: 'Pointer',
     className: '_User',
-    objectId: props.route.params.admin,
+    objectId: 'Cp04cRWSvd',
   };
 
   var currentPatient = {
     __type: 'Pointer',
     className: 'Patient',
-    objectId: props.route.params.item.id,
+    objectId: props.route.params,
   };
 
   parseQuery.equalTo('fromPatient', currentPatient);
