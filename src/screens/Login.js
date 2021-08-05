@@ -25,7 +25,7 @@ export const Login = () => {
     });
     if (verify !== false) {
       navigation.navigate('Home', verify);
-    } else Alert.alert('Error ! User not found');
+    } else Alert.alert('Usuário não encontrado');
   }
 
   return (

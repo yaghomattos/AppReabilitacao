@@ -16,7 +16,7 @@ export const Logout = () => {
       .then(async () => {
         currentUser = await Parse.User.currentAsync();
         if (currentUser === null) {
-          Alert.alert('Success!', 'No patient is logged in anymore!');
+          Alert.alert('Sucesso, Paciente deslogado !');
         }
         navigation.dispatch(StackActions.popToTop());
         return true;
