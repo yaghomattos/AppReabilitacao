@@ -5,7 +5,7 @@ import { StackActions } from '@react-navigation/native';
 
 import Parse from 'parse/react-native';
 
-import Styles from './Styles';
+import Styles from '../Styles';
 
 export const Logout = () => {
   const navigation = useNavigation();

@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Parse from 'parse/react-native';
 
-import { readPatient } from '../../components/Patient';
+import { readPatient } from '../../components/Patient/index';
 
 import Styles from '../../components/Styles';
 

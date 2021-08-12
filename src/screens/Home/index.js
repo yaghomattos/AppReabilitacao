@@ -5,8 +5,8 @@ import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { ToChat } from '../../routes/ToChat';
 import { ToListSelectExercises } from '../../routes/ToListSelectExercises';
 import { ToMonitoring } from '../../routes/ToMonitoring';
-import { Logout } from '../../components/Logout';
-import AuthContext from '../../components/context/Auth';
+import { Logout } from '../../components/Logout/index';
+import AuthContext from '../../components/AuthContext/index';
 
 import Styles from '../../components/Styles';
 
