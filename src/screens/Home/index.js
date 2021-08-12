@@ -2,9 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 
-import { ToChat } from '../../routes/ToChat';
-import { ToListSelectExercises } from '../../routes/ToListSelectExercises';
-import { ToMonitoring } from '../../routes/ToMonitoring';
+import { Button } from '../../components/Button/index';
 import { Logout } from '../../components/Logout/index';
 import AuthContext from '../../components/AuthContext/index';
 
@@ -26,9 +24,8 @@ export function Home(id) {
               {'Paciente'}
             </Text>
           </View>
-          <ToListSelectExercises />
-          <ToMonitoring />
-          <ToChat />
+          <Button title = "Exercícios" onPress="ListSelectExercises" props={patientId}/>
+          <Button title="Chat" onPress="Chat" />
           <Logout />
         </SafeAreaView>
       </AuthContext.Provider>
