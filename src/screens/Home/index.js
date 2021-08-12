@@ -2,13 +2,13 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 
-import { ToChat } from '../routes/ToChat';
-import { ToListSelectExercises } from '../routes/ToListSelectExercises';
-import { ToMonitoring } from '../routes/ToMonitoring';
-import { Logout } from '../components/Logout';
-import AuthContext from '../components/context/Auth';
+import { ToChat } from '../../routes/ToChat';
+import { ToListSelectExercises } from '../../routes/ToListSelectExercises';
+import { ToMonitoring } from '../../routes/ToMonitoring';
+import { Logout } from '../../components/Logout';
+import AuthContext from '../../components/context/Auth';
 
-import Styles from '../components/Styles';
+import Styles from '../../components/Styles';
 
 export function Home(id) {
   const patientId = id.route.params;

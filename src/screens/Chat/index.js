@@ -11,7 +11,7 @@ export function Chat(props) {
   var toAdmin = {
     __type: 'Pointer',
     className: '_User',
-    objectId: 'Cp04cRWSvd',
+    objectId: 'a7ihMfzpFc',
   };
 
   var currentPatient = {

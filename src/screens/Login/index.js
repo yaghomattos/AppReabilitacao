@@ -4,8 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import Parse from 'parse/react-native';
 
-import { readPatient } from '../components/Patient';
-import Styles from '../components/Styles';
+import { readPatient } from '../../components/Patient';
+
+import Styles from '../../components/Styles';
 
 export const Login = () => {
   var user = Parse.User.logIn('1', '1').catch(function (error) {
