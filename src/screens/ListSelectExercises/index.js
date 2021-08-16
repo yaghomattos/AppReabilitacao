@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, Text, Alert } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  Alert,
+  SafeAreaView,
+} from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { List, Divider } from 'react-native-paper';
@@ -7,7 +14,9 @@ import { useParseQuery } from '@parse/react-native';
 
 import Parse from 'parse/react-native.js';
 
-import Styles from '../../components/Styles';
+import styles from './styles';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const parseQuery = new Parse.Query('SelectExercises');
 parseQuery.descending('createdAt');
@@ -18,8 +27,8 @@ async function test(patientId) {
   var patientPointer = {
     __type: 'Pointer',
     className: 'Patient',
-    objectId: patientId
-  }
+    objectId: patientId,
+  };
 
   parseQuery.equalTo('patient', patientPointer);
   const results = await parseQuery.find();
@@ -33,46 +42,55 @@ export const ListSelectExercises = (patient) => {
 
   const navigation = useNavigation();
 
-  const styles = StyleSheet.create({
-    container: {
-      backgroundColor: '#f5f5f5',
-      flex: 1,
-    },
-    listTitle: {
-      fontSize: 22,
-    },
-    listDescription: {
-      fontSize: 16,
-    },
-  });
-
   test(patient.route.params);
 
   return (
-    <>
-      <View style={Styles.login_header}>
-        <Text style={Styles.login_header_text}>
-          <Text style={Styles.login_header_text_bold}>
-            {'AppReabilitação - '}
-          </Text>
-          {'Lista de Exercícios Selecionados'}
-        </Text>
-      </View>
-      <View style={styles.container}>
-        <FlatList
-          data={exercise}
-          keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={() => <Divider />}
-          renderItem={({ item }) => (
-            <List.Item
-              title={item.get('exercise').get('name')}
-              titleNumberOfLines={1}
-              titleStyle={styles.listTitle}
-              onPress={() => navigation.navigate('Player', item.get('exercise').get('video').url())}
-            />
-          )}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Ionicons
+          name="arrow-back"
+          size={24}
+          style={styles.back}
+          onPress={() => navigation.goBack()}
+        />
+        <View style={styles.separate}>
+          <Text style={styles.header_text_bold}>{'Olá, Paciente'}</Text>
+          <Text style={styles.header_text}>{'6 de jun, 2021'}</Text>
+        </View>
+        <MaterialCommunityIcons
+          name="bell"
+          size={30}
+          color="white"
+          style={{ paddingRight: 25 }}
         />
       </View>
-    </>
+      <View style={styles.viewTitle}>
+        <Text style={styles.title}>{'Exercícios'}</Text>
+        <View style={styles.listContainer}>
+          <FlatList
+            data={exercise}
+            keyExtractor={(item) => item.id}
+            ItemSeparatorComponent={() => <Divider />}
+            renderItem={({ item }) => (
+              <List.Item
+                style={styles.listItem}
+                title={item.get('exercise').get('name')}
+                titleNumberOfLines={1}
+                titleStyle={styles.listTitle}
+                description={item.get('exercise').get('description')}
+                descriptionStyle={styles.listDescription}
+                descriptionNumberOfLines={1}
+                onPress={() =>
+                  navigation.navigate(
+                    'Player',
+                    item.get('exercise').get('video').url()
+                  )
+                }
+              />
+            )}
+          />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
