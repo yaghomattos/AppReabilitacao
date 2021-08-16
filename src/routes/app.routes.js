@@ -7,18 +7,20 @@ import { Login } from '../screens/Login/index';
 import { Home } from '../screens/Home/index';
 import { ListSelectExercises } from '../screens/ListSelectExercises/index';
 import { Player } from '../screens/Player/index';
+import { Monitoring } from '../screens/Monitoring/index';
 
 const Stack = createStackNavigator();
 
 export function AppRoutes() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode="none">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="ListSelectExercises" component={ListSelectExercises} />
         <Stack.Screen name="Player" component={Player} />
+        <Stack.Screen name="Monitoring" component={Monitoring} />
       </Stack.Navigator>
     </NavigationContainer>
   );
