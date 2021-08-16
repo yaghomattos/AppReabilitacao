@@ -8,7 +8,7 @@ export async function readPatient(CPF) {
   try {
     const queryResults = await query.find();
     if (queryResults[0].id !== undefined) {
-      return queryResults[0].id;
+      return queryResults[0];
     }
     return false;
   } catch (error) {
