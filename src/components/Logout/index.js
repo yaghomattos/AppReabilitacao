@@ -6,6 +6,7 @@ import { StackActions } from '@react-navigation/native';
 import Parse from 'parse/react-native';
 
 import Styles from '../Styles';
+import styles from './styles';
 
 export const Logout = () => {
   const navigation = useNavigation();
@@ -29,11 +30,11 @@ export const Logout = () => {
   };
 
   return (
-    <View style={Styles.login_wrapper}>
-      <View style={Styles.form}>
+    <View style={styles.wrapper}>
+      <View style={styles.form}>
         <TouchableOpacity onPress={() => userLogout()}>
-          <View style={Styles.button}>
-            <Text style={Styles.button_label}>{'Sair'}</Text>
+          <View style={styles.button}>
+            <Text style={styles.button_label}>{'Sair'}</Text>
           </View>
         </TouchableOpacity>
       </View>
