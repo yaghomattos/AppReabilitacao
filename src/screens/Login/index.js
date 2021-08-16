@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Parse from 'parse/react-native';
 
 import { readPatient } from '../../components/Patient/index';
 
-import Styles from '../../components/Styles';
+import styles from './styles';
 
 export const Login = () => {
   var user = Parse.User.logIn('1', '1').catch(function (error) {
@@ -21,7 +28,6 @@ export const Login = () => {
   async function doUserLogIn() {
     var verify = false;
     await readPatient(CPF).then((response) => {
-      console.log(response)
       verify = response;
     });
     if (verify !== false) {
@@ -30,22 +36,27 @@ export const Login = () => {
   }
 
   return (
-    <View style={Styles.login_wrapper}>
-      <View style={Styles.form}>
-        <TextInput
-          style={Styles.form_input}
-          value={CPF}
-          placeholder={'CPF'}
-          onChangeText={(text) => setCPF(text)}
-          autoCapitalize={'none'}
-          keyboardType={'email-address'}
-        />
-        <TouchableOpacity onPress={() => doUserLogIn()}>
-          <View style={Styles.button}>
-            <Text style={Styles.button_label}>{'Entrar'}</Text>
-          </View>
-        </TouchableOpacity>
+    <KeyboardAvoidingView behavior={'height'} style={styles.keyboard}>
+      <View style={styles.wrapper}>
+        <View style={styles.logo}>
+          <Text style={styles.text_label}>Logo</Text>
+        </View>
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            value={CPF}
+            placeholder={'CPF'}
+            onChangeText={(text) => setCPF(text)}
+            autoCapitalize={'none'}
+            keyboardType={'email-address'}
+          />
+          <TouchableOpacity onPress={() => doUserLogIn()}>
+            <View style={styles.button}>
+              <Text style={styles.text_label}>{'Entrar'}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
