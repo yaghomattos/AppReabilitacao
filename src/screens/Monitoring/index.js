@@ -22,7 +22,7 @@ export function Monitoring() {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.date}>{'6 de jun, 2021'}</Text>
+          <Text style={styles.date}>{'6 de ago, 2021'}</Text>
         </View>
         <View style={styles.today}>
           <Text style={styles.title}>{'Feito Hoje'}</Text>
@@ -33,21 +33,21 @@ export function Monitoring() {
           <View style={styles.exerciseContainer}>
             <Text style={styles.description}>
               {
-                'Exercício 1 - Sentado em uma cadeira, relaxe os ombros, com as mãos na barriga, respire lentamente e profudamente.'
+                'Exercício 1 - Inspire profundamente elevando os braços até a altura dos ombros, em seguida expire lentamente abaixando-os.'
               }
             </Text>
           </View>
           <View style={styles.exerciseContainer}>
             <Text style={styles.description}>
               {
-                'Exercício 2 - Em pé, com as mãos apoiadas na cama, fque na ponta dos pés e volte à posição original.'
+                'Exercício 2 - Em pé, com as mãos apoiadas na cama, fique na ponta dos pés e volte à posição original.'
               }
             </Text>
           </View>
           <View style={styles.exerciseContainer}>
             <Text style={styles.description}>
               {
-                'Exercício 3 - Em pé, eleve os joelhos de forma alternada como se estivesse marchando no mesmo lugar.'
+                'Exercício 3 - Sentado em uma cadeira, relaxe os ombros, com as mãos na barriga, respire lentamente e profundamente.'
               }
             </Text>
           </View>

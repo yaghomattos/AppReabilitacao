@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   date: {
-    marginRight: '39%',
+    marginRight: '36%',
     color: '#fff',
     fontSize: 18,
   },
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   exerciseBox: {
     backgroundColor: '#fff',
     paddingTop: 15,
-    paddingBottom: 10,
+    paddingBottom: '30%',
     paddingHorizontal: 20,
   },
   subTitle: {
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     paddingLeft: '5%',
-    paddingRight: '5%',
+    paddingRight: '4%',
     color: '#000',
   },
   feedback: {
