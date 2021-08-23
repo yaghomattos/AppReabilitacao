@@ -31,8 +31,7 @@ export function Chat(props) {
 
   const [messages, setMessages] = useState([]);
 
-  const { isLive, isLoading, isSync, results, count, erro, reload } =
-    useParseQuery(parseQuery);
+  const results = useParseQuery(parseQuery).results;
 
   Parse.User._clearCache();
 

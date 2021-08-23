@@ -37,9 +37,8 @@ async function test(patientId) {
 }
 
 export const ListSelectExercises = (patient) => {
-  const { isLive, isLoading, isSyncing, results, count, error, reload } =
-    useParseQuery(parseQuery);
-
+  const results = useParseQuery(parseQuery).results;
+  
   const navigation = useNavigation();
 
   test(patient.route.params);
