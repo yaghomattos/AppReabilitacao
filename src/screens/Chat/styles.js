@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   back: {
     paddingTop: "8%",
     paddingLeft: "6%",
+    color: '#fff',
   },
   avatarContainer: {
     paddingBottom: "2%",

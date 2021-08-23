@@ -95,7 +95,6 @@ export function Chat(props) {
         <Ionicons
           name="arrow-back"
           size={24}
-          color="black"
           style={styles.back}
           onPress={() => navigation.goBack()}
         />
@@ -138,7 +137,7 @@ export function Chat(props) {
             user: {
               _id: teste(liveMessage),
               name: 'Teste',
-              avatar: 'https://placeimg.com/140/140/any',
+              avatar: 'https://icon-library.com/images/profile-png-icon/profile-png-icon-1.jpg',
             },
           }))
         }
