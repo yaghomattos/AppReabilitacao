@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   videoItem: {
     width: 340,
     height: 340,
-    resizeMode: 'cover',
+    resizeMode: 'stretch',
     alignItems: 'center',
   },
   description: {
