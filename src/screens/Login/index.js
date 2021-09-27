@@ -39,7 +39,7 @@ export const Login = () => {
     <KeyboardAvoidingView behavior={'height'} style={styles.keyboard}>
       <View style={styles.wrapper}>
         <View style={styles.logo}>
-          <Text style={styles.text_label}>Logo</Text>
+          <Text style={styles.text_label}>App Reabilitação</Text>
         </View>
         <View style={styles.form}>
           <TextInput
