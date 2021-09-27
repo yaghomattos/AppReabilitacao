@@ -38,7 +38,7 @@ async function test(patientId) {
 
 export const ListSelectExercises = (patient) => {
   const results = useParseQuery(parseQuery).results;
-  
+
   const navigation = useNavigation();
 
   test(patient.route.params);
@@ -53,8 +53,8 @@ export const ListSelectExercises = (patient) => {
           onPress={() => navigation.goBack()}
         />
         <View style={styles.separate}>
-          <Text style={styles.header_text_bold}>{'Olá, Paciente'}</Text>
-          <Text style={styles.header_text}>{'6 de jun, 2021'}</Text>
+          <Text style={styles.header_text_bold}>{'Olá, Paciente'}{}</Text>
+          <Text style={styles.header_text}>{'21 de set, 2021'}</Text>
         </View>
         <MaterialCommunityIcons
           name="bell"
@@ -78,12 +78,14 @@ export const ListSelectExercises = (patient) => {
                 titleStyle={styles.listTitle}
                 description={item.get('exercise').get('description')}
                 descriptionStyle={styles.listDescription}
-                descriptionNumberOfLines={1}
+                descriptionNumberOfLines={3}
                 onPress={() =>
-                  navigation.navigate(
-                    'Player',
-                    item.get('exercise').get('video').url()
-                  )
+                  navigation.navigate('Player', [
+                    item.get('exercise').get('video').url(),
+                    item.get('exercise').get('name'),
+                    item.get('sets'),
+                    item.get('reps')
+                  ])
                 }
               />
             )}
