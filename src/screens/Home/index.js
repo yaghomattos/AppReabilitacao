@@ -25,7 +25,7 @@ export function Home(props) {
           <View style={styles.background}>
             <Button title = "Exercícios" onPress="ListSelectExercises" props={patientId.id}/>
             <Button title="Chat" onPress="Chat" props={patientId.id} />
-            <Button title="Monitoring" onPress="Monitoring" />
+            <Button title="Monitoramento" onPress="Monitoring" />
           </View>
           <Logout />
         </SafeAreaView>
