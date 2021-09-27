@@ -22,7 +22,7 @@ export function Monitoring() {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.date}>{'6 de ago, 2021'}</Text>
+          <Text style={styles.date}>{'21 de set, 2021'}</Text>
         </View>
         <View style={styles.today}>
           <Text style={styles.title}>{'Feito Hoje'}</Text>
