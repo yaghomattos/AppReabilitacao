@@ -101,7 +101,7 @@ export function Chat(props) {
           <Avatar.Image
             size={100}
             style={styles.avatar}
-            source={require('../../assets/profile.png')}
+            source={require('../../assets/profile.jpg')}
           />
         </View>
         <View style={styles.person}>
