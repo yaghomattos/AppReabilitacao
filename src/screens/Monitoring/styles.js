@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   exerciseBox: {
     backgroundColor: '#fff',
     paddingTop: 15,
-    paddingBottom: '30%',
     paddingHorizontal: 20,
   },
   subTitle: {
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   exerciseContainer: {
-    height: 70,
+    height: "45%",
     paddingTop: 5,
     marginBottom: 20,
     borderRadius: 4,
@@ -58,8 +57,8 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    paddingLeft: '5%',
-    paddingRight: '4%',
+    paddingLeft: '2%',
+    paddingRight: '2%',
     color: '#000',
   },
   feedback: {
