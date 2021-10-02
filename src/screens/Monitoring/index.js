@@ -1,15 +1,82 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, Text, View, FlatList } from 'react-native';
+
+import Parse from 'parse/react-native.js';
 
 import { useNavigation } from '@react-navigation/native';
+import { useParseQuery } from '@parse/react-native';
 
 import styles from './styles';
 import { Ionicons } from '@expo/vector-icons';
-import { Divider } from 'react-native-paper';
+import { List, Divider } from 'react-native-paper';
 
-export function Monitoring() {
+const parseQuery = new Parse.Query('SelectExercises');
+parseQuery.ascending('createdAt');
+
+var exercise = '';
+var totalExercise = 0;
+
+async function search(patientId) {
+  var patientPointer = {
+    __type: 'Pointer',
+    className: 'Patient',
+    objectId: patientId,
+  };
+
+  parseQuery.equalTo('patient', patientPointer);
+  var results = await parseQuery.find();
+  console.log(results.length)
+  totalExercise = results.length;
+
+  const query = new Parse.Query('SelectExercises');
+  query.ascending('createdAt');
+  query.equalTo('check', true);
+
+  var result = await query.find();
+  exercise = result;
+}
+
+function Case1() {
+  return 'Ruim';
+}
+
+function Case2() {
+  return 'Bom';
+}
+
+function Case3() {
+  return 'Excelente';
+}
+
+function Productivy(props) {
+  const percent = props;
+  if (percent <= 0.34) return <Case1 />;
+  else if (percent > 0.33 && percent <= 0.67) return <Case2 />;
+  else return <Case3 />;
+}
+
+function CurrentDate() {
+
+  var date = new Date().getDate();
+  var month = new Date().getMonth();
+  var year = new Date().getFullYear();
+
+  var monName;
+  monName = new Array ("janeiro", "fevereiro", "março", "abril", "Maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
+
+  return date + ' de ' + monName[month] + ', ' + year;
+}
+
+export function Monitoring(props) {
   const navigation = useNavigation();
+
+  const patientId = props.route.params;
+  console.log(props)
+
+  const results = useParseQuery(parseQuery).results;
+
+  search(patientId);
 
   return (
     <>
@@ -22,7 +89,7 @@ export function Monitoring() {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.date}>{'21 de set, 2021'}</Text>
+          <Text style={styles.date}>{CurrentDate()}</Text>
         </View>
         <View style={styles.today}>
           <Text style={styles.title}>{'Feito Hoje'}</Text>
@@ -31,36 +98,36 @@ export function Monitoring() {
         <View style={styles.exerciseBox}>
           <Text style={styles.subTitle}>{'Exercícios:'}</Text>
           <View style={styles.exerciseContainer}>
-            <Text style={styles.description}>
-              {
-                'Exercício 1 - Inspire profundamente elevando os braços até a altura dos ombros, em seguida expire lentamente abaixando-os.'
-              }
-            </Text>
-          </View>
-          <View style={styles.exerciseContainer}>
-            <Text style={styles.description}>
-              {
-                'Exercício 2 - Em pé, com as mãos apoiadas na cama, fique na ponta dos pés e volte à posição original.'
-              }
-            </Text>
-          </View>
-          <View style={styles.exerciseContainer}>
-            <Text style={styles.description}>
-              {
-                'Exercício 3 - Sentado em uma cadeira, relaxe os ombros, com as mãos na barriga, respire lentamente e profundamente.'
-              }
-            </Text>
+            <FlatList
+              data={exercise}
+              keyExtractor={(item) => item.id}
+              ItemSeparatorComponent={() => <Divider />}
+              renderItem={({ item }) => (
+                <List.Item
+                  style={styles.item}
+                  title={item.get('exercise').get('name')}
+                  titleNumberOfLines={1}
+                  titleStyle={styles.description}
+                  description={item.get('exercise').get('description')}
+                  descriptionNumberOfLines={5}
+                  descriptionStyle={styles.description}
+                />
+              )}
+            />
           </View>
           <View>
             <Text style={styles.subTitle}>{'Quantidade:'}</Text>
             <View>
               <Text style={styles.feedback}>
-                {'3 de 3 exercícios concluídos'}
+                {' '}
+                {exercise.length + ` de ${totalExercise} exercícios concluídos`}
               </Text>
             </View>
             <Text style={styles.subTitle}>{'Produtividade:'}</Text>
             <View>
-              <Text style={styles.feedback}>{'Excelente'}</Text>
+              <Text style={styles.feedback}>
+                {Productivy(exercise.length / totalExercise)}
+              </Text>
             </View>
           </View>
         </View>
