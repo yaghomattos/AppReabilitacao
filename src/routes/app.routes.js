@@ -8,6 +8,7 @@ import { Home } from '../screens/Home/index';
 import { ListSelectExercises } from '../screens/ListSelectExercises/index';
 import { Player } from '../screens/Player/index';
 import { Monitoring } from '../screens/Monitoring/index';
+import { ExerciseEnding } from '../screens/ExerciseEnding';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export function AppRoutes() {
         <Stack.Screen name="ListSelectExercises" component={ListSelectExercises} />
         <Stack.Screen name="Player" component={Player} />
         <Stack.Screen name="Monitoring" component={Monitoring} />
+        <Stack.Screen name="ExerciseEnding" component={ExerciseEnding} />
       </Stack.Navigator>
     </NavigationContainer>
   );
