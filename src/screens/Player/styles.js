@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   description: {
     alignItems: 'center',
-    paddingBottom: '8%',
+    paddingBottom: 10,
     marginHorizontal: 20,
     borderBottomStartRadius: 8,
     borderBottomEndRadius: 8,
@@ -59,6 +59,19 @@ const styles = StyleSheet.create({
   },
   params: {
     fontSize: 18,
+  },
+  button: {
+    width: 100,
+    height: 50,
+    marginTop: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#384955',
+  },
+  text_label: {
+    color: '#fff',
+    fontSize: 15,
   },
 });
 
