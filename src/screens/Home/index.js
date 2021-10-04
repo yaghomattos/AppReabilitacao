@@ -9,23 +9,23 @@ import AuthContext from '../../components/AuthContext/index';
 import styles from './styles';
 
 export function Home(props) {
-  const patientId = props.route.params;
+  const patient = props.route.params;
 
   return (
     <>
-      <AuthContext.Provider value={{ id: patientId }}>
+      <AuthContext.Provider value={{ id: patient }}>
         <StatusBar />
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.header_text}>
               {'Bem Vindo - '}
-              <Text style={styles.header_text_bold}>{patientId.get('name')}</Text>
+              <Text style={styles.header_text_bold}>{patient.get('name')}</Text>
             </Text>
           </View>
           <View style={styles.background}>
-            <Button title = "Exercícios" onPress="ListSelectExercises" props={patientId.id}/>
-            <Button title="Chat" onPress="Chat" props={patientId.id} />
-            <Button title="Monitoramento" onPress="Monitoring" />
+            <Button title = "Exercícios" onPress="ListSelectExercises" props={patient.id}/>
+            <Button title="Chat" onPress="Chat" props={patient.id} />
+            <Button title="Monitoramento" onPress="Monitoring" props={patient.id}/>
           </View>
           <Logout />
         </SafeAreaView>
