@@ -19,11 +19,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const parseQuery = new Parse.Query('SelectExercises');
-parseQuery.descending('createdAt');
+parseQuery.ascending('createdAt');
 
 var exercise = '';
 
-async function test(patientId) {
+async function Search(patientId) {
   var patientPointer = {
     __type: 'Pointer',
     className: 'Patient',
@@ -36,12 +36,14 @@ async function test(patientId) {
   exercise = results;
 }
 
-export const ListSelectExercises = (patient) => {
+export const ListSelectExercises = (props) => {
   const results = useParseQuery(parseQuery).results;
 
   const navigation = useNavigation();
 
-  test(patient.route.params);
+  const patient = props.route.params;
+
+  Search(patient);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -84,7 +86,8 @@ export const ListSelectExercises = (patient) => {
                     item.get('exercise').get('video').url(),
                     item.get('exercise').get('name'),
                     item.get('sets'),
-                    item.get('reps')
+                    item.get('reps'),
+                    patient
                   ])
                 }
               />
