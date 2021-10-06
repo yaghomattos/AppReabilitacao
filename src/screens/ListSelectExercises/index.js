@@ -1,22 +1,14 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Text,
-  Alert,
-  SafeAreaView,
-} from 'react-native';
-
+import { View, FlatList, Text, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { List, Divider } from 'react-native-paper';
 import { useParseQuery } from '@parse/react-native';
-
 import Parse from 'parse/react-native.js';
 
-import styles from './styles';
+import { List, Divider } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import styles from './styles';
 
 const parseQuery = new Parse.Query('SelectExercises');
 parseQuery.ascending('createdAt');
@@ -37,9 +29,9 @@ async function Search(patientId) {
 }
 
 export const ListSelectExercises = (props) => {
-  const results = useParseQuery(parseQuery).results;
-
   const navigation = useNavigation();
+
+  const results = useParseQuery(parseQuery).results;
 
   const patient = props.route.params;
 
@@ -55,7 +47,10 @@ export const ListSelectExercises = (props) => {
           onPress={() => navigation.goBack()}
         />
         <View style={styles.separate}>
-          <Text style={styles.header_text_bold}>{'Olá, Paciente'}{}</Text>
+          <Text style={styles.header_text_bold}>
+            {'Olá, Paciente'}
+            {}
+          </Text>
           <Text style={styles.header_text}>{'21 de set, 2021'}</Text>
         </View>
         <MaterialCommunityIcons
@@ -87,7 +82,7 @@ export const ListSelectExercises = (props) => {
                     item.get('exercise').get('name'),
                     item.get('sets'),
                     item.get('reps'),
-                    patient
+                    patient,
                   ])
                 }
               />

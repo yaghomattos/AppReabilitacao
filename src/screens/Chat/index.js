@@ -1,20 +1,26 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
 import { GiftedChat, Send } from 'react-native-gifted-chat';
-
-import Parse from 'parse/react-native.js';
-import { useParseQuery } from '@parse/react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useParseQuery } from '@parse/react-native';
+import Parse from 'parse/react-native.js';
 
-import styles from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
+
+import styles from './styles';
 
 const parseQuery = new Parse.Query('Chat');
 parseQuery.descending('createdAt');
 
 export function Chat(props) {
+  const navigation = useNavigation();
+
+  const [messages, setMessages] = useState([]);
+
+  const results = useParseQuery(parseQuery).results;
+
   var toAdmin = {
     __type: 'Pointer',
     className: '_User',
@@ -29,18 +35,7 @@ export function Chat(props) {
 
   parseQuery.equalTo('fromPatient', currentPatient);
 
-  const [messages, setMessages] = useState([]);
-
-  const results = useParseQuery(parseQuery).results;
-
   Parse.User._clearCache();
-
-  function teste(object) {
-    if (object.get('from') === '2') {
-      return 1;
-    }
-    return 2;
-  }
 
   const onSend = useCallback((messages = []) => {
     setMessages((previousMessages) =>
@@ -60,13 +55,18 @@ export function Chat(props) {
     }
   }, []);
 
-  const navigation = useNavigation();
+  function CheckRecipient(object) {
+    if (object.get('from') === '2') {
+      return 1;
+    }
+    return 2;
+  }
 
   function renderSend(props) {
     return (
       <Send {...props}>
         <View style={styles.sendingContainer}>
-          <IconButton icon='send-circle' size={40} color='#000' />
+          <IconButton icon="send-circle" size={40} color="#000" />
         </View>
       </Send>
     );
@@ -75,7 +75,7 @@ export function Chat(props) {
   function scrollToBottomComponent() {
     return (
       <View style={styles.bottomComponentContainer}>
-        <IconButton icon='chevron-double-down' size={36} color='#384955' />
+        <IconButton icon="chevron-double-down" size={36} color="#384955" />
       </View>
     );
   }
@@ -83,7 +83,7 @@ export function Chat(props) {
   function renderLoading() {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size='large' color='#384955' />
+        <ActivityIndicator size="large" color="#384955" />
       </View>
     );
   }
@@ -134,9 +134,10 @@ export function Chat(props) {
             text: liveMessage.get('content'),
             createdAt: liveMessage.get('createdAt'),
             user: {
-              _id: teste(liveMessage),
+              _id: CheckRecipient(liveMessage),
               name: 'Teste',
-              avatar: 'https://icon-library.com/images/profile-png-icon/profile-png-icon-1.jpg',
+              avatar:
+                'https://icon-library.com/images/profile-png-icon/profile-png-icon-1.jpg',
             },
           }))
         }
@@ -144,7 +145,7 @@ export function Chat(props) {
         user={{
           _id: 1,
         }}
-        placeholder='Digite sua mensagem'
+        placeholder="Digite sua mensagem"
         alwaysShowSend
         renderSend={renderSend}
         scrollToBottomComponent={scrollToBottomComponent}

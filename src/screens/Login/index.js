@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import Parse from 'parse/react-native';
 
 import { readPatient } from '../../components/Patient/index';
@@ -36,7 +35,11 @@ export const Login = () => {
   }
 
   return (
-    <KeyboardAvoidingView behavior={'height'} style={styles.keyboard}>
+    <KeyboardAvoidingView
+      behavior={'height'}
+      keyboardVerticalOffset="-170"
+      style={styles.keyboard}
+    >
       <View style={styles.wrapper}>
         <View style={styles.logo}>
           <Text style={styles.text_label}>App Reabilitação</Text>

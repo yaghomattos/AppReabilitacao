@@ -12,8 +12,6 @@ import { createForm } from '../../components/Form';
 import { createPatientForm } from '../../components/PatientForm';
 
 export function ExerciseEnding(props) {
-  var patientId = props.route.params;
-
   const navigation = useNavigation();
 
   const [frequency, setFrequency] = useState('');
@@ -21,8 +19,11 @@ export function ExerciseEnding(props) {
   const [dyspnea, setDyspnea] = useState(0);
   const [fatigue, setFatigue] = useState(0);
 
+  var patientId = props.route.params;
+
   function handleSave() {
     var formId = createForm(frequency, saturation, dyspnea, fatigue);
+
     formId.then((response) => {
       if (response != false) {
         var patientPointer = {
@@ -30,19 +31,19 @@ export function ExerciseEnding(props) {
           className: 'Patient',
           objectId: patientId,
         };
-  
+
         var formPointer = {
           __type: 'Pointer',
           className: 'Form',
           objectId: response,
         };
-  
+
         var verify = createPatientForm(patientPointer, formPointer);
         if (verify) {
           navigation.goBack();
         }
       }
-    })
+    });
   }
 
   return (

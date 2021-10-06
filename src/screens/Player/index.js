@@ -7,16 +7,16 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-
 import { useNavigation } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
+
 import styles from './styles';
 
 export function Player(props) {
-  const url = props.route.params[0];
-
   const navigation = useNavigation();
+
+  const url = props.route.params[0];
 
   return (
     <>
@@ -43,13 +43,16 @@ export function Player(props) {
           <View style={styles.paramsBox}>
             <Text style={styles.params}>{props.route.params[3]}</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('ExerciseEnding', props.route.params[4])}>
-          <View style={styles.button}>
-            <Text style={styles.text_label}>{'Terminei'}</Text>
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('ExerciseEnding', props.route.params[4])
+            }
+          >
+            <View style={styles.button}>
+              <Text style={styles.text_label}>{'Terminei'}</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-
       </SafeAreaView>
     </>
   );
