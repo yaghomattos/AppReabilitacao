@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 40,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#f5f5f5',
   },
   form: {
     width: '40%',
     maxWidth: 200,
   },
-    button: {
+  button: {
     alignItems: 'center',
     justifyContent: 'center',
     height: 35,

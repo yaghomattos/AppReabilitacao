@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 2,
     height: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
   },
