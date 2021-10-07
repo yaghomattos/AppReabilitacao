@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useParseQuery } from '@parse/react-native';
 import Parse from 'parse/react-native.js';
 
+import { readPatientId } from '../../components/Patient';
+
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
 import { Avatar } from 'react-native-paper';
@@ -14,26 +16,42 @@ import styles from './styles';
 const parseQuery = new Parse.Query('Chat');
 parseQuery.descending('createdAt');
 
+var adminId = '';
+var adminName = '';
+
+async function teste(patientId) {
+  readPatientId(patientId).then((response) => {
+    adminId = response.get('createdFrom').id;
+    adminName = response.get('createdFromName');
+  });
+}
+
 export function Chat(props) {
   const navigation = useNavigation();
 
   const [messages, setMessages] = useState([]);
 
-  const results = useParseQuery(parseQuery).results;
+  var patientId = props.route.params;
+  console.log(patientId);
+
+  teste(patientId);
 
   var toAdmin = {
     __type: 'Pointer',
     className: '_User',
-    objectId: 'a7ihMfzpFc',
+    objectId: adminId,
   };
 
   var currentPatient = {
     __type: 'Pointer',
     className: 'Patient',
-    objectId: props.route.params,
+    objectId: patientId,
   };
 
   parseQuery.equalTo('fromPatient', currentPatient);
+  parseQuery.find();
+
+  const results = useParseQuery(parseQuery).results;
 
   Parse.User._clearCache();
 
@@ -105,7 +123,7 @@ export function Chat(props) {
           />
         </View>
         <View style={styles.person}>
-          <Text style={styles.text}>{'Nome do Reponsável'}</Text>
+          <Text style={styles.text}>{adminName}</Text>
           <View style={styles.viewCircle}>
             <View style={styles.circleCall}>
               <Ionicons
@@ -135,9 +153,7 @@ export function Chat(props) {
             createdAt: liveMessage.get('createdAt'),
             user: {
               _id: CheckRecipient(liveMessage),
-              name: 'Teste',
-              avatar:
-                'https://icon-library.com/images/profile-png-icon/profile-png-icon-1.jpg',
+              name: adminName,
             },
           }))
         }
