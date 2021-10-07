@@ -17,6 +17,23 @@ export async function readPatient(CPF) {
   }
 }
 
+export async function readPatientId(id) {
+  const patientId = id;
+  var query = new Parse.Query('Patient');
+  query.equalTo('objectId', patientId);
+
+  try {
+    const queryResults = await query.find();
+    if (queryResults[0].id !== undefined) {
+      return queryResults[0];
+    }
+    return false;
+  } catch (error) {
+    console.log('Error fetch patient: ' + error.code + ' ' + error.message);
+    return false;
+  }
+}
+
 export async function updatePatient() {
   const query = new Parse.Query('Patient');
   try {
