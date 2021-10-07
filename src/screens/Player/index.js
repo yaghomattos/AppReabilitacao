@@ -9,9 +9,22 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import {
+  readSelectExercises,
+  updateSelectExercises,
+} from '../../components/SelectExercises';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
+
+async function Check(patientId) {
+  var objectId = '';
+  await readSelectExercises(patientId).then((response) => {
+    objectId = response;
+  });
+  if (objectId != false) updateSelectExercises(objectId);
+}
 
 export function Player(props) {
   const navigation = useNavigation();
@@ -35,18 +48,33 @@ export function Player(props) {
           <Image source={{ uri: url }} style={styles.videoItem} />
         </View>
         <View style={styles.description}>
-          <Text style={styles.paramsTitle}>{'Séries:'}</Text>
-          <View style={styles.paramsBox}>
-            <Text style={styles.params}>{props.route.params[2]}</Text>
+          <Text style={styles.paramsTitle}>
+            {props.route.params[2] != 0 ? 'Séries:' : 'Cronômetro:'}
+          </Text>
+          <View
+            style={
+              props.route.params[2] != 0 ? styles.paramsBox : styles.paramsBox2
+            }
+          >
+            <Text style={styles.params}>
+              {props.route.params[2] != 0
+                ? props.route.params[2]
+                : props.route.params[4] + ' segundos'}
+            </Text>
           </View>
-          <Text style={styles.paramsTitle}>{'Repetições:'}</Text>
-          <View style={styles.paramsBox}>
-            <Text style={styles.params}>{props.route.params[3]}</Text>
+          <Text style={styles.paramsTitle}>
+            {props.route.params[2] != 0 ? 'Repetições:' : ''}
+          </Text>
+          <View style={props.route.params[2] != 0 ? styles.paramsBox : ''}>
+            <Text style={styles.params}>
+              {props.route.params[2] != 0 ? props.route.params[3] : ''}
+            </Text>
           </View>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('ExerciseEnding', props.route.params[4])
-            }
+            onPress={() => {
+              Check(props.route.params[5]);
+              navigation.navigate('ExerciseEnding', props.route.params[5]);
+            }}
           >
             <View style={styles.button}>
               <Text style={styles.text_label}>{'Terminei'}</Text>

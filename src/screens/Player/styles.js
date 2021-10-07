@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     borderTopStartRadius: 8,
     borderTopEndRadius: 8,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   videoItem: {
     width: 340,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderBottomStartRadius: 8,
     borderBottomEndRadius: 8,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   paramsTitle: {
     paddingTop: 10,
@@ -55,7 +55,13 @@ const styles = StyleSheet.create({
     width: '15%',
     alignItems: 'center',
     borderRadius: 4,
-    backgroundColor: '#C4C4C4'
+    backgroundColor: '#C4C4C4',
+  },
+  paramsBox2: {
+    width: '45%',
+    alignItems: 'center',
+    borderRadius: 4,
+    backgroundColor: '#C4C4C4',
   },
   params: {
     fontSize: 18,
