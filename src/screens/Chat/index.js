@@ -32,7 +32,6 @@ export function Chat(props) {
   const [messages, setMessages] = useState([]);
 
   var patientId = props.route.params;
-  console.log(patientId);
 
   teste(patientId);
 

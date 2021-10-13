@@ -24,7 +24,6 @@ async function Search(patientId) {
 
   parseQuery.equalTo('patient', patientPointer);
   var results = await parseQuery.find();
-  console.log(results.length);
   totalExercise = results.length;
 
   const query = new Parse.Query('SelectExercises');
