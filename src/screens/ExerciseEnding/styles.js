@@ -1,10 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0065A4',
+  },
   header: {
     backgroundColor: '#3E9ACD',
     alignItems: 'center',
-    height: '20%',
+    height: 100,
   },
   backView: {
     width: '100%',
@@ -18,7 +24,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     paddingLeft: '10%',
-    paddingTop: '4%',
+    paddingTop: 14,
     fontWeight: 'bold',
   },
   container: {
@@ -36,10 +42,10 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   input: {
-    width: '40%',
+    width: '20%',
     height: 40,
     paddingHorizontal: 20,
-    marginBottom: '5%',
+    marginBottom: 20,
     backgroundColor: '#F4F4F4',
     borderRadius: 10,
   },
@@ -50,7 +56,7 @@ const styles = StyleSheet.create({
   button: {
     width: 100,
     height: 50,
-    marginTop: '5%',
+    marginTop: 20,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
