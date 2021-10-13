@@ -51,7 +51,7 @@ export const Login = () => {
             placeholder={'CPF'}
             onChangeText={(text) => setCPF(text)}
             autoCapitalize={'none'}
-            keyboardType={'email-address'}
+            keyboardType={'numeric'}
           />
           <TouchableOpacity onPress={() => doUserLogIn()}>
             <View style={styles.button}>
