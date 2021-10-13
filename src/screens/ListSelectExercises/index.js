@@ -84,6 +84,7 @@ export const ListSelectExercises = (props) => {
                     item.get('reps'),
                     item.get('timer'),
                     patient,
+                    item.get('exercise'),
                   ])
                 }
               />
