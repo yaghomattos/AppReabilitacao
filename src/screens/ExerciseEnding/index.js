@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/core';
@@ -16,8 +22,8 @@ export function ExerciseEnding(props) {
 
   const [frequency, setFrequency] = useState('');
   const [saturation, setSaturation] = useState('');
-  const [dyspnea, setDyspnea] = useState(0);
-  const [fatigue, setFatigue] = useState(0);
+  const [dyspnea, setDyspnea] = useState('');
+  const [fatigue, setFatigue] = useState('');
 
   var patientId = props.route.params;
 
@@ -47,7 +53,11 @@ export function ExerciseEnding(props) {
   }
 
   return (
-    <>
+    <KeyboardAvoidingView
+      behavior={'height'}
+      keyboardVerticalOffset="-213"
+      style={{ flex: 1, backgroundColor: '#3E9ACD' }}
+    >
       <View style={styles.header}>
         <View style={styles.backView}>
           <Ionicons
@@ -56,7 +66,7 @@ export function ExerciseEnding(props) {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.header_text}>{'Formulário'}</Text>
+          <Text style={styles.header_text}>{'Terminei'}</Text>
         </View>
       </View>
       <View style={styles.container}>
@@ -80,28 +90,22 @@ export function ExerciseEnding(props) {
             maxLength={3}
           />
           <Text style={styles.inputName}>{'Borg Dispineia'}</Text>
-          <Text style={styles.sliderPosition}>{dyspnea}</Text>
-          <Slider
-            style={{ width: 200, height: 20 }}
+          <TextInput
+            style={styles.input}
             value={dyspnea}
-            onValueChange={setDyspnea}
-            maximumValue={6}
-            minimumValue={0}
-            step={1}
-            minimumTrackTintColor="#FFFFFF"
-            maximumTrackTintColor="#000000"
+            placeholder={'digitar'}
+            onChangeText={(text) => setDyspnea(text)}
+            keyboardType={'numeric'}
+            maxLength={3}
           />
           <Text style={styles.inputName}>{'Borg Fadiga'}</Text>
-          <Text style={styles.sliderPosition}>{fatigue}</Text>
-          <Slider
-            style={{ width: 200, height: 20 }}
+          <TextInput
+            style={styles.input}
             value={fatigue}
-            onValueChange={setFatigue}
-            maximumValue={6}
-            minimumValue={0}
-            step={1}
-            minimumTrackTintColor="#FFFFFF"
-            maximumTrackTintColor="#000000"
+            placeholder={'digitar'}
+            onChangeText={(text) => setFatigue(text)}
+            keyboardType={'numeric'}
+            maxLength={3}
           />
           <TouchableOpacity onPress={() => handleSave()}>
             <View style={styles.button}>
@@ -110,6 +114,6 @@ export function ExerciseEnding(props) {
           </TouchableOpacity>
         </View>
       </View>
-    </>
+    </KeyboardAvoidingView>
   );
 }
