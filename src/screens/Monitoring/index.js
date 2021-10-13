@@ -82,6 +82,8 @@ export function Monitoring(props) {
 
   const results = useParseQuery(parseQuery).results;
 
+  Parse.User._clearCache();
+
   const patientId = props.route.params;
 
   Search(patientId);

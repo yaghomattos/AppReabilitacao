@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 
-import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/core';
 
 import Parse from 'parse/react-native.js';

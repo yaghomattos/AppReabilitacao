@@ -33,6 +33,8 @@ export const ListSelectExercises = (props) => {
 
   const results = useParseQuery(parseQuery).results;
 
+  Parse.User._clearCache();
+
   const patient = props.route.params;
 
   Search(patient);
