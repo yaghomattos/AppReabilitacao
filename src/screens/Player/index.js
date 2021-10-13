@@ -18,9 +18,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
 
-async function Check(patientId) {
+async function Check(patientId, exerciseId) {
   var objectId = '';
-  await readSelectExercises(patientId).then((response) => {
+  await readSelectExercises(patientId, exerciseId).then((response) => {
     objectId = response;
   });
   if (objectId != false) updateSelectExercises(objectId);
@@ -72,7 +72,7 @@ export function Player(props) {
           </View>
           <TouchableOpacity
             onPress={() => {
-              Check(props.route.params[5]);
+              Check(props.route.params[5], props.route.params[6].id);
               navigation.navigate('ExerciseEnding', props.route.params[5]);
             }}
           >
