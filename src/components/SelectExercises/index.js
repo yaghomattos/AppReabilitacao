@@ -31,7 +31,7 @@ export async function updateSelectExercises(id) {
   const query = new Parse.Query(SelectExercises);
   try {
     const object = await query.get(id);
-    object.set('check', true);
+    if (object.get('check') != true) object.set('check', true);
     try {
       const response = await object.save();
     } catch (error) {
