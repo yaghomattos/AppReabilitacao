@@ -1,9 +1,17 @@
-import React from 'react';
-import { SafeAreaView, StatusBar, Text, View, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  StatusBar,
+  Text,
+  View,
+  FlatList,
+  TouchableHighlight,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useParseQuery } from '@parse/react-native';
 import Parse from 'parse/react-native.js';
 
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 import { List, Divider } from 'react-native-paper';
 
@@ -88,6 +96,11 @@ export function Monitoring(props) {
 
   Search(patientId);
 
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const currentDate = new Date();
+
   return (
     <>
       <StatusBar />
@@ -99,7 +112,27 @@ export function Monitoring(props) {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.date}>{CurrentDate()}</Text>
+          <TouchableHighlight
+            style={styles.highlight}
+            activeOpacity={0}
+            onPress={() => {
+              setShow(true);
+            }}
+          >
+            <Text style={styles.date}>{CurrentDate()}</Text>
+          </TouchableHighlight>
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={new Date(date)}
+              mode="date"
+              display="calendar"
+              maximumDate={currentDate}
+              onChange={(date) => {
+                setDate(date);
+              }}
+            />
+          )}
         </View>
         <View style={styles.today}>
           <Text style={styles.title}>{'Feito Hoje'}</Text>

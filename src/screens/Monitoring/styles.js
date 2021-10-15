@@ -16,9 +16,16 @@ const styles = StyleSheet.create({
     paddingLeft: '6%',
     color: '#fff',
   },
+  highlight: {
+    marginRight: '28%',
+    backgroundColor: '#fff',
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+  },
   date: {
-    marginRight: '36%',
-    color: '#fff',
+    color: '#000',
     fontSize: 18,
   },
   divider: {
@@ -49,7 +56,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   exerciseContainer: {
-    height: "45%",
+    height: '45%',
     paddingTop: 5,
     marginBottom: 20,
     borderRadius: 4,
