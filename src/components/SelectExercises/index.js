@@ -38,7 +38,10 @@ export async function updateSelectExercises(id, formId) {
   try {
     const object = await query.get(id);
     if (object.get('check') != true) object.set('check', true);
-    if (object.get('form') == undefined || object.get('form') == '')
+    if (
+      (object.get('form') == undefined || object.get('form') == '') &&
+      formId != undefined
+    )
       object.set('form', formPointer);
     try {
       const response = await object.save();
@@ -46,6 +49,6 @@ export async function updateSelectExercises(id, formId) {
       console.error('Error while updating SelectExercises', error);
     }
   } catch (error) {
-    console.error('Error while retrieving object SelectExercises', error);
+    console.error('Error in SelectExercises', error);
   }
 }

@@ -38,7 +38,10 @@ export async function updateSelectExams(id, formId) {
   try {
     const object = await query.get(id);
     if (object.get('check') != true) object.set('check', true);
-    if (object.get('form') == undefined || object.get('form') == '')
+    if (
+      (object.get('form') == undefined || object.get('form') == '') &&
+      formId != undefined
+    )
       object.set('form', formPointer);
     try {
       const response = await object.save();
