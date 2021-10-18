@@ -28,14 +28,37 @@ async function Search(patientId) {
   exercise = results;
 }
 
+function CurrentDate() {
+  var date = new Date().getDate();
+  var month = new Date().getMonth();
+  var year = new Date().getFullYear();
+
+  var monName;
+  monName = new Array(
+    'janeiro',
+    'fevereiro',
+    'março',
+    'abril',
+    'Maio',
+    'junho',
+    'julho',
+    'agosto',
+    'setembro',
+    'outubro',
+    'novembro',
+    'dezembro'
+  );
+
+  return date + ' de ' + monName[month] + ', ' + year;
+}
+
 export const ListSelectExercises = (props) => {
   const navigation = useNavigation();
 
-  const results = useParseQuery(parseQuery).results;
-
-  Parse.User._clearCache();
-
   const patient = props.route.params;
+
+  const results = useParseQuery(parseQuery).results;
+  Parse.User._clearCache();
 
   Search(patient);
 
@@ -53,7 +76,7 @@ export const ListSelectExercises = (props) => {
             {'Olá, Paciente'}
             {}
           </Text>
-          <Text style={styles.header_text}>{'21 de set, 2021'}</Text>
+          <Text style={styles.header_text}>{CurrentDate()}</Text>
         </View>
         <MaterialCommunityIcons
           name="bell"
