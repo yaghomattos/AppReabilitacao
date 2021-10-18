@@ -23,20 +23,21 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
 
+var objectId = false;
+
 async function Check(patientId, exerciseOrExam) {
   const exercise_examId = exerciseOrExam.id;
-  var objectId = '';
 
   if (exerciseOrExam.className == 'Exercise') {
     await readSelectExercises(patientId, exercise_examId).then((response) => {
       objectId = response;
+      if (response != false) updateSelectExercises(response);
     });
-    if (objectId != false) updateSelectExercises(objectId);
   } else {
     await readSelectExams(patientId, exercise_examId).then((response) => {
       objectId = response;
+      if (response != false) updateSelectExams(response);
     });
-    if (objectId != false) updateSelectExams(objectId);
   }
 }
 
@@ -87,7 +88,11 @@ export function Player(props) {
           <TouchableOpacity
             onPress={() => {
               Check(props.route.params[5], props.route.params[6]);
-              navigation.navigate('ExerciseEnding', props.route.params[5]);
+              navigation.navigate('ExerciseEnding', [
+                props.route.params[5],
+                props.route.params[6],
+                objectId,
+              ]);
             }}
           >
             <View style={styles.button}>

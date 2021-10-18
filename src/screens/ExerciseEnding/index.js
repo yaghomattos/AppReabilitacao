@@ -9,10 +9,14 @@ import {
 
 import { useNavigation } from '@react-navigation/core';
 
-import styles from './styles';
+import { createPatientForm } from '../../components/PatientForm';
+import { updateSelectExercises } from '../../components/SelectExercises';
+import { updateSelectExams } from '../../components/SelectExams';
+
 import { Ionicons } from '@expo/vector-icons';
 import { createForm } from '../../components/Form';
-import { createPatientForm } from '../../components/PatientForm';
+
+import styles from './styles';
 
 export function ExerciseEnding(props) {
   const navigation = useNavigation();
@@ -22,7 +26,9 @@ export function ExerciseEnding(props) {
   const [dyspnea, setDyspnea] = useState('');
   const [fatigue, setFatigue] = useState('');
 
-  const patientId = props.route.params;
+  const patientId = props.route.params[0];
+  const exerciseOrExam = props.route.params[1];
+  const id = props.route.params[2];
 
   function handleSave() {
     const data = {
@@ -40,6 +46,16 @@ export function ExerciseEnding(props) {
           className: 'Patient',
           objectId: patientId,
         };
+
+        var formPointer = {
+          __type: 'Pointer',
+          className: 'Form',
+          objectId: response,
+        };
+
+        if (exerciseOrExam.className == 'Exercise')
+          updateSelectExercises(id, response);
+        else updateSelectExams(id, response);
 
         var verify = createPatientForm(patientPointer, formPointer);
         if (verify) {
