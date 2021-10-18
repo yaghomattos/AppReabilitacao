@@ -22,7 +22,7 @@ export function ExerciseEnding(props) {
   const [dyspnea, setDyspnea] = useState('');
   const [fatigue, setFatigue] = useState('');
 
-  const patientId = props.route.params[0];
+  const patientId = props.route.params;
 
   function handleSave() {
     const data = {

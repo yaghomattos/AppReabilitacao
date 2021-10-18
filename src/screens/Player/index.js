@@ -14,16 +14,30 @@ import {
   updateSelectExercises,
 } from '../../components/SelectExercises';
 
+import {
+  readSelectExams,
+  updateSelectExams,
+} from '../../components/SelectExams';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
 
-async function Check(patientId, exerciseId) {
+async function Check(patientId, exerciseOrExam) {
+  const exercise_examId = exerciseOrExam.id;
   var objectId = '';
-  await readSelectExercises(patientId, exerciseId).then((response) => {
-    objectId = response;
-  });
-  if (objectId != false) updateSelectExercises(objectId);
+
+  if (exerciseOrExam.className == 'Exercise') {
+    await readSelectExercises(patientId, exercise_examId).then((response) => {
+      objectId = response;
+    });
+    if (objectId != false) updateSelectExercises(objectId);
+  } else {
+    await readSelectExams(patientId, exercise_examId).then((response) => {
+      objectId = response;
+    });
+    if (objectId != false) updateSelectExams(objectId);
+  }
 }
 
 export function Player(props) {
@@ -72,7 +86,7 @@ export function Player(props) {
           </View>
           <TouchableOpacity
             onPress={() => {
-              Check(props.route.params[5], props.route.params[6].id);
+              Check(props.route.params[5], props.route.params[6]);
               navigation.navigate('ExerciseEnding', props.route.params[5]);
             }}
           >
