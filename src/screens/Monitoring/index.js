@@ -88,18 +88,16 @@ function CurrentDate() {
 export function Monitoring(props) {
   const navigation = useNavigation();
 
-  const results = useParseQuery(parseQuery).results;
-
-  Parse.User._clearCache();
-
   const patientId = props.route.params;
-
-  Search(patientId);
+  const currentDate = new Date();
 
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
-  const currentDate = new Date();
+  const results = useParseQuery(parseQuery).results;
+  Parse.User._clearCache();
+
+  Search(patientId);
 
   return (
     <>
