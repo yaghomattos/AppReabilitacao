@@ -1,11 +1,11 @@
 import Parse from 'parse/react-native.js';
 
-export async function createForm(freq, sat, dysp, fat) {
+export async function createForm(props) {
   const myNewObject = new Parse.Object('Form');
-  myNewObject.set('Frequency', freq);
-  myNewObject.set('Saturation', sat);
-  myNewObject.set('Dyspnea', dysp);
-  myNewObject.set('Fatique', fat);
+  myNewObject.set('Frequency', props.freq);
+  myNewObject.set('Saturation', props.sat);
+  myNewObject.set('Dyspnea', props.dysp);
+  myNewObject.set('Fatique', props.fat);
   try {
     const result = await myNewObject.save();
     if (result !== undefined) return result.id;

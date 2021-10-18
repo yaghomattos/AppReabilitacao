@@ -9,8 +9,6 @@ import {
 
 import { useNavigation } from '@react-navigation/core';
 
-import Parse from 'parse/react-native.js';
-
 import styles from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import { createForm } from '../../components/Form';
@@ -24,10 +22,16 @@ export function ExerciseEnding(props) {
   const [dyspnea, setDyspnea] = useState('');
   const [fatigue, setFatigue] = useState('');
 
-  var patientId = props.route.params;
+  const patientId = props.route.params[0];
 
   function handleSave() {
-    var formId = createForm(frequency, saturation, dyspnea, fatigue);
+    const data = {
+      frequency: frequency,
+      saturation: saturation,
+      dyspnea: dyspnea,
+      fatigue: fatigue,
+    };
+    var formId = createForm(data);
 
     formId.then((response) => {
       if (response != false) {
@@ -35,12 +39,6 @@ export function ExerciseEnding(props) {
           __type: 'Pointer',
           className: 'Patient',
           objectId: patientId,
-        };
-
-        var formPointer = {
-          __type: 'Pointer',
-          className: 'Form',
-          objectId: response,
         };
 
         var verify = createPatientForm(patientPointer, formPointer);
