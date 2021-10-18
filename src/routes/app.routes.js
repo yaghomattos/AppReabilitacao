@@ -6,6 +6,7 @@ import { Chat } from '../screens/Chat/index';
 import { Login } from '../screens/Login/index';
 import { Home } from '../screens/Home/index';
 import { ListSelectExercises } from '../screens/ListSelectExercises/index';
+import { ListSelectExams } from '../screens/ListSelectExams/index';
 import { Player } from '../screens/Player/index';
 import { Monitoring } from '../screens/Monitoring/index';
 import { ExerciseEnding } from '../screens/ExerciseEnding';
@@ -19,13 +20,17 @@ export function AppRoutes() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="ListSelectExercises" component={ListSelectExercises} />
+        <Stack.Screen
+          name="ListSelectExercises"
+          component={ListSelectExercises}
+        />
+        <Stack.Screen name="ListSelectExams" component={ListSelectExams} />
         <Stack.Screen name="Player" component={Player} />
         <Stack.Screen name="Monitoring" component={Monitoring} />
         <Stack.Screen name="ExerciseEnding" component={ExerciseEnding} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+}
 
 export default AppRoutes;

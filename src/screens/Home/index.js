@@ -25,6 +25,7 @@ export function Home(props) {
             onPress="ListSelectExercises"
             props={patient.id}
           />
+          <Button title="Exames" onPress="ListSelectExams" props={patient.id} />
           <Button title="Chat" onPress="Chat" props={patient.id} />
           <Button
             title="Monitoramento"
