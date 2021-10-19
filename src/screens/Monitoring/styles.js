@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   exerciseBox: {
+    width: Dimensions.get('window').width,
     backgroundColor: '#fff',
     paddingTop: 15,
     paddingHorizontal: 20,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   exerciseContainer: {
-    height: '45%',
+    height: 160,
     paddingTop: 5,
     marginBottom: 20,
     borderRadius: 4,
