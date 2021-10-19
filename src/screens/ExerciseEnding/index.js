@@ -25,17 +25,23 @@ export function ExerciseEnding(props) {
   const [saturation, setSaturation] = useState('');
   const [dyspnea, setDyspnea] = useState('');
   const [fatigue, setFatigue] = useState('');
+  const [reps, setReps] = useState('');
 
   const patientId = props.route.params[0];
   const exerciseOrExam = props.route.params[1];
   const id = props.route.params[2];
 
-  function handleSave() {
+  var exam = false;
+
+  if (exerciseOrExam.className == 'Exam') exam = true;
+
+  async function handleSave() {
     const data = {
       frequency: frequency,
       saturation: saturation,
       dyspnea: dyspnea,
       fatigue: fatigue,
+      reps: reps,
     };
     var formId = createForm(data);
 
@@ -53,8 +59,7 @@ export function ExerciseEnding(props) {
           objectId: response,
         };
 
-        if (exerciseOrExam.className == 'Exercise')
-          updateSelectExercises(id, response);
+        if (!exam) updateSelectExercises(id, response);
         else updateSelectExams(id, response);
 
         var verify = createPatientForm(patientPointer, formPointer);
@@ -84,6 +89,19 @@ export function ExerciseEnding(props) {
       </View>
       <View style={styles.container}>
         <View style={styles.form}>
+          {exam ? (
+            <>
+              <Text style={styles.inputName}>{'Número de repetições'}</Text>
+              <TextInput
+                style={styles.input}
+                value={reps}
+                placeholder={'digitar'}
+                onChangeText={(text) => setReps(text)}
+                keyboardType={'numeric'}
+                maxLength={3}
+              />
+            </>
+          ) : null}
           <Text style={styles.inputName}>{'Frequência Cardíaca'}</Text>
           <TextInput
             style={styles.input}
