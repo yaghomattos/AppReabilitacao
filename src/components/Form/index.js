@@ -6,6 +6,7 @@ export async function createForm(props) {
   myNewObject.set('Saturation', props.saturation);
   myNewObject.set('Dyspnea', props.dyspnea);
   myNewObject.set('Fatique', props.fatigue);
+  if (props.reps) myNewObject.set('Reps', props.reps);
   try {
     const result = await myNewObject.save();
     if (result !== undefined) return result.id;
