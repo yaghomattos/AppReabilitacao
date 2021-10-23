@@ -72,10 +72,7 @@ export const ListSelectExercises = (props) => {
           onPress={() => navigation.goBack()}
         />
         <View style={styles.separate}>
-          <Text style={styles.header_text_bold}>
-            {'Olá, Paciente'}
-            {}
-          </Text>
+          <Text style={styles.header_text_bold}>{'Olá, Participante'}</Text>
           <Text style={styles.header_text}>{CurrentDate()}</Text>
         </View>
         <MaterialCommunityIcons
