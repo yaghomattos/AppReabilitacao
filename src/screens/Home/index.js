@@ -21,11 +21,15 @@ export function Home(props) {
         </View>
         <View style={styles.background}>
           <Button
-            title="Exercícios"
+            title="Treinamento"
             onPress="ListSelectExercises"
             props={patient.id}
           />
-          <Button title="Exames" onPress="ListSelectExams" props={patient.id} />
+          <Button
+            title="Avaliação"
+            onPress="ListSelectExams"
+            props={patient.id}
+          />
           <Button title="Chat" onPress="Chat" props={patient.id} />
           <Button
             title="Monitoramento"
