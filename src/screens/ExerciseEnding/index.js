@@ -120,7 +120,7 @@ export function ExerciseEnding(props) {
             keyboardType={'numeric'}
             maxLength={3}
           />
-          <Text style={styles.inputName}>{'Borg Dispineia'}</Text>
+          <Text style={styles.inputName}>{'Falta de Ar'}</Text>
           <TextInput
             style={styles.input}
             value={dyspnea}
@@ -129,7 +129,7 @@ export function ExerciseEnding(props) {
             keyboardType={'numeric'}
             maxLength={3}
           />
-          <Text style={styles.inputName}>{'Borg Fadiga'}</Text>
+          <Text style={styles.inputName}>{'Cansaço'}</Text>
           <TextInput
             style={styles.input}
             value={fatigue}
