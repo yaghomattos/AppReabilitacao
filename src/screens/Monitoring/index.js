@@ -197,7 +197,7 @@ export function Monitoring(props) {
                 </Text>
               </View>
             </View>
-            <Text style={styles.subTitle}>{'Exames:'}</Text>
+            <Text style={styles.subTitle}>{'Testes:'}</Text>
             <View style={styles.exerciseContainer}>
               <FlatList
                 nestedScrollEnabled
@@ -221,7 +221,7 @@ export function Monitoring(props) {
               <View>
                 <Text style={styles.feedback}>
                   {' '}
-                  {exam.length + ` de ${totalExam} exames concluídos`}
+                  {exam.length + ` de ${totalExam} testes concluídos`}
                 </Text>
               </View>
               <Text style={styles.subTitle}>{'Produtividade:'}</Text>
