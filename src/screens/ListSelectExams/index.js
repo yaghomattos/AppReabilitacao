@@ -57,7 +57,7 @@ export const ListSelectExams = (props) => {
   const patient = props.route.params;
 
   const results = useParseQuery(parseQuery).results;
-  //Parse.User._clearCache();
+  Parse.User._clearCache();
 
   Search(patient);
 
@@ -71,7 +71,7 @@ export const ListSelectExams = (props) => {
           onPress={() => navigation.goBack()}
         />
         <View style={styles.separate}>
-          <Text style={styles.header_text_bold}>{'Olá, Paciente'}</Text>
+          <Text style={styles.header_text_bold}>{'Olá, Participante'}</Text>
           <Text style={styles.header_text}>{CurrentDate()}</Text>
         </View>
         <MaterialCommunityIcons
@@ -82,7 +82,7 @@ export const ListSelectExams = (props) => {
         />
       </View>
       <View style={styles.viewTitle}>
-        <Text style={styles.title}>{'Exames'}</Text>
+        <Text style={styles.title}>{'Testes'}</Text>
         <View style={styles.listContainer}>
           <FlatList
             data={exam}
