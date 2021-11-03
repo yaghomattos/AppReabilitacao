@@ -26,23 +26,12 @@ export async function readSelectExams(patientId, examId) {
   }
 }
 
-export async function updateSelectExams(id, formId) {
-  var formPointer = {
-    __type: 'Pointer',
-    className: 'Form',
-    objectId: formId,
-  };
-
+export async function updateSelectExams(id) {
   const SelectExams = Parse.Object.extend('SelectExams');
   const query = new Parse.Query(SelectExams);
   try {
     const object = await query.get(id);
     if (object.get('check') != true) object.set('check', true);
-    if (
-      (object.get('form') == undefined || object.get('form') == '') &&
-      formId != undefined
-    )
-      object.set('form', formPointer);
     try {
       const response = await object.save();
     } catch (error) {
