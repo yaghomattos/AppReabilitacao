@@ -23,19 +23,19 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
 
-var objectId = false;
+var objectId = '';
 
 async function Check(patientId, exerciseOrExam) {
   const exercise_examId = exerciseOrExam.id;
 
   if (exerciseOrExam.className == 'Exercise') {
     await readSelectExercises(patientId, exercise_examId).then((response) => {
-      objectId = response;
+      objectId = exercise_examId;
       if (response != false) updateSelectExercises(response);
     });
   } else {
     await readSelectExams(patientId, exercise_examId).then((response) => {
-      objectId = response;
+      objectId = exercise_examId;
       if (response != false) updateSelectExams(response);
     });
   }
