@@ -10,8 +10,6 @@ import {
 import { useNavigation } from '@react-navigation/core';
 
 import { createPatientForm } from '../../components/PatientForm';
-import { updateSelectExercises } from '../../components/SelectExercises';
-import { updateSelectExams } from '../../components/SelectExams';
 
 import { Ionicons } from '@expo/vector-icons';
 import { createForm } from '../../components/Form';
@@ -26,6 +24,7 @@ export function ExerciseEnding(props) {
   const [dyspnea, setDyspnea] = useState('');
   const [fatigue, setFatigue] = useState('');
   const [reps, setReps] = useState('');
+  const [verify, setVerify] = useState('');
 
   const patientId = props.route.params[0];
   const exerciseOrExam = props.route.params[1];
@@ -59,15 +58,22 @@ export function ExerciseEnding(props) {
           objectId: response,
         };
 
-        if (!exam) updateSelectExercises(id, response);
-        else updateSelectExams(id, response);
+        var receiverPointer = {
+          __type: 'Pointer',
+          className: exerciseOrExam.className,
+          objectId: id,
+        };
 
-        var verify = createPatientForm(patientPointer, formPointer);
-        if (verify) {
-          navigation.goBack();
-        }
+        createPatientForm(patientPointer, formPointer, receiverPointer).then(
+          (response) => {
+            setVerify(response);
+          }
+        );
       }
     });
+    if (verify != false) {
+      navigation.goBack();
+    }
   }
 
   return (
