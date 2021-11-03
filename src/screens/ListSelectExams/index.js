@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, Text, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useParseQuery } from '@parse/react-native';
@@ -54,10 +54,38 @@ function CurrentDate() {
 
 export const ListSelectExams = (props) => {
   const navigation = useNavigation();
+
+  const [orientation, setOrientation] = useState(false);
+
   const patient = props.route.params;
+
+  async function VerifyOrientation() {
+    var patientPointer = {
+      __type: 'Pointer',
+      className: 'Patient',
+      objectId: patient,
+    };
+
+    const SelectOrientations = Parse.Object.extend('SelectOrientations');
+    const query = new Parse.Query(SelectOrientations);
+    query.equalTo('patient', patientPointer);
+    query.equalTo('receiver', 'exam');
+    try {
+      const results = await query.find();
+      if (
+        results[0].get('receiver') == 'exam' ||
+        results[0].get('receiver') == 'both'
+      )
+        setOrientation(true);
+    } catch (error) {
+      console.error('SelectOrientations receiver false');
+    }
+  }
 
   const results = useParseQuery(parseQuery).results;
   Parse.User._clearCache();
+
+  VerifyOrientation();
 
   Search(patient);
 
@@ -98,15 +126,25 @@ export const ListSelectExams = (props) => {
                 descriptionStyle={styles.listDescription}
                 descriptionNumberOfLines={3}
                 onPress={() =>
-                  navigation.navigate('Player', [
-                    item.get('exam').get('video').url(),
-                    item.get('exam').get('name'),
-                    item.get('sets'),
-                    item.get('reps'),
-                    item.get('timer'),
-                    patient,
-                    item.get('exam'),
-                  ])
+                  orientation
+                    ? navigation.navigate('Orientation', [
+                        item.get('exam').get('video').url(),
+                        item.get('exam').get('name'),
+                        item.get('sets'),
+                        item.get('reps'),
+                        item.get('timer'),
+                        patient,
+                        item.get('exam'),
+                      ])
+                    : navigation.navigate('Player', [
+                        item.get('exam').get('video').url(),
+                        item.get('exam').get('name'),
+                        item.get('sets'),
+                        item.get('reps'),
+                        item.get('timer'),
+                        patient,
+                        item.get('exam'),
+                      ])
                 }
               />
             )}
