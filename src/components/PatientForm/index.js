@@ -1,12 +1,15 @@
 import Parse from 'parse/react-native.js';
 
-export async function createPatientForm(patient, form) {
+export async function createPatientForm(patient, form, receive) {
   const myNewObject = new Parse.Object('PatientForm');
   myNewObject.set('patient', patient);
   myNewObject.set('form', form);
+  if (receive.className == 'Exercise') myNewObject.set('exercise', receive);
+  else myNewObject.set('exam', receive);
   try {
     const result = await myNewObject.save();
-    return true;
+    if (result !== undefined) return result.id;
+    return false;
   } catch (error) {
     console.error('Error while creating PatientForm: ', error);
     return false;
