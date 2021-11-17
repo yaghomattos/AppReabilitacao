@@ -19,26 +19,26 @@ export const Orientation = (props) => {
 
   const [orientation, setOrientation] = useState('');
 
-  const patient = props.route.params[5];
+  const examId = props.route.params[6];
 
   const propertys = props.route.params;
 
   useEffect(() => {
     async function Search() {
-      var patientPointer = {
+      var examPointer = {
         __type: 'Pointer',
-        className: 'Patient',
-        objectId: patient,
+        className: 'Exam',
+        objectId: examId,
       };
 
-      parseQuery.equalTo('patient', patientPointer);
+      parseQuery.equalTo('exam', examPointer);
       const results = await parseQuery.find();
 
       setOrientation(results);
     }
 
     Search();
-  }, []);
+  }, [orientation]);
 
   const results = useParseQuery(parseQuery).results;
   Parse.User._clearCache();
@@ -73,8 +73,8 @@ export const Orientation = (props) => {
               )}
             />
           </View>
+          <Button title="Continuar" onPress="Player" props={propertys} />
         </View>
-        <Button title="Continuar" onPress="Player" props={propertys} />
       </View>
     </>
   );
