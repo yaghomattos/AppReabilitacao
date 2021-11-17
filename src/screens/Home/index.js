@@ -36,6 +36,11 @@ export function Home(props) {
             onPress="Monitoring"
             props={patient.id}
           />
+          <Button
+            title="Educacional"
+            onPress="Educational"
+            props={patient.id}
+          />
         </View>
         <Logout />
       </SafeAreaView>

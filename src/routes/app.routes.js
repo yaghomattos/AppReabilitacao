@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Chat } from '../screens/Chat/index';
+import { Educational } from '../screens/Educational/index';
 import { Login } from '../screens/Login/index';
 import { Home } from '../screens/Home/index';
 import { ListSelectExercises } from '../screens/ListSelectExercises/index';
@@ -21,6 +22,7 @@ export function AppRoutes() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="Educational" component={Educational} />
         <Stack.Screen
           name="ListSelectExercises"
           component={ListSelectExercises}
