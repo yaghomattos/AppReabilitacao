@@ -3,12 +3,11 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#208AEC',
+    backgroundColor: '#3E9ACD',
   },
   header: {
     alignItems: 'center',
     height: '20%',
-    backgroundColor: '#3E9ACD',
   },
   backView: {
     width: '100%',
@@ -26,8 +25,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   backgroundList: {
-    flex: 1,
-    backgroundColor: '#fff',
+    height: '80%',
+    backgroundColor: '#f5f5f5',
     borderTopStartRadius: 15,
     borderTopEndRadius: 15,
   },
@@ -37,7 +36,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopStartRadius: 15,
     borderTopEndRadius: 15,
-    backgroundColor: '#f5f5f5',
   },
   item: {
     width: 350,
