@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 40,
+    paddingVertical: 10,
     backgroundColor: '#f5f5f5',
   },
   form: {
