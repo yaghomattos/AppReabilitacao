@@ -19,7 +19,7 @@ export const Orientation = (props) => {
 
   const [orientation, setOrientation] = useState('');
 
-  const examId = props.route.params[6];
+  const examId = props.route.params[3].id;
 
   const propertys = props.route.params;
 
@@ -73,7 +73,7 @@ export const Orientation = (props) => {
               )}
             />
           </View>
-          <Button title="Continuar" onPress="Player" props={propertys} />
+          <Button title="Continuar" onPress="FormStart" props={propertys} />
         </View>
       </View>
     </>

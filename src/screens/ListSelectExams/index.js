@@ -102,11 +102,9 @@ export const ListSelectExams = (props) => {
                   navigation.navigate('Orientation', [
                     item.get('exam').get('video').url(),
                     item.get('exam').get('name'),
-                    item.get('sets'),
-                    item.get('reps'),
                     item.get('timer'),
+                    item.get('exam'),
                     patient,
-                    item.get('exam').id,
                   ])
                 }
               />
