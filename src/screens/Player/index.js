@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Image,
@@ -44,7 +44,14 @@ async function Check(patientId, exerciseOrExam) {
 export function Player(props) {
   const navigation = useNavigation();
 
+  const [exam, setExam] = useState(false);
+
   const url = props.route.params[0];
+  const params = props.route.params.length;
+
+  useEffect(() => {
+    if (params == 5) setExam(true);
+  }, []);
 
   return (
     <>
@@ -64,7 +71,11 @@ export function Player(props) {
         </View>
         <View style={styles.description}>
           <Text style={styles.paramsTitle}>
-            {props.route.params[2] != 0 ? 'Séries:' : 'Cronômetro:'}
+            {exam
+              ? 'Cronômetro:'
+              : props.route.params[2] != 0
+              ? 'Séries:'
+              : 'Cronômetro:'}
           </Text>
           <View
             style={
@@ -78,27 +89,52 @@ export function Player(props) {
             </Text>
           </View>
           <Text style={styles.paramsTitle}>
-            {props.route.params[2] != 0 ? 'Repetições:' : ''}
+            {exam ? null : props.route.params[2] != 0 ? 'Repetições:' : ''}
           </Text>
-          <View style={props.route.params[2] != 0 ? styles.paramsBox : ''}>
+          <View
+            style={
+              exam ? null : props.route.params[2] != 0 ? styles.paramsBox : ''
+            }
+          >
             <Text style={styles.params}>
-              {props.route.params[2] != 0 ? props.route.params[3] : ''}
+              {exam
+                ? props.route.params[2] != 0
+                  ? ''
+                  : props.route.params[3]
+                : null}
             </Text>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              Check(props.route.params[5], props.route.params[6]);
-              navigation.navigate('ExerciseEnding', [
-                props.route.params[5],
-                props.route.params[6],
-                objectId,
-              ]);
-            }}
-          >
-            <View style={styles.button}>
-              <Text style={styles.text_label}>{'Terminei'}</Text>
-            </View>
-          </TouchableOpacity>
+          {exam ? (
+            <TouchableOpacity
+              onPress={() => {
+                Check(props.route.params[4], props.route.params[3]);
+                navigation.navigate('FormEnding', [
+                  props.route.params[4],
+                  props.route.params[3],
+                  objectId,
+                ]);
+              }}
+            >
+              <View style={styles.button}>
+                <Text style={styles.text_label}>{'Terminei'}</Text>
+              </View>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                Check(props.route.params[5], props.route.params[6]);
+                navigation.navigate('FormEnding', [
+                  props.route.params[5],
+                  props.route.params[6],
+                  objectId,
+                ]);
+              }}
+            >
+              <View style={styles.button}>
+                <Text style={styles.text_label}>{'Terminei'}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
         </View>
       </SafeAreaView>
     </>
