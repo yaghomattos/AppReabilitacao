@@ -132,7 +132,7 @@ export function FormStart(props) {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.header_text}>{'Nome ?'}</Text>
+          <Text style={styles.header_text}>{'Informações inicias'}</Text>
         </View>
       </View>
       <View style={styles.container}>

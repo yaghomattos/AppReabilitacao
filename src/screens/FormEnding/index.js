@@ -130,7 +130,7 @@ export function FormEnding(props) {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.header_text}>{'Terminei'}</Text>
+          <Text style={styles.header_text}>{'Informações finais'}</Text>
         </View>
       </View>
       <View style={styles.container}>
