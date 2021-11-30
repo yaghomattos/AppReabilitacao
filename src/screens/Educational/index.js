@@ -9,19 +9,16 @@ import { readPatientId } from '../../components/Patient';
 
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
-import { Avatar } from 'react-native-paper';
 
 import styles from './styles';
 
 const parseQuery = new Parse.Query('Educational');
 parseQuery.descending('createdAt');
 
-var adminId = '';
 var adminName = '';
 
-async function teste(patientId) {
+async function Search(patientId) {
   readPatientId(patientId).then((response) => {
-    adminId = response.get('createdFrom').id;
     adminName = response.get('createdFromName');
   });
 }
@@ -33,13 +30,7 @@ export function Educational(props) {
 
   var patientId = props.route.params;
 
-  teste(patientId);
-
-  var fromAdmin = {
-    __type: 'Pointer',
-    className: '_User',
-    objectId: adminId,
-  };
+  Search(patientId);
 
   var currentPatient = {
     __type: 'Pointer',
@@ -51,7 +42,6 @@ export function Educational(props) {
   parseQuery.find();
 
   const results = useParseQuery(parseQuery).results;
-
   Parse.User._clearCache();
 
   const onSend = useCallback((messages = []) => {
