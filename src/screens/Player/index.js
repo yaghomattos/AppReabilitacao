@@ -13,11 +13,11 @@ import {
   readSelectExercises,
   updateSelectExercises,
 } from '../../components/SelectExercises';
-
 import {
   readSelectExams,
   updateSelectExams,
 } from '../../components/SelectExams';
+import { Timer } from '../../components/Timer';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -83,9 +83,11 @@ export function Player(props) {
             }
           >
             <Text style={styles.params}>
-              {props.route.params[2] != 0
-                ? props.route.params[2]
-                : props.route.params[4] + ' segundos'}
+              {props.route.params[2] != 0 ? (
+                <Timer time={props.route.params[2]} />
+              ) : (
+                props.route.params[4] + ' segundos'
+              )}
             </Text>
           </View>
           <Text style={styles.paramsTitle}>
