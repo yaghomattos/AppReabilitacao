@@ -65,9 +65,19 @@ export const Orientation = (props) => {
               ItemSeparatorComponent={() => <Divider />}
               renderItem={({ item }) => (
                 <List.Item
-                  style={styles.item}
+                  style={{
+                    width: 350,
+                    height: item.get('orientation').get('text').length,
+                    marginBottom: 5,
+                    borderRadius: 5,
+                    paddingHorizontal: 0,
+                    paddingVertical: 10,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#6f6f6f',
+                  }}
                   title={item.get('orientation').get('text')}
-                  titleNumberOfLines={10}
+                  titleNumberOfLines={100}
                   titleStyle={styles.itemTitle}
                 />
               )}
