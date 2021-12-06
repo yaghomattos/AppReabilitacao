@@ -63,6 +63,14 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#C4C4C4',
   },
+  timer: {
+    width: '30%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    backgroundColor: '#C4C4C4',
+  },
   params: {
     fontSize: 18,
   },
