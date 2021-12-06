@@ -3,17 +3,20 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3E9ACD',
+    width: 100,
   },
-
+  icons: {
+    color: '#000',
+  },
   title: {
-    color: '#fff',
+    color: '#000',
     fontSize: 15,
   },
   buttons: {
-    width: '40%',
+    width: 80,
+    height: 30,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
   },
 });
 
