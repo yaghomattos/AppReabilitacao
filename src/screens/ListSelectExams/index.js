@@ -78,7 +78,7 @@ export const ListSelectExams = (props) => {
         <MaterialCommunityIcons
           name="bell"
           size={30}
-          color="white"
+          color="transparent"
           style={{ paddingRight: 25 }}
         />
       </View>
@@ -91,13 +91,19 @@ export const ListSelectExams = (props) => {
             ItemSeparatorComponent={() => <Divider />}
             renderItem={({ item }) => (
               <List.Item
-                style={styles.listItem}
+                style={{
+                  width: 342,
+                  height: item.get('exam').get('description'.length),
+                  marginTop: 18,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                }}
                 title={item.get('exam').get('name')}
                 titleNumberOfLines={1}
                 titleStyle={styles.listTitle}
                 description={item.get('exam').get('description')}
                 descriptionStyle={styles.listDescription}
-                descriptionNumberOfLines={3}
+                descriptionNumberOfLines={100}
                 onPress={() =>
                   navigation.navigate('Orientation', [
                     item.get('exam').get('video').url(),

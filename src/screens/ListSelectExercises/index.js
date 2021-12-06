@@ -78,7 +78,7 @@ export const ListSelectExercises = (props) => {
         <MaterialCommunityIcons
           name="bell"
           size={30}
-          color="white"
+          color="transparent"
           style={{ paddingRight: 25 }}
         />
       </View>
