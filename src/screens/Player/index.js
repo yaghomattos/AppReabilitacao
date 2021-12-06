@@ -82,8 +82,16 @@ export function Player(props) {
               props.route.params[2] != 0 ? styles.timer : styles.paramsBox2
             }
           >
-            {props.route.params[2] != 0 ? (
-              <Timer time={props.route.params[2]} />
+            {exam ? (
+              props.route.params[2] != 0 ? (
+                <Timer time={props.route.params[2]} />
+              ) : (
+                <Text style={styles.params}>
+                  {props.route.params[4] + ' segundos'}
+                </Text>
+              )
+            ) : props.route.params[2] != 0 ? (
+              <Text>{props.route.params[2]}</Text>
             ) : (
               <Text style={styles.params}>
                 {props.route.params[4] + ' segundos'}
