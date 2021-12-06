@@ -79,16 +79,16 @@ export function Player(props) {
           </Text>
           <View
             style={
-              props.route.params[2] != 0 ? styles.paramsBox : styles.paramsBox2
+              props.route.params[2] != 0 ? styles.timer : styles.paramsBox2
             }
           >
-            <Text style={styles.params}>
-              {props.route.params[2] != 0 ? (
-                <Timer time={props.route.params[2]} />
-              ) : (
-                props.route.params[4] + ' segundos'
-              )}
-            </Text>
+            {props.route.params[2] != 0 ? (
+              <Timer time={props.route.params[2]} />
+            ) : (
+              <Text style={styles.params}>
+                {props.route.params[4] + ' segundos'}
+              </Text>
+            )}
           </View>
           <Text style={styles.paramsTitle}>
             {exam ? null : props.route.params[2] != 0 ? 'Repetições:' : ''}
