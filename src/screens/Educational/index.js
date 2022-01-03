@@ -1,15 +1,12 @@
-import React, { useState, useCallback } from 'react';
-import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
-import { GiftedChat, Send } from 'react-native-gifted-chat';
-import { useNavigation } from '@react-navigation/native';
-import { useParseQuery } from '@parse/react-native';
-import Parse from 'parse/react-native.js';
-
-import { readPatientId } from '../../components/Patient';
-
 import { Ionicons } from '@expo/vector-icons';
+import { useParseQuery } from '@parse/react-native';
+import { useNavigation } from '@react-navigation/native';
+import Parse from 'parse/react-native.js';
+import React, { useCallback, useState } from 'react';
+import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
-
+import { readPatientId } from '../../components/CRUDs/Patient';
 import styles from './styles';
 
 const parseQuery = new Parse.Query('Educational');

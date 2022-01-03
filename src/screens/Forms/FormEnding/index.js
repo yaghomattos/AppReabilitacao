@@ -1,3 +1,7 @@
+import { Ionicons } from '@expo/vector-icons';
+import { useParseQuery } from '@parse/react-native';
+import { useNavigation } from '@react-navigation/core';
+import Parse from 'parse/react-native.js';
 import React, { useCallback, useState } from 'react';
 import {
   KeyboardAvoidingView,
@@ -6,15 +10,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
-import { useParseQuery } from '@parse/react-native';
-import Parse from 'parse/react-native.js';
-
-import { createPatientForm } from '../../components/PatientForm';
-import { createForm } from '../../components/Form';
-
-import { Ionicons } from '@expo/vector-icons';
-
+import { createForm } from '../../../components/CRUDs/Form';
+import { createPatientForm } from '../../../components/CRUDs/PatientForm';
 import styles from './styles';
 
 var results = '';

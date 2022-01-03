@@ -1,26 +1,23 @@
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
-  View,
   Image,
-  StatusBar,
   SafeAreaView,
+  StatusBar,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-import {
-  readSelectExercises,
-  updateSelectExercises,
-} from '../../components/SelectExercises';
 import {
   readSelectExams,
   updateSelectExams,
-} from '../../components/SelectExams';
+} from '../../components/CRUDs/SelectExams';
+import {
+  readSelectExercises,
+  updateSelectExercises,
+} from '../../components/CRUDs/SelectExercises';
 import { Timer } from '../../components/Timer';
-
-import { Ionicons } from '@expo/vector-icons';
-
 import styles from './styles';
 
 var objectId = '';
