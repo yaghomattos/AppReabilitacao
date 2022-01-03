@@ -1,8 +1,8 @@
 import Parse from 'parse/react-native.js';
 
-export async function createPatientForm(patient, form, receive) {
-  const myNewObject = new Parse.Object('PatientForm');
-  myNewObject.set('patient', patient);
+export async function createParticipantForm(participant, form, receive) {
+  const myNewObject = new Parse.Object('ParticipantForm');
+  myNewObject.set('participant', participant);
   myNewObject.set('form', form);
   if (receive.className == 'Exercise') myNewObject.set('exercise', receive);
   else myNewObject.set('exam', receive);
@@ -11,14 +11,14 @@ export async function createPatientForm(patient, form, receive) {
     if (result !== undefined) return result.id;
     return false;
   } catch (error) {
-    console.error('Error while creating PatientForm: ', error);
+    console.error('Error while creating ParticipantForm: ', error);
     return false;
   }
 }
 
-export async function readPatientForm() {
-  const PatientForm = Parse.Object.extend('PatientForm');
-  const query = new Parse.Query(PatientForm);
+export async function readParticipantForm() {
+  const ParticipantForm = Parse.Object.extend('ParticipantForm');
+  const query = new Parse.Query(ParticipantForm);
   query.equalTo('objectId', 'xKue915KBG');
   try {
     const results = await query.find();
@@ -27,7 +27,7 @@ export async function readPatientForm() {
     }
     return false;
   } catch (error) {
-    console.error('Error while fetching PatientForm', error);
+    console.error('Error while fetching ParticipantForm', error);
     return false;
   }
 }

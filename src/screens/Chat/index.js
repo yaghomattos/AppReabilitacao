@@ -6,7 +6,7 @@ import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { GiftedChat, Send } from 'react-native-gifted-chat';
 import { Avatar, IconButton } from 'react-native-paper';
-import { readPatientId } from '../../components/CRUDs/Patient';
+import { readParticipantId } from '../../components/CRUDs/Participant';
 import styles from './styles';
 
 const parseQuery = new Parse.Query('Chat');
@@ -15,8 +15,8 @@ parseQuery.descending('createdAt');
 var adminId = '';
 var adminName = '';
 
-async function teste(patientId) {
-  readPatientId(patientId).then((response) => {
+async function teste(participantId) {
+  readParticipantId(participantId).then((response) => {
     adminId = response.get('createdFrom').id;
     adminName = response.get('createdFromName');
   });
@@ -27,9 +27,9 @@ export function Chat(props) {
 
   const [messages, setMessages] = useState([]);
 
-  var patientId = props.route.params;
+  var participantId = props.route.params;
 
-  teste(patientId);
+  teste(participantId);
 
   var toAdmin = {
     __type: 'Pointer',
@@ -37,13 +37,13 @@ export function Chat(props) {
     objectId: adminId,
   };
 
-  var currentPatient = {
+  var currentParticipant = {
     __type: 'Pointer',
-    className: 'Patient',
-    objectId: patientId,
+    className: 'Participant',
+    objectId: participantId,
   };
 
-  parseQuery.equalTo('fromPatient', currentPatient);
+  parseQuery.equalTo('fromParticipant', currentParticipant);
   parseQuery.find();
 
   const results = useParseQuery(parseQuery).results;
@@ -58,7 +58,7 @@ export function Chat(props) {
     const Message = new Parse.Object('Chat');
 
     Message.set('fromAdmin', toAdmin);
-    Message.set('fromPatient', currentPatient);
+    Message.set('fromParticipant', currentParticipant);
     Message.set('from', '2');
     Message.set('content', messages[0].text);
     try {

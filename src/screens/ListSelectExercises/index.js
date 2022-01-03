@@ -1,13 +1,10 @@
-import React from 'react';
-import { View, FlatList, Text, SafeAreaView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useParseQuery } from '@parse/react-native';
+import { useNavigation } from '@react-navigation/native';
 import Parse from 'parse/react-native.js';
-
-import { List, Divider } from 'react-native-paper';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import React from 'react';
+import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { Divider, List } from 'react-native-paper';
 import styles from './styles';
 
 const parseQuery = new Parse.Query('SelectExercises');
@@ -15,14 +12,14 @@ parseQuery.ascending('createdAt');
 
 var exercise = '';
 
-async function Search(patientId) {
-  var patientPointer = {
+async function Search(participantId) {
+  var participantPointer = {
     __type: 'Pointer',
-    className: 'Patient',
-    objectId: patientId,
+    className: 'Participant',
+    objectId: participantId,
   };
 
-  parseQuery.equalTo('patient', patientPointer);
+  parseQuery.equalTo('participant', participantPointer);
   const results = await parseQuery.find();
 
   exercise = results;
@@ -55,12 +52,12 @@ function CurrentDate() {
 export const ListSelectExercises = (props) => {
   const navigation = useNavigation();
 
-  const patient = props.route.params;
+  const participant = props.route.params;
 
   const results = useParseQuery(parseQuery).results;
   Parse.User._clearCache();
 
-  Search(patient);
+  Search(participant);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -105,7 +102,7 @@ export const ListSelectExercises = (props) => {
                     item.get('sets'),
                     item.get('reps'),
                     item.get('timer'),
-                    patient,
+                    participant,
                     item.get('exercise'),
                   ])
                 }

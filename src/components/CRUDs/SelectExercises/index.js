@@ -1,10 +1,10 @@
 import Parse from 'parse/react-native.js';
 
-export async function readSelectExercises(patientId, exerciseId) {
+export async function readSelectExercises(participantId, exerciseId) {
   var currentUser = {
     __type: 'Pointer',
-    className: 'Patient',
-    objectId: patientId,
+    className: 'Participant',
+    objectId: participantId,
   };
   var currentExercise = {
     __type: 'Pointer',
@@ -14,7 +14,7 @@ export async function readSelectExercises(patientId, exerciseId) {
 
   const SelectExercises = Parse.Object.extend('SelectExercises');
   const query = new Parse.Query(SelectExercises);
-  query.equalTo('patient', currentUser);
+  query.equalTo('participant', currentUser);
   query.equalTo('exercise', currentExercise);
   try {
     const results = await query.find();

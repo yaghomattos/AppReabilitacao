@@ -69,7 +69,7 @@ const Styles = StyleSheet.create({
     width: '100%',
     maxWidth: 600,
   },
-  menu_patient: {
+  menu_participant: {
     alignItems: 'center',
     paddingTop: 200,
     paddingBottom: 20,

@@ -6,7 +6,7 @@ import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
-import { readPatientId } from '../../components/CRUDs/Patient';
+import { readParticipantId } from '../../components/CRUDs/Participant';
 import styles from './styles';
 
 const parseQuery = new Parse.Query('Educational');
@@ -14,8 +14,8 @@ parseQuery.descending('createdAt');
 
 var adminName = '';
 
-async function Search(patientId) {
-  readPatientId(patientId).then((response) => {
+async function Search(participantId) {
+  readParticipantId(participantId).then((response) => {
     adminName = response.get('createdFromName');
   });
 }
@@ -25,17 +25,17 @@ export function Educational(props) {
 
   const [messages, setMessages] = useState([]);
 
-  var patientId = props.route.params;
+  var participantId = props.route.params;
 
-  Search(patientId);
+  Search(participantId);
 
-  var currentPatient = {
+  var currentParticipant = {
     __type: 'Pointer',
-    className: 'Patient',
-    objectId: patientId,
+    className: 'Participant',
+    objectId: participantId,
   };
 
-  parseQuery.equalTo('to', currentPatient);
+  parseQuery.equalTo('to', currentParticipant);
   parseQuery.find();
 
   const results = useParseQuery(parseQuery).results;

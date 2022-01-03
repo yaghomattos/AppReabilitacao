@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { createForm } from '../../../components/CRUDs/Form';
-import { createPatientForm } from '../../../components/CRUDs/PatientForm';
+import { createParticipantForm } from '../../../components/CRUDs/ParticipantForm';
 import styles from './styles';
 
 var results = '';
@@ -36,7 +36,7 @@ export function FormEnding(props) {
   const [metric5, setMetric5] = useState(false);
   const [metric6, setMetric6] = useState(false);
 
-  const patientId = props.route.params[0];
+  const participantId = props.route.params[0];
   const exerciseOrExam = props.route.params[1];
   const id = props.route.params[2];
 
@@ -83,10 +83,10 @@ export function FormEnding(props) {
 
     formId.then((response) => {
       if (response != false) {
-        var patientPointer = {
+        var participantPointer = {
           __type: 'Pointer',
-          className: 'Patient',
-          objectId: patientId,
+          className: 'Participant',
+          objectId: participantId,
         };
 
         var formPointer = {
@@ -101,11 +101,13 @@ export function FormEnding(props) {
           objectId: id,
         };
 
-        createPatientForm(patientPointer, formPointer, receiverPointer).then(
-          (response) => {
-            setVerify(response);
-          }
-        );
+        createParticipantForm(
+          participantPointer,
+          formPointer,
+          receiverPointer
+        ).then((response) => {
+          setVerify(response);
+        });
       }
     });
     if (verify != false) {
