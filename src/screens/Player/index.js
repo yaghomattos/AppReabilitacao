@@ -10,13 +10,13 @@ import {
   View,
 } from 'react-native';
 import {
-  readSelectExams,
-  updateSelectExams,
-} from '../../components/CRUDs/SelectExams';
-import {
   readSelectExercises,
   updateSelectExercises,
 } from '../../components/CRUDs/SelectExercises';
+import {
+  readSelectTest,
+  updateSelectTest,
+} from '../../components/CRUDs/SelectTest';
 import { Timer } from '../../components/Timer';
 import styles from './styles';
 
@@ -33,9 +33,9 @@ async function Check(participantId, exerciseOrExam) {
       }
     );
   } else {
-    await readSelectExams(participantId, exercise_examId).then((response) => {
+    await readSelectTest(participantId, exercise_examId).then((response) => {
       objectId = exercise_examId;
-      if (response != false) updateSelectExams(response);
+      if (response != false) updateSelectTest(response);
     });
   }
 }

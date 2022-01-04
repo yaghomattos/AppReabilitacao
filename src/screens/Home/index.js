@@ -27,7 +27,7 @@ export function Home(props) {
           />
           <Button
             title="Avaliação"
-            onPress="ListSelectExams"
+            onPress="ListSelectTest"
             props={participant.id}
           />
           <Button title="Chat" onPress="Chat" props={participant.id} />

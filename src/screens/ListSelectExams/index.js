@@ -7,7 +7,7 @@ import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import { Divider, List } from 'react-native-paper';
 import styles from './styles';
 
-const parseQuery = new Parse.Query('SelectExams');
+const parseQuery = new Parse.Query('SelectTest');
 parseQuery.ascending('createdAt');
 
 var exam = '';
@@ -49,7 +49,7 @@ function CurrentDate() {
   return date + ' de ' + monName[month] + ', ' + year;
 }
 
-export const ListSelectExams = (props) => {
+export const ListSelectTest = (props) => {
   const navigation = useNavigation();
 
   const participant = props.route.params;

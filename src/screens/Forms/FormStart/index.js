@@ -16,7 +16,7 @@ import styles from './styles';
 
 var results = '';
 
-const parseQuery = new Parse.Query('SelectExams');
+const parseQuery = new Parse.Query('SelectTest');
 parseQuery.descending('createdAt');
 
 export function FormStart(props) {
