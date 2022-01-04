@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
-  Alert,
   KeyboardAvoidingView,
   Text,
   TextInput,
@@ -9,38 +8,23 @@ import {
   View,
 } from 'react-native';
 import { readParticipant } from '../../components/CRUDs/Participant/index';
-import { auth } from '../../services/firebase';
 import styles from './styles';
 
 export const Login = () => {
-  const [CPF, setCPF] = useState('');
-  const [user, setUser] = useState('');
-
   const navigation = useNavigation();
 
-  const connectServer = async function () {
-    setUser(`${CPF}@participant.com`);
-    const password = '123456';
-
-    auth
-      .signInWithEmailAndPassword(user, password)
-      .then((user) => {
-        navigation.navigate('Home');
-      })
-      .catch(() => {
-        Alert.alert('Email/Senha inválidos');
-      });
-  };
+  const [CPF, setCPF] = useState('');
 
   async function doUserLogIn() {
-    connectServer();
-    var verify = false;
+    var verify = '';
+
     await readParticipant(CPF).then((response) => {
       verify = response;
     });
-    if (verify !== false) {
+
+    if (verify != undefined) {
       navigation.navigate('Home', verify);
-    } else Alert.alert('Usuário não encontrado');
+    }
   }
 
   return (
