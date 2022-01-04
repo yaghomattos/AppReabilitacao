@@ -7,7 +7,7 @@ import {
   REACT_APP_MENSSAGING_SENDER_ID,
   REACT_APP_PROJECT_ID,
   REACT_APP_STORAGE_BUCKET,
-} from '@env';
+} from '@envlocal';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
