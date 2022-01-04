@@ -1,31 +1,22 @@
+import { StackActions, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackActions } from '@react-navigation/native';
-
-import Parse from 'parse/react-native';
-
-import Styles from '../Styles';
+import { auth } from '../../services/firebase';
 import styles from './styles';
 
 export const Logout = () => {
   const navigation = useNavigation();
 
   const userLogout = async function () {
-    let currentUser = await Parse.User.currentAsync();
-    await Parse.User.logOut()
-      .then(async () => {
-        currentUser = await Parse.User.currentAsync();
-        if (currentUser === null) {
-          Alert.alert('Sucesso, Paciente deslogado !');
-        }
+    auth
+      .signOut()
+      .then(() => {
+        Alert.alert('Participante deslogado!');
         navigation.dispatch(StackActions.popToTop());
-        return true;
       })
-      .catch((error) => {
-        Alert.alert('Error in logout!', error.message);
+      .catch(() => {
+        Alert.alert('Erro ao deslogar!');
         navigation.dispatch(StackActions.popToTop());
-        return false;
       });
   };
 
