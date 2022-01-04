@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   Alert,
@@ -7,26 +8,34 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import Parse from 'parse/react-native';
-
-import { readPatient } from '../../components/Patient/index';
-
+import { readParticipant } from '../../components/CRUDs/Participant/index';
+import { auth } from '../../services/firebase';
 import styles from './styles';
 
 export const Login = () => {
-  var user = Parse.User.logIn('1', '1').catch(function (error) {
-    console.log('Error: ' + error.code + ' ' + error.message);
-  });
-  Parse.User._clearCache();
-
   const [CPF, setCPF] = useState('');
+  const [user, setUser] = useState('');
 
   const navigation = useNavigation();
 
+  const connectServer = async function () {
+    setUser(`${CPF}@participant.com`);
+    const password = '123456';
+
+    auth
+      .signInWithEmailAndPassword(user, password)
+      .then((user) => {
+        navigation.navigate('Home');
+      })
+      .catch(() => {
+        Alert.alert('Email/Senha inválidos');
+      });
+  };
+
   async function doUserLogIn() {
+    connectServer();
     var verify = false;
-    await readPatient(CPF).then((response) => {
+    await readParticipant(CPF).then((response) => {
       verify = response;
     });
     if (verify !== false) {
