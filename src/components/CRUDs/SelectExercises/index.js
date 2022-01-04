@@ -1,43 +1,27 @@
-import Parse from 'parse/react-native.js';
+import { database } from '../../../services/firebase';
 
-export async function readSelectExercises(participantId, exerciseId) {
-  var currentUser = {
-    __type: 'Pointer',
-    className: 'Participant',
-    objectId: participantId,
-  };
-  var currentExercise = {
-    __type: 'Pointer',
-    className: 'Exercise',
-    objectId: exerciseId,
-  };
+export async function readSelectExercise(props) {
+  var selectExercise = '';
+  const selectExerciseRef = database
+    .ref('selectExercise')
+    .orderByChild('name')
+    .equalTo(props)
+    .on('child_added', function (snapshot) {
+      selectExercise = snapshot;
+    });
 
-  const SelectExercises = Parse.Object.extend('SelectExercises');
-  const query = new Parse.Query(SelectExercises);
-  query.equalTo('participant', currentUser);
-  query.equalTo('exercise', currentExercise);
-  try {
-    const results = await query.find();
-    if (results != undefined) return results[0].id;
-    return false;
-  } catch (error) {
-    console.error('Error while fetching SelectExercises', error);
-    return false;
+  if (!selectExercise) {
+    console.log('selectExercise does not exists.');
+    return;
+  } else {
+    return selectExerciseRef;
   }
 }
 
-export async function updateSelectExercises(id) {
-  const SelectExercises = Parse.Object.extend('SelectExercises');
-  const query = new Parse.Query(SelectExercises);
-  try {
-    const object = await query.get(id);
-    if (object.get('check') != true) object.set('check', true);
-    try {
-      const response = await object.save();
-    } catch (error) {
-      console.error('Error while updating SelectExercises', error);
-    }
-  } catch (error) {
-    console.error('Error in SelectExercises', error);
-  }
+export async function updateSelectExercise(props) {
+  const selectExerciseRef = database.ref('selectExercise/' + props);
+
+  selectExerciseRef.update({
+    check: true,
+  });
 }
