@@ -1,77 +1,76 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useParseQuery } from '@parse/react-native';
 import { useNavigation } from '@react-navigation/core';
-import Parse from 'parse/react-native.js';
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   KeyboardAvoidingView,
+  LogBox,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { createForm } from '../../../components/CRUDs/Form';
-import { createParticipantForm } from '../../../components/CRUDs/ParticipantForm';
+import { createPreForm } from '../../../components/CRUDs/Form/index';
+import { database } from '../../../services/firebase';
 import styles from './styles';
 
-var results = '';
-
-const parseQuery = new Parse.Query('SelectTest');
-parseQuery.descending('createdAt');
+LogBox.ignoreLogs(['Setting a timer']);
 
 export function FormStart(props) {
   const navigation = useNavigation();
 
+  const [verify, setVerify] = useState('');
+  const [reps, setReps] = useState('');
+  const [timer, setTimer] = useState('');
   const [frequency, setFrequency] = useState('');
   const [saturation, setSaturation] = useState('');
   const [dyspnea, setDyspnea] = useState('');
   const [fatigue, setFatigue] = useState('');
-  const [reps, setReps] = useState('');
-  const [verify, setVerify] = useState('');
+  const [results, setResults] = useState('');
 
-  const [metric1, setMetric1] = useState(false);
-  const [metric2, setMetric2] = useState(false);
-  const [metric3, setMetric3] = useState(false);
-  const [metric4, setMetric4] = useState(false);
-  const [metric5, setMetric5] = useState(false);
-  const [metric6, setMetric6] = useState(false);
-
-  const participantId = props.route.params[5];
-  const exerciseOrExam = props.route.params[3];
-  const id = props.route.params[3].id;
+  const participant = props.route.params.participant;
+  const exerciseOrTest = props.route.params.className;
+  const id = props.route.params.id;
 
   const propertys = props.route.params;
 
-  var exam = false;
-  var result = '';
-
-  async function Search() {
-    results = useParseQuery(parseQuery).results;
-    Parse.User._clearCache();
-  }
-
-  if (exerciseOrExam.className == 'Exam') {
-    exam = true;
-
-    var currentExam = {
-      __type: 'Pointer',
-      className: 'Exam',
-      objectId: exerciseOrExam.id,
-    };
-
-    parseQuery.equalTo('exam', currentExam);
-    parseQuery.find();
-
-    useCallback(() => {
-      Search();
-      if (results[0].get('frequency')) setMetric1(true);
-      if (results[0].get('saturation')) setMetric2(true);
-      if (results[0].get('dyspnea')) setMetric3(true);
-      if (results[0].get('fatique')) setMetric4(true);
-      if (results[0].get('reps')) setMetric5(true);
-      if (results[0].get('')) setMetric6(true);
-    }, [results]);
-  }
+  useEffect(() => {
+    var li = '';
+    if (exerciseOrTest == 'test') {
+      database.ref('selectTest').on('value', (snapshot) => {
+        snapshot.forEach((child) => {
+          if (child.key == id) {
+            li = {
+              test: child.val().test,
+              frequency: child.val().frequency,
+              saturation: child.val().saturation,
+              dyspnea: child.val().dyspnea,
+              fatigue: child.val().fatigue,
+              reps: child.val().reps,
+              timer: child.val().timer,
+            };
+          }
+        });
+        setResults(li);
+      });
+    } else {
+      database.ref('selectExercise').on('value', (snapshot) => {
+        snapshot.forEach((child) => {
+          if (child.key == id) {
+            li = {
+              exercise: child.val().exercise,
+              frequency: child.val().frequency,
+              saturation: child.val().saturation,
+              dyspnea: child.val().dyspnea,
+              fatigue: child.val().fatigue,
+              reps: child.val().reps,
+              timer: child.val().timer,
+            };
+          }
+        });
+        setResults(li);
+      });
+    }
+  }, []);
 
   async function handleSave() {
     const data = {
@@ -80,38 +79,14 @@ export function FormStart(props) {
       dyspnea: dyspnea,
       fatigue: fatigue,
       reps: reps,
+      timer: timer,
+      participant: participant,
     };
-    var formId = createForm(data);
 
-    formId.then((response) => {
-      if (response != false) {
-        var participantPointer = {
-          __type: 'Pointer',
-          className: 'Participant',
-          objectId: participantId,
-        };
-
-        var formPointer = {
-          __type: 'Pointer',
-          className: 'Form',
-          objectId: response,
-        };
-
-        var receiverPointer = {
-          __type: 'Pointer',
-          className: exerciseOrExam.className,
-          objectId: id,
-        };
-
-        createParticipantForm(
-          participantPointer,
-          formPointer,
-          receiverPointer
-        ).then((response) => {
-          setVerify(response);
-        });
-      }
+    var formId = createPreForm(data).then((response) => {
+      setVerify(true);
     });
+
     if (verify != false) {
       navigation.navigate('Player', propertys);
     }
@@ -136,10 +111,10 @@ export function FormStart(props) {
       </View>
       <View style={styles.container}>
         <View style={styles.form}>
-          {!metric5 ? (
-            metric6 ? (
+          {results.reps != false ? (
+            results.timer != false ? (
               <>
-                <Text style={styles.inputName}>{'Parametro'}</Text>
+                <Text style={styles.inputName}>{'Tempo'}</Text>
                 <TextInput
                   style={styles.input}
                   value={reps}
@@ -164,7 +139,7 @@ export function FormStart(props) {
             )
           ) : null}
 
-          {!metric1 ? (
+          {results.frequency != false ? (
             <>
               <Text style={styles.inputName}>{'Frequência Cardíaca'}</Text>
               <TextInput
@@ -178,7 +153,7 @@ export function FormStart(props) {
             </>
           ) : null}
 
-          {metric2 ? (
+          {results.saturation != false ? (
             <>
               <Text style={styles.inputName}>{'Saturação'}</Text>
               <TextInput
@@ -188,11 +163,11 @@ export function FormStart(props) {
                 onChangeText={(text) => setSaturation(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
-              />{' '}
+              />
             </>
           ) : null}
 
-          {metric3 ? (
+          {results.dyspnea != false ? (
             <>
               <Text style={styles.inputName}>{'Falta de Ar'}</Text>
               <TextInput
@@ -202,11 +177,11 @@ export function FormStart(props) {
                 onChangeText={(text) => setDyspnea(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
-              />{' '}
+              />
             </>
           ) : null}
 
-          {metric4 ? (
+          {results.fatigue != false ? (
             <>
               <Text style={styles.inputName}>{'Cansaço'}</Text>
               <TextInput
