@@ -1,18 +1,17 @@
-import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import React from 'react';
 import { Chat } from '../screens/Chat/index';
 import { Educational } from '../screens/Educational/index';
-import { Login } from '../screens/Login/index';
+import { FormEnding } from '../screens/Forms/FormEnding/index';
+import { FormStart } from '../screens/Forms/FormStart/index';
 import { Home } from '../screens/Home/index';
 import { ListSelectExercises } from '../screens/ListSelectExercises/index';
-import { ListSelectExams } from '../screens/ListSelectExams/index';
-import { Player } from '../screens/Player/index';
+import { ListSelectTest } from '../screens/ListSelectTest/index';
+import { Login } from '../screens/Login/index';
 import { Monitoring } from '../screens/Monitoring/index';
-import { FormEnding } from '../screens/FormEnding/index';
-import { FormStart } from '../screens/FormStart/index';
 import { Orientation } from '../screens/Orientation/index';
+import { Player } from '../screens/Player/index';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +27,7 @@ export function AppRoutes() {
           name="ListSelectExercises"
           component={ListSelectExercises}
         />
-        <Stack.Screen name="ListSelectExams" component={ListSelectExams} />
+        <Stack.Screen name="ListSelectTest" component={ListSelectTest} />
         <Stack.Screen name="Player" component={Player} />
         <Stack.Screen name="Monitoring" component={Monitoring} />
         <Stack.Screen name="FormEnding" component={FormEnding} />
