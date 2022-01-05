@@ -13,7 +13,7 @@ export async function readParticipant(props) {
       participant = snapshot;
     });
 
-  if (!participant) {
+  if (participant == undefined) {
     console.log('Participant does not exists.');
     return;
   } else {
