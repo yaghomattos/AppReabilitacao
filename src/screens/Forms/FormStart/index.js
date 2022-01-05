@@ -19,8 +19,6 @@ export function FormStart(props) {
   const navigation = useNavigation();
 
   const [verify, setVerify] = useState('');
-  const [reps, setReps] = useState('');
-  const [timer, setTimer] = useState('');
   const [frequency, setFrequency] = useState('');
   const [saturation, setSaturation] = useState('');
   const [dyspnea, setDyspnea] = useState('');
@@ -45,8 +43,6 @@ export function FormStart(props) {
               saturation: child.val().saturation,
               dyspnea: child.val().dyspnea,
               fatigue: child.val().fatigue,
-              reps: child.val().reps,
-              timer: child.val().timer,
             };
           }
         });
@@ -62,8 +58,6 @@ export function FormStart(props) {
               saturation: child.val().saturation,
               dyspnea: child.val().dyspnea,
               fatigue: child.val().fatigue,
-              reps: child.val().reps,
-              timer: child.val().timer,
             };
           }
         });
@@ -78,12 +72,10 @@ export function FormStart(props) {
       saturation: saturation,
       dyspnea: dyspnea,
       fatigue: fatigue,
-      reps: reps,
-      timer: timer,
       participant: participant,
     };
 
-    var formId = createPreForm(data).then((response) => {
+    var formId = createPreForm(data).then(() => {
       setVerify(true);
     });
 
@@ -111,34 +103,6 @@ export function FormStart(props) {
       </View>
       <View style={styles.container}>
         <View style={styles.form}>
-          {results.reps != false ? (
-            results.timer != false ? (
-              <>
-                <Text style={styles.inputName}>{'Tempo'}</Text>
-                <TextInput
-                  style={styles.input}
-                  value={reps}
-                  placeholder={'digitar'}
-                  onChangeText={(text) => setReps(text)}
-                  keyboardType={'numeric'}
-                  maxLength={3}
-                />
-              </>
-            ) : (
-              <>
-                <Text style={styles.inputName}>{'Número de repetições'}</Text>
-                <TextInput
-                  style={styles.input}
-                  value={reps}
-                  placeholder={'digitar'}
-                  onChangeText={(text) => setReps(text)}
-                  keyboardType={'numeric'}
-                  maxLength={3}
-                />
-              </>
-            )
-          ) : null}
-
           {results.frequency != false ? (
             <>
               <Text style={styles.inputName}>{'Frequência Cardíaca'}</Text>

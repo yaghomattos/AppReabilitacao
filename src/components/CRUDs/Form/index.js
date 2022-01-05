@@ -1,27 +1,40 @@
 import { database } from '../../../services/firebase';
-import { createParticipantPreForm } from '../ParticipantForm/index';
+import {
+  createParticipantPostForm,
+  createParticipantPreForm,
+} from '../ParticipantForm/index';
 
 export async function createPostForm(props) {
   const formRef = database.ref('postForm');
 
   formRef
     .push({
-      reps: '',
-      time: '',
-      frequency: '',
-      saturation: '',
-      dyspnea: '',
-      fatique: '',
+      reps: props.reps,
+      timer: props.timer,
+      frequency: props.frequency,
+      saturation: props.saturation,
+      dyspnea: props.dyspnea,
+      fatigue: props.fatigue,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     })
     .then(() => {
       console.log('Formulário cadastrado');
-      return true;
+      var property = {
+        reps: props.reps,
+        timer: props.timer,
+        participant: props.participant,
+        frequency: props.frequency,
+        saturation: props.saturation,
+        dyspnea: props.dyspnea,
+        fatigue: props.fatigue,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      };
+      createParticipantPostForm(property);
     })
     .catch(() => {
       console.log('Erro ao criar formulário');
-      return false;
     });
 }
 
@@ -34,8 +47,6 @@ export async function createPreForm(props) {
       saturation: props.saturation,
       dyspnea: props.dyspnea,
       fatigue: props.fatigue,
-      reps: props.reps,
-      timer: props.timer,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     })
@@ -43,14 +54,17 @@ export async function createPreForm(props) {
       console.log('Formulário cadastrado');
       var property = {
         participant: props.participant,
-        preForm: response.key,
+        frequency: props.frequency,
+        saturation: props.saturation,
+        dyspnea: props.dyspnea,
+        fatigue: props.fatigue,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
       };
       createParticipantPreForm(property);
-      return response.key;
     })
     .catch(() => {
       console.log('Erro ao criar formulário');
-      return false;
     });
 }
 
