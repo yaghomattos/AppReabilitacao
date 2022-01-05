@@ -9,48 +9,38 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
-  readSelectExercises,
-  updateSelectExercises,
-} from '../../components/CRUDs/SelectExercises';
-import {
-  readSelectTest,
-  updateSelectTest,
-} from '../../components/CRUDs/SelectTest';
-import { Timer } from '../../components/Timer';
+import { updateSelectExercise } from '../../components/CRUDs/SelectExercise/index';
+import { updateSelectTest } from '../../components/CRUDs/SelectTest/index';
+import { Timer } from '../../components/Timer/index';
 import styles from './styles';
-
-var objectId = '';
-
-async function Check(participantId, exerciseOrExam) {
-  const exercise_examId = exerciseOrExam.id;
-
-  if (exerciseOrExam.className == 'Exercise') {
-    await readSelectExercises(participantId, exercise_examId).then(
-      (response) => {
-        objectId = exercise_examId;
-        if (response != false) updateSelectExercises(response);
-      }
-    );
-  } else {
-    await readSelectTest(participantId, exercise_examId).then((response) => {
-      objectId = exercise_examId;
-      if (response != false) updateSelectTest(response);
-    });
-  }
-}
 
 export function Player(props) {
   const navigation = useNavigation();
 
-  const [exam, setExam] = useState(false);
+  const [test, setTest] = useState(false);
 
-  const url = props.route.params[0];
-  const params = props.route.params.length;
+  const propertys = props.route.params;
+
+  const name = props.route.params.name;
+  const video = props.route.params.video;
+  const sets = '';
+  const numReps = props.route.params.numReps;
+  const timer = props.route.params.timer;
+  const id = props.route.params.id;
+  const className = props.route.params.className;
 
   useEffect(() => {
-    if (params == 5) setExam(true);
+    if (className == 'test') setTest(true);
+    else sets = props.route.params.sets;
   }, []);
+
+  async function Check() {
+    if (test) {
+      updateSelectTest(id);
+    } else {
+      updateSelectExercise(id);
+    }
+  }
 
   return (
     <>
@@ -63,87 +53,46 @@ export function Player(props) {
             style={styles.back}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.title}>{props.route.params[1]}</Text>
+          <Text style={styles.title}>{name}</Text>
         </View>
         <View style={styles.videoBox}>
-          <Image source={{ uri: url }} style={styles.videoItem} />
+          <Image source={{ uri: video }} style={styles.videoItem} />
         </View>
         <View style={styles.description}>
           <Text style={styles.paramsTitle}>
-            {exam
-              ? 'Cronômetro:'
-              : props.route.params[2] != 0
-              ? 'Séries:'
-              : 'Cronômetro:'}
+            {test ? 'Cronômetro:' : sets != '' ? 'Séries:' : 'Cronômetro:'}
           </Text>
-          <View
-            style={
-              props.route.params[2] != 0 ? styles.timer : styles.paramsBox2
-            }
-          >
-            {exam ? (
-              props.route.params[2] != 0 ? (
-                <Timer time={props.route.params[2]} />
+          <View style={sets != '' ? styles.timer : styles.paramsBox2}>
+            {test ? (
+              sets != '' ? (
+                <Timer time={sets} />
               ) : (
-                <Text style={styles.params}>
-                  {props.route.params[4] + ' segundos'}
-                </Text>
+                <Text style={styles.params}>{timer + ' segundos'}</Text>
               )
-            ) : props.route.params[2] != 0 ? (
-              <Text>{props.route.params[2]}</Text>
+            ) : sets != '' ? (
+              <Text>{sets}</Text>
             ) : (
-              <Text style={styles.params}>
-                {props.route.params[4] + ' segundos'}
-              </Text>
+              <Text style={styles.params}>{timer + ' segundos'}</Text>
             )}
           </View>
           <Text style={styles.paramsTitle}>
-            {exam ? null : props.route.params[2] != 0 ? 'Repetições:' : ''}
+            {test ? null : sets != '' ? 'Repetições:' : ''}
           </Text>
-          <View
-            style={
-              exam ? null : props.route.params[2] != 0 ? styles.paramsBox : ''
-            }
-          >
+          <View style={test ? null : sets != '' ? styles.paramsBox : ''}>
             <Text style={styles.params}>
-              {exam
-                ? props.route.params[2] != 0
-                  ? ''
-                  : props.route.params[3]
-                : null}
+              {test ? (sets != '' ? '' : numReps) : null}
             </Text>
           </View>
-          {exam ? (
-            <TouchableOpacity
-              onPress={() => {
-                Check(props.route.params[4], props.route.params[3]);
-                navigation.navigate('FormEnding', [
-                  props.route.params[4],
-                  props.route.params[3],
-                  objectId,
-                ]);
-              }}
-            >
-              <View style={styles.button}>
-                <Text style={styles.text_label}>{'Terminei'}</Text>
-              </View>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={() => {
-                Check(props.route.params[5], props.route.params[6]);
-                navigation.navigate('FormEnding', [
-                  props.route.params[5],
-                  props.route.params[6],
-                  objectId,
-                ]);
-              }}
-            >
-              <View style={styles.button}>
-                <Text style={styles.text_label}>{'Terminei'}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity
+            onPress={() => {
+              Check();
+              navigation.navigate('FormEnding', propertys);
+            }}
+          >
+            <View style={styles.button}>
+              <Text style={styles.text_label}>{'Terminei'}</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </>
