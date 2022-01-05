@@ -16,14 +16,14 @@ export const Login = () => {
   const [CPF, setCPF] = useState('');
 
   async function doUserLogIn() {
-    var verify = '';
+    var verify = false;
 
     await readParticipant(CPF).then((response) => {
       verify = response;
     });
 
-    if (verify != undefined) {
-      navigation.navigate('Home', verify);
+    if (verify != false) {
+      navigation.navigate('Home', CPF);
     }
   }
 
