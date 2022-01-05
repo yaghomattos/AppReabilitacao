@@ -1,29 +1,10 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useParseQuery } from '@parse/react-native';
 import { useNavigation } from '@react-navigation/native';
-import Parse from 'parse/react-native.js';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, Text, View } from 'react-native';
-import { Divider, List } from 'react-native-paper';
+import { List } from 'react-native-paper';
+import { database } from '../../services/firebase';
 import styles from './styles';
-
-const parseQuery = new Parse.Query('SelectTest');
-parseQuery.ascending('createdAt');
-
-var exam = '';
-
-async function Search(participantId) {
-  var participantPointer = {
-    __type: 'Pointer',
-    className: 'Participant',
-    objectId: participantId,
-  };
-
-  parseQuery.equalTo('participant', participantPointer);
-  const results = await parseQuery.find();
-
-  exam = results;
-}
 
 function CurrentDate() {
   var date = new Date().getDate();
@@ -54,10 +35,30 @@ export const ListSelectTest = (props) => {
 
   const participant = props.route.params;
 
-  const results = useParseQuery(parseQuery).results;
-  Parse.User._clearCache();
+  const [test, setTest] = useState([]);
 
-  Search(participant);
+  useEffect(() => {
+    var li = [];
+    database.ref('selectTest').on('value', (snapshot) => {
+      snapshot.forEach((child) => {
+        if (child.val().participant == participant.key) {
+          li.push({
+            test: child.val().test,
+            numReps: child.val().numReps,
+            timer: child.val().timer,
+            name: child.val().name,
+            description: child.val().description,
+            video: child.val().video,
+            preview: child.val().preview,
+            participant: child.val().participant,
+            className: 'test',
+            id: child.key,
+          });
+        }
+      });
+      setTest(li);
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -83,33 +84,26 @@ export const ListSelectTest = (props) => {
         <Text style={styles.title}>{'Testes'}</Text>
         <View style={styles.listContainer}>
           <FlatList
-            data={exam}
+            data={test}
             keyExtractor={(item) => item.id}
-            ItemSeparatorComponent={() => <Divider />}
             renderItem={({ item }) => (
               <List.Item
                 style={{
                   width: 342,
-                  height: item.get('exam').get('description'.length),
-                  marginTop: 18,
+                  height: item.description.length,
+                  minHeight: 80,
+                  justifyContent: 'center',
+                  marginVertical: 38,
                   borderWidth: 1,
                   borderRadius: 8,
                 }}
-                title={item.get('exam').get('name')}
+                title={item.name}
                 titleNumberOfLines={1}
                 titleStyle={styles.listTitle}
-                description={item.get('exam').get('description')}
+                description={item.description}
                 descriptionStyle={styles.listDescription}
                 descriptionNumberOfLines={100}
-                onPress={() =>
-                  navigation.navigate('Orientation', [
-                    item.get('exam').get('video').url(),
-                    item.get('exam').get('name'),
-                    item.get('timer'),
-                    item.get('exam'),
-                    participant,
-                  ])
-                }
+                onPress={() => navigation.navigate('Orientation', item)}
               />
             )}
           />
