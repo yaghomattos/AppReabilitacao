@@ -1,7 +1,8 @@
 import { database } from '../../../services/firebase';
+import { createParticipantPreForm } from '../ParticipantForm/index';
 
 export async function createPostForm(props) {
-  const formRef = database.ref('form');
+  const formRef = database.ref('postForm');
 
   formRef
     .push({
@@ -16,23 +17,40 @@ export async function createPostForm(props) {
     })
     .then(() => {
       console.log('Formulário cadastrado');
+      return true;
+    })
+    .catch(() => {
+      console.log('Erro ao criar formulário');
+      return false;
     });
 }
 
 export async function createPreForm(props) {
-  const formRef = database.ref('form');
+  const formRef = database.ref('preForm');
 
   formRef
     .push({
-      frequency: '',
-      saturation: '',
-      dyspnea: '',
-      fatique: '',
+      frequency: props.frequency,
+      saturation: props.saturation,
+      dyspnea: props.dyspnea,
+      fatigue: props.fatigue,
+      reps: props.reps,
+      timer: props.timer,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     })
-    .then(() => {
+    .then((response) => {
       console.log('Formulário cadastrado');
+      var property = {
+        participant: props.participant,
+        preForm: response.key,
+      };
+      createParticipantPreForm(property);
+      return response.key;
+    })
+    .catch(() => {
+      console.log('Erro ao criar formulário');
+      return false;
     });
 }
 
