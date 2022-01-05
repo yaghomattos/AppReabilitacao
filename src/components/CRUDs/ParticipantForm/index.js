@@ -1,4 +1,3 @@
-import { Alert } from 'react-native';
 import { database } from '../../../services/firebase';
 
 export async function createParticipantPreForm(props) {
@@ -7,13 +6,15 @@ export async function createParticipantPreForm(props) {
   participantPreFormRef
     .push({
       participant: props.participant,
-      preForm: props.preForm,
+      form: props.preForm,
     })
     .then(() => {
-      Alert.alert('Exercício selecionado');
+      console.log('ParticipantForm criado');
+      return true;
     })
     .catch(() => {
-      Alert.alert('Erro ao selecionar exercício');
+      console.log('Erro ao criar ParticipantForm');
+      return false;
     });
 }
 
@@ -23,12 +24,14 @@ export async function createParticipantPostForm(props) {
   participantPostFormRef
     .push({
       participant: props.participant,
-      postForm: props.postForm,
+      form: props.postForm,
     })
     .then(() => {
-      Alert.alert('Exercício selecionado');
+      console.log('ParticipantForm criado');
+      return true;
     })
     .catch(() => {
-      Alert.alert('Erro ao selecionar exercício');
+      console.log('Erro ao criar ParticipantForm');
+      return false;
     });
 }
