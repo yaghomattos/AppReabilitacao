@@ -15,7 +15,7 @@ import styles from './styles';
 
 LogBox.ignoreLogs(['Setting a timer']);
 
-export function FormStart(props) {
+export function FormEnding(props) {
   const navigation = useNavigation();
 
   const [verify, setVerify] = useState('');
