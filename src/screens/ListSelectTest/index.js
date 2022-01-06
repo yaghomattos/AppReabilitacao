@@ -39,26 +39,29 @@ export const ListSelectTest = (props) => {
 
   useEffect(() => {
     var li = [];
-    database.ref('selectTest').on('value', (snapshot) => {
-      snapshot.forEach((child) => {
-        if (child.val().participant == participant.key) {
-          li.push({
-            test: child.val().test,
-            numReps: child.val().numReps,
-            timer: child.val().timer,
-            name: child.val().name,
-            description: child.val().description,
-            video: child.val().video,
-            preview: child.val().preview,
-            participant: child.val().participant,
-            className: 'test',
-            id: child.key,
-          });
-        }
+    database
+      .ref('selectTest')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          if (child.val().participant == participant.key) {
+            li.push({
+              test: child.val().test,
+              numReps: child.val().numReps,
+              timer: child.val().timer,
+              name: child.val().name,
+              description: child.val().description,
+              video: child.val().video,
+              preview: child.val().preview,
+              participant: child.val().participant,
+              className: 'test',
+              id: child.key,
+            });
+          }
+        });
+        setTest(li);
       });
-      setTest(li);
-    });
-  }, []);
+  }, [test]);
 
   return (
     <SafeAreaView style={styles.container}>

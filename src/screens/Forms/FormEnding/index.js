@@ -31,27 +31,28 @@ export function FormEnding(props) {
   const exerciseOrTest = props.route.params.className;
   const id = props.route.params.id;
 
-  const propertys = props.route.params;
-
   useEffect(() => {
     var li = '';
     if (exerciseOrTest == 'test') {
-      database.ref('selectTest').on('value', (snapshot) => {
-        snapshot.forEach((child) => {
-          if (child.key == id) {
-            li = {
-              test: child.val().test,
-              frequency: child.val().frequency,
-              saturation: child.val().saturation,
-              dyspnea: child.val().dyspnea,
-              fatigue: child.val().fatigue,
-              reps: child.val().reps,
-              timer: child.val().timer,
-            };
-          }
+      database
+        .ref('selectTest')
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((child) => {
+            if (child.key == id) {
+              li = {
+                test: child.val().test,
+                frequency: child.val().frequency,
+                saturation: child.val().saturation,
+                dyspnea: child.val().dyspnea,
+                fatigue: child.val().fatigue,
+                reps: child.val().reps,
+                timer: child.val().timer,
+              };
+            }
+          });
+          setResults(li);
         });
-        setResults(li);
-      });
     } else {
       database.ref('selectExercise').on('value', (snapshot) => {
         snapshot.forEach((child) => {
@@ -70,7 +71,7 @@ export function FormEnding(props) {
         setResults(li);
       });
     }
-  }, []);
+  }, [results]);
 
   async function handleSave() {
     const data = {

@@ -17,17 +17,20 @@ export const Orientation = (props) => {
 
   useEffect(() => {
     var li = [];
-    database.ref('selectOrientation').on('value', (snapshot) => {
-      snapshot.forEach((child) => {
-        if (child.val().test == test) {
-          selectTestList.push({
-            orientation: child.val().orientation,
-          });
-        }
+    database
+      .ref('selectOrientation')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          if (child.val().test == test) {
+            selectTestList.push({
+              orientation: child.val().orientation,
+            });
+          }
+        });
+        setOrientation(li);
       });
-      setOrientation(li);
-    });
-  }, []);
+  }, [orientation]);
 
   return (
     <>
