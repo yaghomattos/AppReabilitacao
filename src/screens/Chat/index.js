@@ -1,71 +1,62 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useParseQuery } from '@parse/react-native';
 import { useNavigation } from '@react-navigation/native';
-import Parse from 'parse/react-native.js';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { GiftedChat, Send } from 'react-native-gifted-chat';
 import { Avatar, IconButton } from 'react-native-paper';
-import { readParticipantId } from '../../components/CRUDs/Participant';
 import styles from './styles';
-
-const parseQuery = new Parse.Query('Chat');
-parseQuery.descending('createdAt');
-
-var adminId = '';
-var adminName = '';
-
-async function teste(participantId) {
-  readParticipantId(participantId).then((response) => {
-    adminId = response.get('createdFrom').id;
-    adminName = response.get('createdFromName');
-  });
-}
 
 export function Chat(props) {
   const navigation = useNavigation();
 
   const [messages, setMessages] = useState([]);
+  const [results, setResults] = useState([]);
 
-  var participantId = props.route.params;
+  var participant = props.route.params.id;
+  var user = props.route.params.user;
+  var adminName = props.route.params.userName;
 
-  teste(participantId);
-
-  var toAdmin = {
-    __type: 'Pointer',
-    className: '_User',
-    objectId: adminId,
-  };
-
-  var currentParticipant = {
-    __type: 'Pointer',
-    className: 'Participant',
-    objectId: participantId,
-  };
-
-  parseQuery.equalTo('fromParticipant', currentParticipant);
-  parseQuery.find();
-
-  const results = useParseQuery(parseQuery).results;
-
-  Parse.User._clearCache();
+  useEffect(() => {
+    var li = [];
+    database
+      .ref('chat')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          if (
+            child.val().user == user &&
+            child.val().participant == participant
+          ) {
+            li.push({
+              key: child.key,
+              content: child.val().content,
+              participant: child.val.user,
+              user: child.val().user,
+              from: child.val().from,
+              createdAt: child.val().created_at,
+              updatedAt: child.val().updated_at,
+            });
+          }
+        });
+        setResults(li);
+      });
+  }, [results]);
 
   const onSend = useCallback((messages = []) => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
 
-    const Message = new Parse.Object('Chat');
+    const chatRef = database.ref('chat');
 
-    Message.set('fromAdmin', toAdmin);
-    Message.set('fromParticipant', currentParticipant);
-    Message.set('from', '2');
-    Message.set('content', messages[0].text);
-    try {
-      const result = Message.save();
-    } catch (error) {
-      console.error('Error while creating Chat: ', error);
-    }
+    chatRef.push({
+      content: messages[0].text,
+      participant: participant,
+      user: user,
+      from: '2',
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    });
   }, []);
 
   function CheckRecipient(object) {
@@ -143,9 +134,9 @@ export function Chat(props) {
         messages={
           results &&
           results.map((liveMessage) => ({
-            _id: liveMessage.id,
-            text: liveMessage.get('content'),
-            createdAt: liveMessage.get('createdAt'),
+            _id: liveMessage.key,
+            text: liveMessage.content,
+            createdAt: liveMessage.createdAt,
             user: {
               _id: CheckRecipient(liveMessage),
               name: adminName,
