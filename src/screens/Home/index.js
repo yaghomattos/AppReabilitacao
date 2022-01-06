@@ -29,7 +29,7 @@ export function Home(props) {
         <View style={styles.background}>
           <Button
             title="Treinamento"
-            onPress="ListSelectExercises"
+            onPress="ListSelectExercise"
             props={participant}
           />
           <Button
@@ -37,7 +37,7 @@ export function Home(props) {
             onPress="ListSelectTest"
             props={participant}
           />
-          <Button title="Chat" onPress="Chat" props={participant.key} />
+          <Button title="Chat" onPress="Chat" props={participant} />
           <Button
             title="Monitoramento"
             onPress="Monitoring"
@@ -46,7 +46,7 @@ export function Home(props) {
           <Button
             title="Educacional"
             onPress="Educational"
-            props={participant.key}
+            props={participant}
           />
         </View>
         <Logout />
