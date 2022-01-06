@@ -1,45 +1,45 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useParseQuery } from '@parse/react-native';
 import { useNavigation } from '@react-navigation/native';
-import Parse from 'parse/react-native.js';
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
-import { readParticipantId } from '../../components/CRUDs/Participant';
 import styles from './styles';
-
-const parseQuery = new Parse.Query('Educational');
-parseQuery.descending('createdAt');
-
-var adminName = '';
-
-async function Search(participantId) {
-  readParticipantId(participantId).then((response) => {
-    adminName = response.get('createdFromName');
-  });
-}
 
 export function Educational(props) {
   const navigation = useNavigation();
 
   const [messages, setMessages] = useState([]);
+  const [results, setResults] = useState([]);
 
-  var participantId = props.route.params;
+  var participant = props.route.params.id;
+  var user = props.route.params.user;
+  var adminName = props.route.params.userName;
 
-  Search(participantId);
-
-  var currentParticipant = {
-    __type: 'Pointer',
-    className: 'Participant',
-    objectId: participantId,
-  };
-
-  parseQuery.equalTo('to', currentParticipant);
-  parseQuery.find();
-
-  const results = useParseQuery(parseQuery).results;
-  Parse.User._clearCache();
+  useEffect(() => {
+    var li = [];
+    database
+      .ref('educational')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          if (
+            child.val().user == user &&
+            child.val().participant == participant
+          ) {
+            li.push({
+              key: child.key,
+              content: child.val().content,
+              participant: child.val.user,
+              user: child.val().user,
+              createdAt: child.val().created_at,
+              updatedAt: child.val().updated_at,
+            });
+          }
+        });
+        setResults(li);
+      });
+  }, [results]);
 
   const onSend = useCallback((messages = []) => {
     setMessages((previousMessages) =>
@@ -80,9 +80,9 @@ export function Educational(props) {
         messages={
           results &&
           results.map((liveMessage) => ({
-            _id: liveMessage.id,
-            text: liveMessage.get('content'),
-            createdAt: liveMessage.get('createdAt'),
+            _id: liveMessage.key,
+            text: liveMessage.content,
+            createdAt: liveMessage.createdAt,
             user: {
               _id: 2,
               name: adminName,
