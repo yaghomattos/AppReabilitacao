@@ -1,29 +1,9 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useParseQuery } from '@parse/react-native';
 import { useNavigation } from '@react-navigation/native';
-import Parse from 'parse/react-native.js';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, Text, View } from 'react-native';
-import { Divider, List } from 'react-native-paper';
+import { List } from 'react-native-paper';
 import styles from './styles';
-
-const parseQuery = new Parse.Query('SelectExercises');
-parseQuery.ascending('createdAt');
-
-var exercise = '';
-
-async function Search(participantId) {
-  var participantPointer = {
-    __type: 'Pointer',
-    className: 'Participant',
-    objectId: participantId,
-  };
-
-  parseQuery.equalTo('participant', participantPointer);
-  const results = await parseQuery.find();
-
-  exercise = results;
-}
 
 function CurrentDate() {
   var date = new Date().getDate();
@@ -49,15 +29,39 @@ function CurrentDate() {
   return date + ' de ' + monName[month] + ', ' + year;
 }
 
-export const ListSelectExercises = (props) => {
+export const ListSelectExercise = (props) => {
   const navigation = useNavigation();
 
   const participant = props.route.params;
 
-  const results = useParseQuery(parseQuery).results;
-  Parse.User._clearCache();
+  const [exercise, setExercise] = useState([]);
 
-  Search(participant);
+  useEffect(() => {
+    var li = [];
+    database
+      .ref('selectExercise')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          if (child.val().participant == participant.key) {
+            li.push({
+              exercise: child.val().exercise,
+              numReps: child.val().numReps,
+              sets: child.val().sets,
+              timer: child.val().timer,
+              name: child.val().name,
+              description: child.val().description,
+              video: child.val().video,
+              preview: child.val().preview,
+              participant: child.val().participant,
+              className: 'exercise',
+              id: child.key,
+            });
+          }
+        });
+        setExercise(li);
+      });
+  }, [exercise]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -85,27 +89,24 @@ export const ListSelectExercises = (props) => {
           <FlatList
             data={exercise}
             keyExtractor={(item) => item.id}
-            ItemSeparatorComponent={() => <Divider />}
             renderItem={({ item }) => (
               <List.Item
-                style={styles.listItem}
-                title={item.get('exercise').get('name')}
+                style={{
+                  width: 342,
+                  height: item.description.length,
+                  minHeight: 80,
+                  justifyContent: 'center',
+                  marginVertical: 38,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                }}
+                title={item.name}
                 titleNumberOfLines={1}
                 titleStyle={styles.listTitle}
-                description={item.get('exercise').get('description')}
+                description={item.description}
                 descriptionStyle={styles.listDescription}
-                descriptionNumberOfLines={3}
-                onPress={() =>
-                  navigation.navigate('Player', [
-                    item.get('exercise').get('video').url(),
-                    item.get('exercise').get('name'),
-                    item.get('sets'),
-                    item.get('reps'),
-                    item.get('timer'),
-                    participant,
-                    item.get('exercise'),
-                  ])
-                }
+                descriptionNumberOfLines={100}
+                onPress={() => navigation.navigate('Orientation', item)}
               />
             )}
           />

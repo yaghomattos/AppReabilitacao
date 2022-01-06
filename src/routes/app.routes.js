@@ -6,7 +6,7 @@ import { Educational } from '../screens/Educational/index';
 import { FormEnding } from '../screens/Forms/FormEnding/index';
 import { FormStart } from '../screens/Forms/FormStart/index';
 import { Home } from '../screens/Home/index';
-import { ListSelectExercises } from '../screens/ListSelectExercises/index';
+import { ListSelectExercise } from '../screens/ListSelectExercise/index';
 import { ListSelectTest } from '../screens/ListSelectTest/index';
 import { Login } from '../screens/Login/index';
 import { Monitoring } from '../screens/Monitoring/index';
@@ -24,8 +24,8 @@ export function AppRoutes() {
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Educational" component={Educational} />
         <Stack.Screen
-          name="ListSelectExercises"
-          component={ListSelectExercises}
+          name="ListSelectExercise"
+          component={ListSelectExercise}
         />
         <Stack.Screen name="ListSelectTest" component={ListSelectTest} />
         <Stack.Screen name="Player" component={Player} />
