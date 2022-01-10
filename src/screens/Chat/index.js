@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { GiftedChat, Send } from 'react-native-gifted-chat';
 import { Avatar, IconButton } from 'react-native-paper';
+import { database } from '../../services/firebase';
 import styles from './styles';
 
 export function Chat(props) {

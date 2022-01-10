@@ -1,9 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
+import { database } from '../../services/firebase';
 import styles from './styles';
 
 export function Educational(props) {

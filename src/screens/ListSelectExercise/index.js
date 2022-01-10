@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import { List } from 'react-native-paper';
+import { database } from '../../services/firebase';
 import styles from './styles';
 
 function CurrentDate() {
