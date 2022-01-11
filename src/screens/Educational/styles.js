@@ -4,26 +4,6 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
   },
-  header: {
-    backgroundColor: '#3E9ACD',
-    alignItems: 'center',
-    height: 115,
-  },
-  backView: {
-    width: '100%',
-    paddingStart: 20,
-    margin: 30,
-  },
-  back: {
-    color: '#fff',
-  },
-  header_text: {
-    color: '#fff',
-    fontSize: 18,
-    paddingLeft: '10%',
-    paddingTop: 14,
-    fontWeight: 'bold',
-  },
   avatarContainer: {
     paddingBottom: '2%',
     alignItems: 'center',

@@ -1,34 +1,10 @@
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import { List } from 'react-native-paper';
+import HeaderDate from '../../components/HeaderDate';
 import { database } from '../../services/firebase';
 import styles from './styles';
-
-function CurrentDate() {
-  var date = new Date().getDate();
-  var month = new Date().getMonth();
-  var year = new Date().getFullYear();
-
-  var monName;
-  monName = new Array(
-    'janeiro',
-    'fevereiro',
-    'março',
-    'abril',
-    'Maio',
-    'junho',
-    'julho',
-    'agosto',
-    'setembro',
-    'outubro',
-    'novembro',
-    'dezembro'
-  );
-
-  return date + ' de ' + monName[month] + ', ' + year;
-}
 
 export const ListSelectTest = (props) => {
   const navigation = useNavigation();
@@ -65,24 +41,7 @@ export const ListSelectTest = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Ionicons
-          name="arrow-back"
-          size={24}
-          style={styles.back}
-          onPress={() => navigation.goBack()}
-        />
-        <View style={styles.separate}>
-          <Text style={styles.header_text_bold}>{'Olá, Participante'}</Text>
-          <Text style={styles.header_text}>{CurrentDate()}</Text>
-        </View>
-        <MaterialCommunityIcons
-          name="bell"
-          size={30}
-          color="transparent"
-          style={{ paddingRight: 25 }}
-        />
-      </View>
+      <HeaderDate />
       <View style={styles.viewTitle}>
         <Text style={styles.title}>{'Testes'}</Text>
         <View style={styles.listContainer}>

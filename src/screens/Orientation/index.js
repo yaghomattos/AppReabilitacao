@@ -1,9 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { Divider, List } from 'react-native-paper';
 import { Button } from '../../components/Button/index';
+import Header from '../../components/Header';
 import { database } from '../../services/firebase';
 import styles from './styles';
 
@@ -35,17 +35,7 @@ export const Orientation = (props) => {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.backView}>
-            <Ionicons
-              name="arrow-back"
-              size={24}
-              style={styles.back}
-              onPress={() => navigation.goBack()}
-            />
-            <Text style={styles.header_text}>{'Orientações'}</Text>
-          </View>
-        </View>
+        <Header title="Orientações" />
         <View style={styles.backgroundList}>
           <View style={styles.viewList}>
             <FlatList

@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
@@ -11,6 +10,7 @@ import {
 } from 'react-native';
 import { updateSelectExercise } from '../../components/CRUDs/SelectExercise/index';
 import { updateSelectTest } from '../../components/CRUDs/SelectTest/index';
+import Header from '../../components/Header';
 import { Timer } from '../../components/Timer/index';
 import styles from './styles';
 
@@ -46,15 +46,7 @@ export function Player(props) {
     <>
       <StatusBar />
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <Ionicons
-            name="arrow-back"
-            size={24}
-            style={styles.back}
-            onPress={() => navigation.goBack()}
-          />
-          <Text style={styles.title}>{name}</Text>
-        </View>
+        <Header title={name} />
         <View style={styles.videoBox}>
           <Image source={{ uri: video }} style={styles.videoItem} />
         </View>

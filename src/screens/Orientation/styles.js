@@ -5,27 +5,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#3E9ACD',
   },
-  header: {
-    alignItems: 'center',
-    height: '20%',
-  },
-  backView: {
-    width: '100%',
-    paddingStart: 20,
-    margin: 30,
-  },
-  back: {
-    color: '#fff',
-  },
-  header_text: {
-    color: '#fff',
-    fontSize: 18,
-    paddingLeft: '10%',
-    paddingTop: '5%',
-    fontWeight: 'bold',
-  },
   backgroundList: {
-    height: '80%',
+    height: '90%',
     backgroundColor: '#f5f5f5',
     borderTopStartRadius: 15,
     borderTopEndRadius: 15,

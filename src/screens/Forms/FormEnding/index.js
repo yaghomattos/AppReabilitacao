@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import {
@@ -10,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { createPostForm } from '../../../components/CRUDs/Form/index';
+import Header from '../../../components/Header';
 import { database } from '../../../services/firebase';
 import styles from './styles';
 
@@ -99,17 +99,7 @@ export function FormEnding(props) {
       keyboardVerticalOffset="-213"
       style={{ flex: 1, backgroundColor: '#3E9ACD' }}
     >
-      <View style={styles.header}>
-        <View style={styles.backView}>
-          <Ionicons
-            name="arrow-back"
-            size={24}
-            style={styles.back}
-            onPress={() => navigation.goBack()}
-          />
-          <Text style={styles.header_text}>{'Informações inicias'}</Text>
-        </View>
-      </View>
+      <Header title="Informações finais" />
       <View style={styles.container}>
         <View style={styles.form}>
           {results.reps != false ? (

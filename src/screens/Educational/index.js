@@ -1,9 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
+import { ActivityIndicator, SafeAreaView, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
+import Header from '../../components/Header';
 import { database } from '../../services/firebase';
 import styles from './styles';
 
@@ -66,17 +66,7 @@ export function Educational(props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.backView}>
-          <Ionicons
-            name="arrow-back"
-            size={24}
-            style={styles.back}
-            onPress={() => navigation.goBack()}
-          />
-          <Text style={styles.header_text}>{'Recomendações Educacionais'}</Text>
-        </View>
-      </View>
+      <Header title="Recomendações Educacionais" />
       <GiftedChat
         messages={
           results &&

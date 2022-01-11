@@ -5,17 +5,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#3E9ACD',
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: '8%',
-    paddingBottom: '8%',
-  },
-  back: {
-    color: '#fff',
-    paddingLeft: '6%',
-  },
   title: {
     marginRight: '39%',
     color: '#fff',
