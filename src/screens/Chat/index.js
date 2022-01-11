@@ -61,7 +61,7 @@ export function Chat(props) {
   }, []);
 
   function CheckRecipient(object) {
-    if (object.get('from') === '2') {
+    if (object.from === '2') {
       return 1;
     }
     return 2;

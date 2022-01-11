@@ -56,7 +56,7 @@ export const Orientation = (props) => {
                 <List.Item
                   style={{
                     width: 350,
-                    height: item.get('orientation').get('text').length,
+                    height: item.orientation.text.length,
                     marginBottom: 5,
                     borderRadius: 5,
                     paddingHorizontal: 0,
@@ -65,7 +65,7 @@ export const Orientation = (props) => {
                     justifyContent: 'center',
                     backgroundColor: '#6f6f6f',
                   }}
-                  title={item.get('orientation').get('text')}
+                  title={item.orientation.text}
                   titleNumberOfLines={100}
                   titleStyle={styles.itemTitle}
                 />
