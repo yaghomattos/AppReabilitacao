@@ -1,13 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
+  Alert,
   KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { readParticipant } from '../../components/CRUDs/Participant/index';
+import { auth } from '../../services/firebase';
 import styles from './styles';
 
 export const Login = () => {
@@ -16,15 +17,14 @@ export const Login = () => {
   const [CPF, setCPF] = useState('');
 
   async function doUserLogIn() {
-    var verify = false;
-
-    await readParticipant(CPF).then((response) => {
-      verify = response;
-    });
-
-    if (verify != false) {
-      navigation.navigate('Home', CPF);
-    }
+    auth
+      .signInWithEmailAndPassword(`${CPF}@participant.com`, '123456')
+      .then((user) => {
+        navigation.navigate('Home', CPF);
+      })
+      .catch(() => {
+        Alert.alert('CPF inválido');
+      });
   }
 
   return (
