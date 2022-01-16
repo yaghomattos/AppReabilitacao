@@ -2,32 +2,9 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import { List } from 'react-native-paper';
+import HeaderDate from '../../components/HeaderDate';
 import { database } from '../../services/firebase';
 import styles from './styles';
-
-function CurrentDate() {
-  var date = new Date().getDate();
-  var month = new Date().getMonth();
-  var year = new Date().getFullYear();
-
-  var monName;
-  monName = new Array(
-    'janeiro',
-    'fevereiro',
-    'março',
-    'abril',
-    'Maio',
-    'junho',
-    'julho',
-    'agosto',
-    'setembro',
-    'outubro',
-    'novembro',
-    'dezembro'
-  );
-
-  return date + ' de ' + monName[month] + ', ' + year;
-}
 
 export const ListSelectExercise = (props) => {
   const navigation = useNavigation();
