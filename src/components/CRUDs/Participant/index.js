@@ -9,7 +9,7 @@ export async function readParticipant(props) {
     .ref('participant')
     .orderByChild('cpf')
     .equalTo(props)
-    .on('child_added', function (snapshot) {
+    .once('child_added', function (snapshot) {
       participant = snapshot;
     });
 

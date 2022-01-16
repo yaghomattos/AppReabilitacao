@@ -10,10 +10,28 @@ export function Home(props) {
 
   const [participant, setParticipant] = useState('');
 
-  useEffect(() => {
-    readParticipant(cpf).then((response) => {
-      setParticipant(response);
+  async function getParticipant() {
+    var li = '';
+    const participantFound = await readParticipant(cpf).then((response) => {
+      li = {
+        address: response.val().address,
+        age: response.val().age,
+        cpf: response.val().cpf,
+        diagnosis: response.val().diagnosis,
+        name: response.val().name,
+        phone: response.val().phone,
+        user: response.val().user,
+        height: response.val().height,
+        weight: response.val().weight,
+        id: response.key,
+      };
     });
+    setParticipant(li);
+    console.log(participant);
+  }
+
+  useEffect(() => {
+    getParticipant();
   }, []);
 
   return (
@@ -38,11 +56,11 @@ export function Home(props) {
             props={participant}
           />
           <Button title="Chat" onPress="Chat" props={participant} />
-          <Button
+          {/* <Button
             title="Monitoramento"
             onPress="Monitoring"
             props={participant.key}
-          />
+          /> */}
           <Button
             title="Educacional"
             onPress="Educational"
