@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
+  StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
@@ -33,6 +34,7 @@ export const Login = () => {
       keyboardVerticalOffset="-170"
       style={styles.keyboard}
     >
+      <StatusBar barStyle="dark-content" backgroundColor="#0065A4" />
       <View style={styles.wrapper}>
         <View style={styles.logo}>
           <Text style={styles.text_label}>App Reabilitação</Text>
