@@ -36,7 +36,7 @@ export function Home(props) {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#0065A4" />
+      <StatusBar barStyle="dark-content" backgroundColor="#3E9ACD" />
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.header_text}>
