@@ -91,11 +91,9 @@ export function FormEnding(props) {
       name: results.name,
     };
 
-    setVerify(await createPostForm(data));
-
-    if (verify != false) {
-      navigation.push('Home');
-    }
+    createPostForm(data).then(() => {
+      navigation.navigate('Home');
+    });
   }
 
   return (

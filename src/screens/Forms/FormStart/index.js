@@ -18,7 +18,7 @@ LogBox.ignoreLogs(['Setting a timer']);
 export function FormStart(props) {
   const navigation = useNavigation();
 
-  const [verify, setVerify] = useState('');
+  const [verify, setVerify] = useState(false);
   const [frequency, setFrequency] = useState('');
   const [saturation, setSaturation] = useState('');
   const [dyspnea, setDyspnea] = useState('');
@@ -82,11 +82,9 @@ export function FormStart(props) {
       name: results.name,
     };
 
-    setVerify(await createPreForm(data));
-
-    if (verify != false) {
+    createPreForm(data).then(() => {
       navigation.navigate('Player', propertys);
-    }
+    });
   }
 
   return (
