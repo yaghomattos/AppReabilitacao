@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { Button } from '../../components/Button/index';
-import { readParticipant } from '../../components/CRUDs/Participant/index';
 import { Logout } from '../../components/Logout/index';
+import { database } from '../../services/firebase';
 import styles from './styles';
 
 export function Home(props) {
@@ -10,33 +10,33 @@ export function Home(props) {
 
   const [participant, setParticipant] = useState('');
 
-  async function getParticipant() {
-    var li = '';
-    const participantFound = await readParticipant(cpf).then((response) => {
-      li = {
-        address: response.val().address,
-        age: response.val().age,
-        cpf: response.val().cpf,
-        diagnosis: response.val().diagnosis,
-        name: response.val().name,
-        phone: response.val().phone,
-        user: response.val().user,
-        height: response.val().height,
-        weight: response.val().weight,
-        id: response.key,
-      };
-    });
-    setParticipant(li);
-    console.log(participant);
-  }
-
   useEffect(() => {
-    getParticipant();
+    database
+      .ref('participant')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          if (child.val().cpf == cpf) {
+            setParticipant({
+              address: child.val().address,
+              age: child.val().age,
+              cpf: child.val().cpf,
+              diagnosis: child.val().diagnosis,
+              name: child.val().name,
+              phone: child.val().phone,
+              user: child.val().user,
+              height: child.val().height,
+              weight: child.val().weight,
+              id: child.key,
+            });
+          }
+        });
+      });
   }, []);
 
   return (
     <>
-      <StatusBar />
+      <StatusBar barStyle="dark-content" backgroundColor="#0065A4" />
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.header_text}>
