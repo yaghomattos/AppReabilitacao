@@ -20,7 +20,7 @@ export const ListSelectExercise = (props) => {
       .get()
       .then((snapshot) => {
         snapshot.forEach((child) => {
-          if (child.val().participant == participant.key) {
+          if (child.val().participant == participant.id) {
             li.push({
               exercise: child.val().exercise,
               numReps: child.val().numReps,
