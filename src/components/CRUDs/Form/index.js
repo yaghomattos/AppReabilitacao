@@ -9,6 +9,8 @@ export async function createPostForm(props) {
 
   formRef
     .push({
+      name: props.name,
+      className: props.className,
       reps: props.reps,
       timer: props.timer,
       frequency: props.frequency,
@@ -18,16 +20,12 @@ export async function createPostForm(props) {
       createdAt: Date.now(),
       updatedAt: Date.now(),
     })
-    .then(() => {
+    .then((response) => {
       console.log('Formulário cadastrado');
       var property = {
-        reps: props.reps,
-        timer: props.timer,
+        form: response.key,
+        name: props.name,
         participant: props.participant,
-        frequency: props.frequency,
-        saturation: props.saturation,
-        dyspnea: props.dyspnea,
-        fatigue: props.fatigue,
         createdAt: Date.now(),
         updatedAt: Date.now(),
       };
@@ -43,6 +41,8 @@ export async function createPreForm(props) {
 
   formRef
     .push({
+      name: props.name,
+      className: props.className,
       frequency: props.frequency,
       saturation: props.saturation,
       dyspnea: props.dyspnea,
@@ -53,11 +53,9 @@ export async function createPreForm(props) {
     .then((response) => {
       console.log('Formulário cadastrado');
       var property = {
+        form: response.key,
+        name: props.name,
         participant: props.participant,
-        frequency: props.frequency,
-        saturation: props.saturation,
-        dyspnea: props.dyspnea,
-        fatigue: props.fatigue,
         createdAt: Date.now(),
         updatedAt: Date.now(),
       };

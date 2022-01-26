@@ -41,6 +41,7 @@ export function FormEnding(props) {
           snapshot.forEach((child) => {
             if (child.key == id) {
               li = {
+                name: child.val().name,
                 test: child.val().test,
                 frequency: child.val().frequency,
                 saturation: child.val().saturation,
@@ -54,22 +55,26 @@ export function FormEnding(props) {
           setResults(li);
         });
     } else {
-      database.ref('selectExercise').on('value', (snapshot) => {
-        snapshot.forEach((child) => {
-          if (child.key == id) {
-            li = {
-              exercise: child.val().exercise,
-              frequency: child.val().frequency,
-              saturation: child.val().saturation,
-              dyspnea: child.val().dyspnea,
-              fatigue: child.val().fatigue,
-              reps: child.val().reps,
-              timer: child.val().timer,
-            };
-          }
+      database
+        .ref('selectExercise')
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((child) => {
+            if (child.key == id) {
+              li = {
+                name: child.val().name,
+                exercise: child.val().exercise,
+                frequency: child.val().frequency,
+                saturation: child.val().saturation,
+                dyspnea: child.val().dyspnea,
+                fatigue: child.val().fatigue,
+                reps: child.val().reps,
+                timer: child.val().timer,
+              };
+            }
+          });
+          setResults(li);
         });
-        setResults(li);
-      });
     }
   }, [results]);
 
@@ -82,14 +87,14 @@ export function FormEnding(props) {
       reps: reps,
       timer: timer,
       participant: participant,
+      className: exerciseOrTest,
+      name: results.name,
     };
 
-    var formId = createPostForm(data).then(() => {
-      setVerify(true);
-    });
+    setVerify(await createPostForm(data));
 
     if (verify != false) {
-      navigation.goBack;
+      navigation.push('Home');
     }
   }
 

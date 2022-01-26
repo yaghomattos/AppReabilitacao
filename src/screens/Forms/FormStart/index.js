@@ -41,6 +41,7 @@ export function FormStart(props) {
           snapshot.forEach((child) => {
             if (child.key == id) {
               li = {
+                name: child.val().name,
                 test: child.val().test,
                 frequency: child.val().frequency,
                 saturation: child.val().saturation,
@@ -56,6 +57,7 @@ export function FormStart(props) {
         snapshot.forEach((child) => {
           if (child.key == id) {
             li = {
+              name: child.val().name,
               exercise: child.val().exercise,
               frequency: child.val().frequency,
               saturation: child.val().saturation,
@@ -76,11 +78,11 @@ export function FormStart(props) {
       dyspnea: dyspnea,
       fatigue: fatigue,
       participant: participant,
+      className: exerciseOrTest,
+      name: results.name,
     };
 
-    var formId = createPreForm(data).then(() => {
-      setVerify(true);
-    });
+    setVerify(await createPreForm(data));
 
     if (verify != false) {
       navigation.navigate('Player', propertys);

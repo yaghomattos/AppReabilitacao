@@ -5,8 +5,12 @@ export async function createParticipantPreForm(props) {
 
   participantPreFormRef
     .push({
+      type: 'preForm',
+      name: props.name,
       participant: props.participant,
-      form: props.preForm,
+      form: props.form,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     })
     .then(() => {
       console.log('ParticipantForm criado');
@@ -23,8 +27,12 @@ export async function createParticipantPostForm(props) {
 
   participantPostFormRef
     .push({
+      type: 'postForm',
+      name: props.name,
       participant: props.participant,
-      form: props.postForm,
+      form: props.form,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     })
     .then(() => {
       console.log('ParticipantForm criado');
