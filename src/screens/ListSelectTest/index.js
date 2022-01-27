@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
 import { List } from 'react-native-paper';
 import HeaderDate from '../../components/HeaderDate';
 import { database } from '../../services/firebase';
@@ -66,6 +66,16 @@ export const ListSelectTest = (props) => {
                 descriptionStyle={styles.listDescription}
                 descriptionNumberOfLines={100}
                 onPress={() => navigation.navigate('Orientation', item)}
+                left={() => (
+                  <Image
+                    style={{
+                      width: '20%',
+                      height: 50,
+                      marginHorizontal: 5,
+                    }}
+                    source={{ uri: item.preview }}
+                  />
+                )}
               />
             )}
           />
