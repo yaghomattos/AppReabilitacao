@@ -18,7 +18,6 @@ LogBox.ignoreLogs(['Setting a timer']);
 export function FormStart(props) {
   const navigation = useNavigation();
 
-  const [verify, setVerify] = useState(false);
   const [frequency, setFrequency] = useState('');
   const [saturation, setSaturation] = useState('');
   const [dyspnea, setDyspnea] = useState('');
@@ -53,21 +52,24 @@ export function FormStart(props) {
           setResults(li);
         });
     } else {
-      database.ref('selectExercise').on('value', (snapshot) => {
-        snapshot.forEach((child) => {
-          if (child.key == id) {
-            li = {
-              name: child.val().name,
-              exercise: child.val().exercise,
-              frequency: child.val().frequency,
-              saturation: child.val().saturation,
-              dyspnea: child.val().dyspnea,
-              fatigue: child.val().fatigue,
-            };
-          }
+      database
+        .ref('selectExercise')
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((child) => {
+            if (child.key == id) {
+              li = {
+                name: child.val().name,
+                exercise: child.val().exercise,
+                frequency: child.val().frequency,
+                saturation: child.val().saturation,
+                dyspnea: child.val().dyspnea,
+                fatigue: child.val().fatigue,
+              };
+            }
+          });
+          setResults(li);
         });
-        setResults(li);
-      });
     }
   }, [results]);
 
