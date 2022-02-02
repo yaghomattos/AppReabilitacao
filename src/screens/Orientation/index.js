@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { List } from 'react-native-paper';
@@ -8,8 +7,6 @@ import { database } from '../../services/firebase';
 import styles from './styles';
 
 export const Orientation = (props) => {
-  const navigation = useNavigation();
-
   const [orientation, setOrientation] = useState('');
 
   const test = props.route.params.id;
