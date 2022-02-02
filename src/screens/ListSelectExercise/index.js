@@ -23,7 +23,7 @@ export const ListSelectExercise = (props) => {
           if (child.val().participant == participant.id) {
             li.push({
               exercise: child.val().exercise,
-              numReps: child.val().numReps,
+              reps: child.val().reps,
               sets: child.val().sets,
               timer: child.val().timer,
               name: child.val().name,
