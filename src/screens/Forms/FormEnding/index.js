@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   KeyboardAvoidingView,
   LogBox,
@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { createPostForm } from '../../../components/CRUDs/Form/index';
 import Header from '../../../components/Header';
+import { TimerContext } from '../../../context/timer';
 import { database } from '../../../services/firebase';
 import styles from './styles';
 
@@ -18,7 +19,8 @@ LogBox.ignoreLogs(['Setting a timer']);
 export function FormEnding(props) {
   const navigation = useNavigation();
 
-  const [verify, setVerify] = useState('');
+  const { seconds, setSeconds } = useContext(TimerContext);
+
   const [reps, setReps] = useState('');
   const [timer, setTimer] = useState('');
   const [frequency, setFrequency] = useState('');
@@ -105,20 +107,8 @@ export function FormEnding(props) {
       <Header title="Informações finais" />
       <View style={styles.container}>
         <View style={styles.form}>
-          {results.reps != false ? (
-            results.timer != false ? (
-              <>
-                <Text style={styles.inputName}>{'Tempo'}</Text>
-                <TextInput
-                  style={styles.input}
-                  value={timer}
-                  placeholder={'digitar'}
-                  onChangeText={(text) => setTimer(text)}
-                  keyboardType={'numeric'}
-                  maxLength={3}
-                />
-              </>
-            ) : (
+          {results.reps != '' ? (
+            results.timer != '' ? (
               <>
                 <Text style={styles.inputName}>{'Número de repetições'}</Text>
                 <TextInput
@@ -130,8 +120,25 @@ export function FormEnding(props) {
                   maxLength={3}
                 />
               </>
+            ) : (
+              <>
+                <Text style={styles.inputName}>{'Tempo'}</Text>
+                <Text style={styles.inputName}>{seconds + ' segundos'}</Text>
+              </>
             )
-          ) : null}
+          ) : (
+            <>
+              <Text style={styles.inputName}>{'Número de repetições'}</Text>
+              <TextInput
+                style={styles.input}
+                value={reps}
+                placeholder={'digitar'}
+                onChangeText={(text) => setReps(text)}
+                keyboardType={'numeric'}
+                maxLength={3}
+              />
+            </>
+          )}
 
           {results.frequency != false ? (
             <>
