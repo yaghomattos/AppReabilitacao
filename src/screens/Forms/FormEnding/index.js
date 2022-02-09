@@ -22,7 +22,6 @@ export function FormEnding(props) {
   const { seconds, setSeconds } = useContext(TimerContext);
 
   const [reps, setReps] = useState('');
-  const [timer, setTimer] = useState('');
   const [frequency, setFrequency] = useState('');
   const [saturation, setSaturation] = useState('');
   const [dyspnea, setDyspnea] = useState('');
@@ -87,7 +86,7 @@ export function FormEnding(props) {
       dyspnea: dyspnea,
       fatigue: fatigue,
       reps: reps,
-      timer: timer,
+      timer: seconds,
       participant: participant,
       className: exerciseOrTest,
       name: results.name,
@@ -107,7 +106,7 @@ export function FormEnding(props) {
       <Header title="Informações finais" />
       <View style={styles.container}>
         <View style={styles.form}>
-          {results.reps != '' ? (
+          {exerciseOrTest != 'test' ? null : results.reps != '' ? (
             results.timer != '' ? (
               <>
                 <Text style={styles.inputName}>{'Número de repetições'}</Text>
