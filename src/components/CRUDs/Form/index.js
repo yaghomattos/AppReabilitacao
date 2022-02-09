@@ -25,6 +25,7 @@ export async function createPostForm(props) {
       var property = {
         form: response.key,
         name: props.name,
+        className: props.className,
         participant: props.participant,
         createdAt: Date.now(),
         updatedAt: Date.now(),
@@ -55,6 +56,7 @@ export async function createPreForm(props) {
       var property = {
         form: response.key,
         name: props.name,
+        className: props.className,
         participant: props.participant,
         createdAt: Date.now(),
         updatedAt: Date.now(),

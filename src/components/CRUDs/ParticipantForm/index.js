@@ -7,6 +7,7 @@ export async function createParticipantPreForm(props) {
     .push({
       type: 'preForm',
       name: props.name,
+      className: props.className,
       participant: props.participant,
       form: props.form,
       createdAt: Date.now(),
@@ -29,6 +30,7 @@ export async function createParticipantPostForm(props) {
     .push({
       type: 'postForm',
       name: props.name,
+      className: props.className,
       participant: props.participant,
       form: props.form,
       createdAt: Date.now(),
