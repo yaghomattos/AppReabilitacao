@@ -39,6 +39,7 @@ export function Chat(props) {
             });
           }
         });
+        li.reverse();
         setResults(li);
       });
   }, [results]);

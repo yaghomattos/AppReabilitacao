@@ -38,6 +38,7 @@ export function Educational(props) {
             });
           }
         });
+        li.reverse();
         setResults(li);
       });
   }, [results]);
