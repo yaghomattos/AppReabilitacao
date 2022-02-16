@@ -5,10 +5,10 @@ import {
   KeyboardAvoidingView,
   StatusBar,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
 import { auth } from '../../services/firebase';
 import styles from './styles';
 
@@ -40,13 +40,12 @@ export const Login = () => {
           <Text style={styles.text_label}>App Reabilitação</Text>
         </View>
         <View style={styles.form}>
-          <TextInput
+          <TextInputMask
             style={styles.input}
-            value={CPF}
+            type={'cpf'}
             placeholder={'CPF'}
+            value={CPF}
             onChangeText={(text) => setCPF(text)}
-            autoCapitalize={'none'}
-            keyboardType={'numeric'}
           />
           <TouchableOpacity onPress={() => doUserLogIn()}>
             <View style={styles.button}>
