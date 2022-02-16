@@ -34,8 +34,8 @@ export function Chat(props) {
               participant: child.val.user,
               user: child.val().user,
               from: child.val().from,
-              createdAt: child.val().created_at,
-              updatedAt: child.val().updated_at,
+              createdAt: child.val().createdAt,
+              updatedAt: child.val().updatedAt,
             });
           }
         });
@@ -51,13 +51,16 @@ export function Chat(props) {
 
     const chatRef = database.ref('chat');
 
+    const date = new Date();
+    const brazilianDate = date.toLocaleString();
+
     chatRef.push({
       content: messages[0].text,
       participant: participant,
       user: user,
       from: '2',
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: brazilianDate,
+      updatedAt: brazilianDate,
     });
   }, []);
 

@@ -7,6 +7,10 @@ import {
 export async function createPostForm(props) {
   const formRef = database.ref('postForm');
 
+  const date = new Date();
+  const brazilianDate =
+    date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
   formRef
     .push({
       name: props.name,
@@ -17,8 +21,8 @@ export async function createPostForm(props) {
       saturation: props.saturation,
       dyspnea: props.dyspnea,
       fatigue: props.fatigue,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: brazilianDate,
+      updatedAt: brazilianDate,
     })
     .then((response) => {
       console.log('Formulário cadastrado');
@@ -27,8 +31,8 @@ export async function createPostForm(props) {
         name: props.name,
         className: props.className,
         participant: props.participant,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
+        createdAt: brazilianDate,
+        updatedAt: brazilianDate,
       };
       createParticipantPostForm(property);
     })
@@ -40,6 +44,10 @@ export async function createPostForm(props) {
 export async function createPreForm(props) {
   const formRef = database.ref('preForm');
 
+  const date = new Date();
+  const brazilianDate =
+    date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
   formRef
     .push({
       name: props.name,
@@ -48,8 +56,8 @@ export async function createPreForm(props) {
       saturation: props.saturation,
       dyspnea: props.dyspnea,
       fatigue: props.fatigue,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: brazilianDate,
+      updatedAt: brazilianDate,
     })
     .then((response) => {
       console.log('Formulário cadastrado');
@@ -58,8 +66,8 @@ export async function createPreForm(props) {
         name: props.name,
         className: props.className,
         participant: props.participant,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
+        createdAt: brazilianDate,
+        updatedAt: brazilianDate,
       };
       createParticipantPreForm(property);
     })
