@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 15,
   },
   viewList: {
-    flex: 1,
+    height: '80%',
     paddingTop: 10,
     alignItems: 'center',
     borderTopStartRadius: 15,
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     backgroundColor: '#afafaf',
+  },
+  divider: {
+    height: 3,
+    backgroundColor: '#fff',
   },
   itemTitle: {
     fontSize: 22,
