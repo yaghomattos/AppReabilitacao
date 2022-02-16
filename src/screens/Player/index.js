@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -11,27 +11,35 @@ import {
 import { updateSelectExercise } from '../../components/CRUDs/SelectExercise/index';
 import { updateSelectTest } from '../../components/CRUDs/SelectTest/index';
 import Header from '../../components/Header';
-import { Timer } from '../../components/Timer/index';
+import { TimerDown } from '../../components/TimerDown/index';
+import { TimerUp } from '../../components/TimerUp/index';
+import { TimerContext } from '../../context/timer';
 import styles from './styles';
 
 export function Player(props) {
   const navigation = useNavigation();
 
+  const { seconds, setSeconds } = useContext(TimerContext);
+
   const [test, setTest] = useState(false);
+  const [enable, setEnable] = useState(true);
+  const [sets, setSets] = useState('');
 
   const propertys = props.route.params;
 
   const name = props.route.params.name;
   const video = props.route.params.video;
-  const sets = '';
-  const numReps = props.route.params.numReps;
+  const reps = props.route.params.reps;
   const timer = props.route.params.timer;
   const id = props.route.params.id;
   const className = props.route.params.className;
 
   useEffect(() => {
     if (className == 'test') setTest(true);
-    else sets = props.route.params.sets;
+    else setSets(props.route.params.sets);
+
+    if (timer != '') setSeconds(timer);
+    else setSeconds(0);
   }, []);
 
   async function Check() {
@@ -40,6 +48,7 @@ export function Player(props) {
     } else {
       updateSelectExercise(id);
     }
+    setEnable(false);
   }
 
   return (
@@ -52,28 +61,42 @@ export function Player(props) {
         </View>
         <View style={styles.description}>
           <Text style={styles.paramsTitle}>
-            {test ? 'Cronômetro:' : sets != '' ? 'Séries:' : 'Cronômetro:'}
+            {test
+              ? reps != ''
+                ? 'Repetições'
+                : 'Cronômetro:'
+              : sets == ''
+              ? ''
+              : 'Séries:'}
           </Text>
           <View style={sets != '' ? styles.timer : styles.paramsBox2}>
             {test ? (
-              sets != '' ? (
-                <Timer time={sets} />
+              reps != '' ? (
+                <Text style={styles.params}>{reps}</Text>
               ) : (
-                <Text style={styles.params}>{timer + ' segundos'}</Text>
+                enable && <TimerDown value={timer} />
               )
-            ) : sets != '' ? (
-              <Text>{sets}</Text>
+            ) : sets == '' ? (
+              timer == '' ? null : (
+                enable && <TimerDown value={timer} />
+              )
             ) : (
-              <Text style={styles.params}>{timer + ' segundos'}</Text>
+              <Text style={styles.params}>{sets}</Text>
             )}
           </View>
           <Text style={styles.paramsTitle}>
-            {test ? null : sets != '' ? 'Repetições:' : ''}
+            {test && reps != ''
+              ? 'Cronômetro'
+              : sets != ''
+              ? 'Repetições:'
+              : ''}
           </Text>
           <View style={test ? null : sets != '' ? styles.paramsBox : ''}>
-            <Text style={styles.params}>
-              {test ? (sets != '' ? '' : numReps) : null}
-            </Text>
+            {test && reps != '' ? (
+              enable && <TimerUp />
+            ) : (
+              <Text style={styles.params}>{sets == '' ? '' : reps}</Text>
+            )}
           </View>
           <TouchableOpacity
             onPress={() => {
