@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
-import { GiftedChat, Send } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import { Avatar, IconButton } from 'react-native-paper';
 import { database } from '../../services/firebase';
 import styles from './styles';
@@ -15,7 +15,7 @@ export function Chat(props) {
 
   var participant = props.route.params.id;
   var user = props.route.params.user;
-  var adminName = props.route.params.userName;
+  var adminName = 'Terapeuta';
 
   useEffect(() => {
     var li = [];
@@ -97,6 +97,22 @@ export function Chat(props) {
     );
   }
 
+  function renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: '#3E9ACD',
+          },
+          left: {
+            backgroundColor: '#fff',
+          },
+        }}
+      />
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -115,24 +131,6 @@ export function Chat(props) {
         </View>
         <View style={styles.person}>
           <Text style={styles.text}>{adminName}</Text>
-          <View style={styles.viewCircle}>
-            <View style={styles.circleCall}>
-              <Ionicons
-                name="call-sharp"
-                size={24}
-                color="#fff"
-                style={styles.call}
-              />
-            </View>
-            <View style={styles.circleVideo}>
-              <Ionicons
-                name="videocam-sharp"
-                size={24}
-                color="#fff"
-                style={styles.video}
-              />
-            </View>
-          </View>
         </View>
       </View>
       <GiftedChat
@@ -157,6 +155,7 @@ export function Chat(props) {
         renderSend={renderSend}
         scrollToBottomComponent={scrollToBottomComponent}
         renderLoading={renderLoading}
+        renderBubble={renderBubble}
       />
     </SafeAreaView>
   );
