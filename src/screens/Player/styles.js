@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   },
   paramsBox2: {
     width: '45%',
+    height: '40%',
     alignItems: 'center',
     borderRadius: 4,
     backgroundColor: '#C4C4C4',
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
   button: {
     width: 100,
     height: 50,
-    marginTop: 5,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
