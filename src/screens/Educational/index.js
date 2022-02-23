@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -8,8 +7,6 @@ import { database } from '../../services/firebase';
 import styles from './styles';
 
 export function Educational(props) {
-  const navigation = useNavigation();
-
   const [messages, setMessages] = useState([]);
   const [results, setResults] = useState([]);
 
