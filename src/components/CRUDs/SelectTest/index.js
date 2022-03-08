@@ -11,7 +11,6 @@ export async function readSelectTest(props) {
     });
 
   if (!selectTest) {
-    console.log('selectTest does not exists.');
     return;
   } else {
     return selectTestRef;

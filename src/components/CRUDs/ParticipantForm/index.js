@@ -14,11 +14,9 @@ export async function createParticipantPreForm(props) {
       updatedAt: Date.now(),
     })
     .then(() => {
-      console.log('ParticipantForm criado');
       return true;
     })
     .catch(() => {
-      console.log('Erro ao criar ParticipantForm');
       return false;
     });
 }
@@ -37,11 +35,9 @@ export async function createParticipantPostForm(props) {
       updatedAt: Date.now(),
     })
     .then(() => {
-      console.log('ParticipantForm criado');
       return true;
     })
     .catch(() => {
-      console.log('Erro ao criar ParticipantForm');
       return false;
     });
 }

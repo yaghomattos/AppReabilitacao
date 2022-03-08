@@ -25,7 +25,6 @@ export async function createPostForm(props) {
       updatedAt: brazilianDate,
     })
     .then((response) => {
-      console.log('Formulário cadastrado');
       var property = {
         form: response.key,
         name: props.name,
@@ -36,9 +35,7 @@ export async function createPostForm(props) {
       };
       createParticipantPostForm(property);
     })
-    .catch(() => {
-      console.log('Erro ao criar formulário');
-    });
+    .catch(() => {});
 }
 
 export async function createPreForm(props) {
@@ -60,7 +57,6 @@ export async function createPreForm(props) {
       updatedAt: brazilianDate,
     })
     .then((response) => {
-      console.log('Formulário cadastrado');
       var property = {
         form: response.key,
         name: props.name,
@@ -71,16 +67,13 @@ export async function createPreForm(props) {
       };
       createParticipantPreForm(property);
     })
-    .catch(() => {
-      console.log('Erro ao criar formulário');
-    });
+    .catch(() => {});
 }
 
 export async function readForm(props) {
   const formRef = await database.ref(`form/${props}`).get();
 
   if (!formRef.exists()) {
-    console.log('Form does not exists.');
     return false;
   } else {
     return formRef;

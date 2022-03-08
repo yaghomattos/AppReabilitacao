@@ -11,7 +11,6 @@ export async function readSelectExercise(props) {
     });
 
   if (!selectExercise) {
-    console.log('selectExercise does not exists.');
     return;
   } else {
     return selectExerciseRef;
