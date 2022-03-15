@@ -10,8 +10,8 @@ export async function createParticipantPreForm(props) {
       className: props.className,
       participant: props.participant,
       form: props.form,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: props.createdAt,
+      updatedAt: props.updatedAt,
     })
     .then(() => {
       return true;
@@ -31,8 +31,8 @@ export async function createParticipantPostForm(props) {
       className: props.className,
       participant: props.participant,
       form: props.form,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: props.createdAt,
+      updatedAt: props.updatedAt,
     })
     .then(() => {
       return true;
