@@ -1,38 +1,43 @@
 import { Ionicons } from '@expo/vector-icons';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { TimerContext } from '../../context/timer';
 import styles from './styles';
 
 export const TimerUp = () => {
-  const { seconds, setSeconds } = useContext(TimerContext);
+  const { value, setValue } = useContext(TimerContext);
 
-  const [start, setStart] = useState(false);
-  const [restart, setRestart] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
 
-  useEffect(() => {
-    if (start) {
-      if (restart) {
-        setSeconds(0);
-      } else {
-        setTimeout(function () {
-          setSeconds(seconds + 1);
-        }, 1000);
-      }
-    }
-  });
+  const [customInterval, setCustomInterval] = useState('');
 
   function startTimer() {
-    setStart(true);
+    setCustomInterval(
+      setInterval(() => {
+        updateTimer();
+      }, 1000)
+    );
   }
 
   function restartTimer() {
-    setRestart(true);
+    setMinutes(0);
+    setSeconds(0);
+  }
+
+  function updateTimer() {
+    setSeconds((prevState) => {
+      if (prevState + 1 == 60) setMinutes(minutes + 1);
+      return prevState + 1;
+    });
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> {seconds + ' segundos'}</Text>
+      <Text style={styles.title}>
+        {minutes < 10 ? '0' + minutes : minutes}:
+        {seconds < 10 ? '0' + seconds : seconds}
+      </Text>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           onPress={() => {
