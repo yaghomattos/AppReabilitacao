@@ -26,6 +26,7 @@ export async function createPostForm(props) {
     })
     .then((response) => {
       var property = {
+        reference: props.reference,
         form: response.key,
         name: props.name,
         className: props.className,
