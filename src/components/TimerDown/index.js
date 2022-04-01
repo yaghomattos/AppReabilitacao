@@ -5,7 +5,7 @@ import styles from './styles';
 
 export const TimerDown = ({ value }) => {
   const [seconds, setSeconds] = useState(value % 60);
-  const [minutes, setMinutes] = useState(value / 60);
+  const [minutes, setMinutes] = useState(Math.floor(value / 60));
 
   const [customInterval, setCustomInterval] = useState('');
 
@@ -18,7 +18,7 @@ export const TimerDown = ({ value }) => {
   }
 
   function restartTimer() {
-    setMinutes(value / 60);
+    setMinutes(Math.floor(value / 60));
     setSeconds(value % 60);
   }
 

@@ -26,6 +26,7 @@ export const TimerUp = () => {
   }
 
   function updateTimer() {
+    setValue(prevState);
     setSeconds((prevState) => {
       if (prevState + 1 == 60) setMinutes(minutes + 1);
       return prevState + 1;
