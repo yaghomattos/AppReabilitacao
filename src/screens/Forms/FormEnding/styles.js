@@ -1,50 +1,41 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#0065A4',
-  },
   container: {
     flex: 1,
-    paddingBottom: 50,
-    justifyContent: 'center',
-    backgroundColor: '#3E9ACD',
+    backgroundColor: '#76BCAA',
   },
   form: {
+    flex: 1,
+    paddingTop: Dimensions.get('window').height * 0.017,
     alignItems: 'center',
   },
-  inputName: {
-    color: '#fff',
-    fontSize: 15,
-    paddingBottom: 10,
+  inputBox: {
+    width: Dimensions.get('window').width * 0.88,
+    marginBottom: 8,
+    borderBottomWidth: 1,
   },
-  input: {
-    width: '20%',
-    height: 40,
-    paddingHorizontal: 20,
-    marginBottom: 10,
-    backgroundColor: '#F4F4F4',
-    borderRadius: 10,
-  },
-  sliderPosition: {
-    color: '#fff',
+  label: {
+    paddingTop: 5,
     fontSize: 12,
   },
+  input: {
+    width: Dimensions.get('window').width * 0.88,
+    fontSize: 14,
+  },
   button: {
-    width: 100,
-    height: 50,
-    marginTop: 20,
-    borderRadius: 10,
+    flexDirection: 'row',
+    width: Dimensions.get('window').width * 0.88,
+    height: Dimensions.get('window').height * 0.07,
+    marginTop: Dimensions.get('window').height * 0.1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#384955',
+    backgroundColor: '#222222',
   },
   text_label: {
-    color: '#fff',
+    color: '#fefefe',
     fontSize: 15,
+    paddingLeft: 10,
   },
 });
 

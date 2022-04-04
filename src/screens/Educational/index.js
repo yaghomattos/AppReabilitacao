@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, View } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
 import Header from '../../components/Header';
 import { database } from '../../services/firebase';
 import styles from './styles';
-
 export function Educational(props) {
   const [messages, setMessages] = useState([]);
   const [results, setResults] = useState([]);
@@ -62,9 +61,27 @@ export function Educational(props) {
     );
   }
 
+  function renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          left: {
+            backgroundColor: '#565755',
+          },
+        }}
+        textStyle={{
+          left: {
+            color: '#fefefe',
+          },
+        }}
+      />
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Recomendações Educacionais" />
+      <Header title="Educacional" />
       <GiftedChat
         messages={
           results &&
@@ -81,6 +98,7 @@ export function Educational(props) {
         textInputStyle={{ display: 'none' }}
         scrollToBottomComponent={scrollToBottomComponent}
         renderLoading={renderLoading}
+        renderBubble={renderBubble}
       />
     </SafeAreaView>
   );

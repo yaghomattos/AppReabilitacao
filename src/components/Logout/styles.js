@@ -1,29 +1,27 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
-    paddingVertical: 0,
+    flex: 0.4,
+    marginTop: Dimensions.get('window').height * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
-    backgroundColor: '#f5f5f5',
   },
   form: {
-    width: '40%',
-    maxWidth: 200,
+    width: Dimensions.get('window').width * 0.68,
   },
   button: {
+    flexDirection: 'row',
+    height: Dimensions.get('window').height * 0.08,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 35,
-    backgroundColor: '#DE726A',
-    borderRadius: 10,
+    backgroundColor: '#546F7A',
   },
   button_label: {
-    color: '#000',
-    fontSize: 15,
+    fontSize: 16,
+    paddingLeft: 10,
     fontWeight: 'bold',
+    color: '#fefefe',
   },
 });
 

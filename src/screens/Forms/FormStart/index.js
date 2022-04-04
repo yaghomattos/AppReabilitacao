@@ -1,8 +1,9 @@
+import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import {
-  KeyboardAvoidingView,
   LogBox,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -90,77 +91,70 @@ export function FormStart(props) {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={'height'}
-      keyboardVerticalOffset="-213"
-      style={{ flex: 1, backgroundColor: '#3E9ACD' }}
-    >
+    <View style={styles.container}>
       <Header title="Informações inicias" />
-      <View style={styles.container}>
+      <ScrollView>
         <View style={styles.form}>
           {results.frequency != false ? (
-            <>
-              <Text style={styles.inputName}>{'Frequência Cardíaca'}</Text>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>{'Frequência Cardíaca'}</Text>
               <TextInput
                 style={styles.input}
                 value={frequency}
-                placeholder={'digitar'}
                 onChangeText={(text) => setFrequency(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           {results.saturation != false ? (
-            <>
-              <Text style={styles.inputName}>{'Saturação'}</Text>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>{'Saturação'}</Text>
               <TextInput
                 style={styles.input}
                 value={saturation}
-                placeholder={'digitar'}
                 onChangeText={(text) => setSaturation(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           {results.dyspnea != false ? (
-            <>
-              <Text style={styles.inputName}>{'Falta de Ar'}</Text>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>{'Falta de Ar'}</Text>
               <TextInput
                 style={styles.input}
                 value={dyspnea}
-                placeholder={'digitar'}
                 onChangeText={(text) => setDyspnea(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           {results.fatigue != false ? (
-            <>
-              <Text style={styles.inputName}>{'Cansaço'}</Text>
+            <View style={styles.inputBox}>
+              <Text style={styles.label}>{'Cansaço'}</Text>
               <TextInput
                 style={styles.input}
                 value={fatigue}
-                placeholder={'digitar'}
                 onChangeText={(text) => setFatigue(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           <TouchableOpacity onPress={() => handleSave()}>
             <View style={styles.button}>
-              <Text style={styles.text_label}>{'Continuar'}</Text>
+              <Feather name="check" size={24} color="#fefefe" />
+              <Text style={styles.text_label}>{'Salvar'}</Text>
             </View>
           </TouchableOpacity>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </ScrollView>
+    </View>
   );
 }

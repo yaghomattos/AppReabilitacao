@@ -44,21 +44,13 @@ export const ListSelectTest = (props) => {
       <HeaderDate />
       <View style={styles.viewTitle}>
         <Text style={styles.title}>{'Testes'}</Text>
-        <View style={styles.listContainer}>
+        <View style={styles.viewList}>
           <FlatList
             data={test}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <List.Item
-                style={{
-                  width: 342,
-                  height: item.description.length,
-                  minHeight: 80,
-                  justifyContent: 'center',
-                  marginVertical: 38,
-                  borderWidth: 1,
-                  borderRadius: 8,
-                }}
+                style={styles.itemContainer}
                 title={item.name}
                 titleNumberOfLines={1}
                 titleStyle={styles.listTitle}
@@ -67,14 +59,7 @@ export const ListSelectTest = (props) => {
                 descriptionNumberOfLines={100}
                 onPress={() => navigation.navigate('Orientation', item)}
                 left={() => (
-                  <Image
-                    style={{
-                      width: '20%',
-                      height: 50,
-                      marginHorizontal: 5,
-                    }}
-                    source={{ uri: item.preview }}
-                  />
+                  <Image style={styles.image} source={{ uri: item.preview }} />
                 )}
               />
             )}

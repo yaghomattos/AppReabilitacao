@@ -4,7 +4,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
 
-const Header = ({ title }) => {
+const HeaderHome = ({ title }) => {
   const navigation = useNavigation();
 
   return (
@@ -17,9 +17,10 @@ const Header = ({ title }) => {
           onPress={() => navigation.goBack()}
         />
         <Text style={styles.header_text}>{title}</Text>
+        <Ionicons name="home" size={24} color="transparent" />
       </View>
     </View>
   );
 };
 
-export default Header;
+export default HeaderHome;

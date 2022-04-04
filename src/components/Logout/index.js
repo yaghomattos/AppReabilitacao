@@ -1,3 +1,4 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
@@ -25,6 +26,7 @@ export const Logout = () => {
       <View style={styles.form}>
         <TouchableOpacity onPress={() => userLogout()}>
           <View style={styles.button}>
+            <MaterialIcons name="logout" size={24} color="#fefefe" />
             <Text style={styles.button_label}>{'Sair'}</Text>
           </View>
         </TouchableOpacity>

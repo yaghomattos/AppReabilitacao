@@ -1,48 +1,61 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  keyboard: {
+  container: {
     flex: 1,
-    backgroundColor: '#0065A4',
+    justifyContent: 'center',
+    backgroundColor: '#76BCAA',
+  },
+  scrollview: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   wrapper: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0065A4',
   },
   logo: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 150,
-    height: 150,
-    borderRadius: 30,
-    backgroundColor: '#384955',
+  },
+  icon: {
+    width: 125,
+    height: 125,
+  },
+  name: {
+    marginTop: 25,
+    color: '#222222',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   form: {
-    width: 280,
-    alignItems: 'center',
+    width: Dimensions.get('window').width * 0.88,
+    height: Dimensions.get('window').height * 0.08,
     marginTop: '15%',
+    borderWidth: 1,
+    paddingLeft: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   input: {
-    width: 250,
-    height: 52,
-    paddingHorizontal: 20,
-    marginBottom: "20%",
-    backgroundColor: '#F4F4F4',
-    borderRadius: 10,
+    width: Dimensions.get('window').width * 0.76,
+    height: Dimensions.get('window').height * 0.07,
+    paddingLeft: 5,
   },
   button: {
+    flexDirection: 'row',
+    width: Dimensions.get('window').width * 0.68,
+    height: Dimensions.get('window').height * 0.08,
+    marginTop: '12%',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 180,
-    height: 60,
-    borderRadius: 10,
-    backgroundColor: '#384955',
+    backgroundColor: '#222222',
   },
   text_label: {
-    color: '#fff',
+    color: '#fefefe',
     fontSize: 15,
+    paddingLeft: 10,
   },
 });
 

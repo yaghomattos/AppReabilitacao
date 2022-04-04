@@ -2,23 +2,22 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#3E9ACD',
     alignItems: 'center',
-    height: 100,
+    justifyContent: 'center',
   },
   backView: {
+    flexDirection: 'row',
     width: '100%',
-    paddingStart: 20,
     margin: 30,
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
   },
-  back: {
-    color: '#fff',
+  icon: {
+    color: '#222222',
   },
   header_text: {
-    color: '#fff',
-    fontSize: 18,
-    paddingLeft: '10%',
-    paddingTop: 14,
+    color: '#222222',
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });

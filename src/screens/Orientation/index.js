@@ -1,12 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
-import { Divider, List } from 'react-native-paper';
-import { Button } from '../../components/Button/index';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { List } from 'react-native-paper';
 import Header from '../../components/Header';
 import { database } from '../../services/firebase';
 import styles from './styles';
-
 export const Orientation = (props) => {
+  const navigation = useNavigation();
+
   const [orientation, setOrientation] = useState('');
 
   const provider = props.route.params.id;
@@ -40,34 +41,33 @@ export const Orientation = (props) => {
   }, [orientation]);
 
   return (
-    <>
-      <View style={styles.container}>
-        <Header title="Orientações" />
-        <View style={styles.backgroundList}>
-          <View style={styles.viewList}>
-            <FlatList
-              data={orientation}
-              keyExtractor={(item) => item.id}
-              ItemSeparatorComponent={() => <Divider style={styles.divider} />}
-              renderItem={({ item }) => (
+    <View style={styles.container}>
+      <Header title="Orientações" />
+      <View style={styles.background}>
+        <View style={styles.viewList}>
+          <FlatList
+            data={orientation}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={styles.itemContainer}>
                 <List.Item
-                  style={{
-                    width: 350,
-                    borderRadius: 5,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: '#6f6f6f',
-                  }}
+                  style={styles.item}
                   title={item.orientation}
                   titleNumberOfLines={100}
                   titleStyle={styles.itemTitle}
                 />
-              )}
-            />
-          </View>
-          <Button title="Continuar" onPress="FormStart" props={propertys} />
+              </View>
+            )}
+          />
         </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('FormStart', propertys)}
+        >
+          <View style={styles.button}>
+            <Text style={styles.text_label}>{'Continuar'}</Text>
+          </View>
+        </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 };

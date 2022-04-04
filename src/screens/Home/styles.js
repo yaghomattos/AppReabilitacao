@@ -1,29 +1,70 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3E9ACD',
+    backgroundColor: '#76BCAA',
   },
   header: {
-    justifyContent: 'center',
-    height: '30%',
+    flexDirection: 'row',
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
-  header_text: {
-    color: '#f0f0f0',
-    fontSize: 18,
-    paddingLeft: '10%',
-  },
-  header_text_bold: {
-    color: '#fff',
+  app_name: {
+    color: '#000',
+    fontSize: 24,
     fontWeight: 'bold',
   },
+  welcome: {
+    justifyContent: 'center',
+    marginTop: Dimensions.get('window').height * 0.05,
+    marginLeft: Dimensions.get('window').height * 0.03,
+  },
+  welcome_text: {
+    color: '#000',
+    fontSize: 22,
+  },
+  welcome_text_bold: {
+    color: '#000',
+    fontWeight: 'bold',
+  },
+  alignDivider: {
+    alignItems: 'center',
+  },
+  divider: {
+    width: Dimensions.get('window').width * 0.88,
+    height: 1,
+    marginBottom: Dimensions.get('window').height * 0.05,
+    alignItems: 'center',
+    color: '#565755',
+  },
   background: {
-    flex: 2,
-    height: '100%',
-    backgroundColor: '#f5f5f5',
-    borderTopStartRadius: 20,
-    borderTopEndRadius: 20,
+    marginBottom: Dimensions.get('window').height * 0.04,
+    alignItems: 'center',
+  },
+  menu: {
+    flexDirection: 'row',
+    width: Dimensions.get('window').width * 0.88,
+    marginBottom: Dimensions.get('window').height * 0.019,
+    justifyContent: 'space-around',
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: Dimensions.get('window').width * 0.41,
+    height: Dimensions.get('window').width * 0.33,
+    borderRadius: 5,
+    backgroundColor: '#fefefe',
+  },
+  button_label: {
+    color: '#000',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  fake_button: {
+    width: Dimensions.get('window').width * 0.4,
+    height: Dimensions.get('window').width * 0.33,
   },
 });
 

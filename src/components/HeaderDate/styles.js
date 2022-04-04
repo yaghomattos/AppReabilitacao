@@ -5,23 +5,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    height: '19%',
+    marginTop: 22,
   },
   back: {
-    color: '#fff',
+    color: '#222222',
   },
   separate: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#3E9ACD',
+    backgroundColor: '#76BCAA',
   },
   header_text: {
-    color: '#fff',
+    color: '#222222',
     fontSize: 16,
     paddingLeft: '6%',
   },
   header_text_bold: {
-    color: '#fff',
+    color: '#222222',
     fontSize: 20,
     fontWeight: 'bold',
     paddingLeft: '6%',

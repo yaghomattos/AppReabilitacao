@@ -1,80 +1,55 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3E9ACD',
-  },
-  title: {
-    marginRight: '39%',
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
+    backgroundColor: '#76BCAA',
   },
   videoBox: {
-    height: '50%',
     alignItems: 'center',
-    marginTop: 0,
-    marginHorizontal: 20,
-    paddingTop: 10,
-    borderTopStartRadius: 8,
-    borderTopEndRadius: 8,
-    backgroundColor: '#fFf',
+    marginTop: 30,
+    marginBottom: 70,
   },
   videoItem: {
-    width: '92%',
-    height: '95%',
+    width: Dimensions.get('window').width * 0.86,
+    height: Dimensions.get('window').height * 0.4,
     resizeMode: 'stretch',
     alignItems: 'center',
   },
+  infoBox: {},
   description: {
     height: '30%',
     alignItems: 'center',
-    paddingBottom: 10,
-    marginHorizontal: 20,
-    borderBottomStartRadius: 8,
-    borderBottomEndRadius: 8,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
   },
   paramsTitle: {
-    paddingTop: 10,
     fontSize: 18,
     fontWeight: 'bold',
   },
   paramsBox: {
-    width: '15%',
     alignItems: 'center',
-    borderRadius: 4,
-    backgroundColor: '#C4C4C4',
   },
   paramsBox2: {
-    width: '45%',
-    height: '40%',
     alignItems: 'center',
-    borderRadius: 4,
-    backgroundColor: '#C4C4C4',
   },
   timer: {
     width: '30%',
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 4,
-    backgroundColor: '#C4C4C4',
   },
   params: {
     fontSize: 18,
   },
   button: {
-    width: 100,
-    height: 50,
-    borderRadius: 10,
+    width: Dimensions.get('window').width * 0.68,
+    height: Dimensions.get('window').height * 0.08,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#384955',
+    backgroundColor: '#222222',
   },
   text_label: {
-    color: '#fff',
+    color: '#fefefe',
     fontSize: 15,
   },
 });

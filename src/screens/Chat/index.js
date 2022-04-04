@@ -1,21 +1,20 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
-import { Avatar, IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
+import Header from '../../components/Header';
 import { database } from '../../services/firebase';
 import styles from './styles';
 
 export function Chat(props) {
-  const navigation = useNavigation();
-
   const [messages, setMessages] = useState([]);
   const [results, setResults] = useState([]);
 
   var participant = props.route.params.id;
   var user = props.route.params.user;
   var adminName = 'Terapeuta';
+
+  if (props.route.params.userName) adminName = props.route.params.userName;
 
   useEffect(() => {
     var li = [];
@@ -75,7 +74,7 @@ export function Chat(props) {
     return (
       <Send {...props}>
         <View style={styles.sendingContainer}>
-          <IconButton icon="send-circle" size={40} color="#000" />
+          <IconButton icon="send-circle" size={40} color="#009788" />
         </View>
       </Send>
     );
@@ -84,7 +83,7 @@ export function Chat(props) {
   function scrollToBottomComponent() {
     return (
       <View style={styles.bottomComponentContainer}>
-        <IconButton icon="chevron-double-down" size={36} color="#384955" />
+        <IconButton icon="chevron-double-down" size={36} color="#546F7A" />
       </View>
     );
   }
@@ -92,7 +91,7 @@ export function Chat(props) {
   function renderLoading() {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#384955" />
+        <ActivityIndicator size="large" color="#546F7A" />
       </View>
     );
   }
@@ -103,10 +102,18 @@ export function Chat(props) {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#3E9ACD',
+            backgroundColor: '#009788',
           },
           left: {
-            backgroundColor: '#fff',
+            backgroundColor: '#565755',
+          },
+        }}
+        textStyle={{
+          right: {
+            color: '#fefefe',
+          },
+          left: {
+            color: '#fefefe',
           },
         }}
       />
@@ -116,19 +123,7 @@ export function Chat(props) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Ionicons
-          name="arrow-back"
-          size={24}
-          style={styles.back}
-          onPress={() => navigation.goBack()}
-        />
-        <View style={styles.avatarContainer}>
-          <Avatar.Image
-            size={100}
-            style={styles.avatar}
-            source={require('../../assets/profile.jpg')}
-          />
-        </View>
+        <Header title="Chat" />
         <View style={styles.person}>
           <Text style={styles.text}>{adminName}</Text>
         </View>

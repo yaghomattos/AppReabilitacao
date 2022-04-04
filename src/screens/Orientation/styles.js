@@ -1,38 +1,45 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3E9ACD',
+    backgroundColor: '#76BCAA',
   },
-  backgroundList: {
-    height: '90%',
-    backgroundColor: '#f5f5f5',
-    borderTopStartRadius: 15,
-    borderTopEndRadius: 15,
+  background: {
+    flex: 1,
+    alignItems: 'center',
   },
   viewList: {
-    height: '80%',
-    paddingTop: 10,
+    height: Dimensions.get('window').height * 0.68,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    width: Dimensions.get('window').width * 0.88,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#565755',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    borderTopStartRadius: 15,
-    borderTopEndRadius: 15,
   },
   item: {
-    width: 350,
-    height: 100,
-    marginTop: 10,
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#afafaf',
-  },
-  divider: {
-    height: 3,
-    backgroundColor: '#fff',
+    width: Dimensions.get('window').width * 0.79,
   },
   itemTitle: {
-    fontSize: 22,
-    color: '#fff',
+    fontSize: 18,
+    color: '#222222',
+  },
+  button: {
+    width: Dimensions.get('window').width * 0.88,
+    height: Dimensions.get('window').height * 0.07,
+    marginTop: Dimensions.get('window').height * 0.04,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#000',
+  },
+  text_label: {
+    color: '#fefefe',
+    fontSize: 15,
   },
 });
 

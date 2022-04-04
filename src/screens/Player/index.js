@@ -1,25 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  Image,
-  SafeAreaView,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { updateSelectExercise } from '../../components/CRUDs/SelectExercise/index';
 import { updateSelectTest } from '../../components/CRUDs/SelectTest/index';
 import Header from '../../components/Header';
 import { TimerDown } from '../../components/TimerDown/index';
 import { TimerUp } from '../../components/TimerUp/index';
-import { TimerContext } from '../../context/timer';
 import styles from './styles';
 
 export function Player(props) {
   const navigation = useNavigation();
-
-  const { seconds, setSeconds } = useContext(TimerContext);
 
   const [test, setTest] = useState(false);
   const [enable, setEnable] = useState(true);
@@ -37,9 +27,6 @@ export function Player(props) {
   useEffect(() => {
     if (className == 'test') setTest(true);
     else setSets(props.route.params.sets);
-
-    if (timer != '') setSeconds(timer);
-    else setSeconds(0);
   }, []);
 
   async function Check() {
@@ -52,13 +39,12 @@ export function Player(props) {
   }
 
   return (
-    <>
-      <StatusBar />
-      <SafeAreaView style={styles.container}>
-        <Header title={name} />
-        <View style={styles.videoBox}>
-          <Image source={{ uri: video }} style={styles.videoItem} />
-        </View>
+    <View style={styles.container}>
+      <Header title={name} />
+      <View style={styles.videoBox}>
+        <Image source={{ uri: video }} style={styles.videoItem} />
+      </View>
+      <View style={styles.infoBox}>
         <View style={styles.description}>
           <Text style={styles.paramsTitle}>
             {test
@@ -109,7 +95,7 @@ export function Player(props) {
             </View>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    </>
+      </View>
+    </View>
   );
 }

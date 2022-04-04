@@ -1,8 +1,9 @@
+import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import React, { useContext, useEffect, useState } from 'react';
 import {
-  KeyboardAvoidingView,
   LogBox,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -27,6 +28,7 @@ export function FormEnding(props) {
   const [dyspnea, setDyspnea] = useState('');
   const [fatigue, setFatigue] = useState('');
   const [results, setResults] = useState('');
+  const [reference, setReference] = useState('');
 
   const participant = props.route.params.participant;
   const exerciseOrTest = props.route.params.className;
@@ -50,10 +52,12 @@ export function FormEnding(props) {
                 fatigue: child.val().fatigue,
                 reps: child.val().reps,
                 timer: child.val().timer,
+                reference: child.val().reference,
               };
             }
           });
           setResults(li);
+          setReference(results.reference);
         });
     } else {
       database
@@ -90,6 +94,7 @@ export function FormEnding(props) {
       participant: participant,
       className: exerciseOrTest,
       name: results.name,
+      reference: reference,
     };
 
     createPostForm(data).then(() => {
@@ -98,110 +103,103 @@ export function FormEnding(props) {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={'height'}
-      keyboardVerticalOffset="-213"
-      style={{ flex: 1, backgroundColor: '#3E9ACD' }}
-    >
+    <View style={styles.container}>
       <Header title="Informações finais" />
-      <View style={styles.container}>
+      <ScrollView>
         <View style={styles.form}>
           {exerciseOrTest != 'test' ? null : results.reps != '' ? (
             results.timer != '' ? (
-              <>
-                <Text style={styles.inputName}>{'Número de repetições'}</Text>
+              <View style={styles.inputBox}>
+                <Text style={styles.label}>{'Número de repetições'}</Text>
                 <TextInput
                   style={styles.input}
                   value={reps}
-                  placeholder={'digitar'}
                   onChangeText={(text) => setReps(text)}
                   keyboardType={'numeric'}
                   maxLength={3}
                 />
-              </>
+              </View>
             ) : (
-              <>
-                <Text style={styles.inputName}>{'Tempo'}</Text>
-                <Text style={styles.inputName}>{seconds + ' segundos'}</Text>
-              </>
+              <View style={styles.inputBox}>
+                <Text style={styles.label}>{'Tempo'}</Text>
+                <Text style={styles.label}>
+                  {Math.floor(seconds / 60) + ':' + (seconds % 60)}
+                </Text>
+              </View>
             )
           ) : (
-            <>
+            <View style={styles.inputBox}>
               <Text style={styles.inputName}>{'Número de repetições'}</Text>
               <TextInput
                 style={styles.input}
                 value={reps}
-                placeholder={'digitar'}
                 onChangeText={(text) => setReps(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           )}
 
           {results.frequency != false ? (
-            <>
+            <View style={styles.inputBox}>
               <Text style={styles.inputName}>{'Frequência Cardíaca'}</Text>
               <TextInput
                 style={styles.input}
                 value={frequency}
-                placeholder={'digitar'}
                 onChangeText={(text) => setFrequency(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           {results.saturation != false ? (
-            <>
+            <View style={styles.inputBox}>
               <Text style={styles.inputName}>{'Saturação'}</Text>
               <TextInput
                 style={styles.input}
                 value={saturation}
-                placeholder={'digitar'}
                 onChangeText={(text) => setSaturation(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           {results.dyspnea != false ? (
-            <>
+            <View style={styles.inputBox}>
               <Text style={styles.inputName}>{'Falta de Ar'}</Text>
               <TextInput
                 style={styles.input}
                 value={dyspnea}
-                placeholder={'digitar'}
                 onChangeText={(text) => setDyspnea(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           {results.fatigue != false ? (
-            <>
+            <View style={styles.inputBox}>
               <Text style={styles.inputName}>{'Cansaço'}</Text>
               <TextInput
                 style={styles.input}
                 value={fatigue}
-                placeholder={'digitar'}
                 onChangeText={(text) => setFatigue(text)}
                 keyboardType={'numeric'}
                 maxLength={3}
               />
-            </>
+            </View>
           ) : null}
 
           <TouchableOpacity onPress={() => handleSave()}>
             <View style={styles.button}>
-              <Text style={styles.text_label}>{'Continuar'}</Text>
+              <Feather name="check" size={24} color="#fefefe" />
+              <Text style={styles.text_label}>{'Salvar'}</Text>
             </View>
           </TouchableOpacity>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </ScrollView>
+    </View>
   );
 }
