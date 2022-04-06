@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { createPostForm } from '../../../components/CRUDs/Form/index';
 import Header from '../../../components/Header';
-import { TimerContext } from '../../../context/timer';
+import { TimerContext } from '../../../context/Timer';
 import { database } from '../../../services/firebase';
 import styles from './styles';
 

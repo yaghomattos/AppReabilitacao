@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useContext, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { TimerContext } from '../../context/timer';
+import { TimerContext } from '../../context/Timer';
 import styles from './styles';
 
 export const TimerUp = () => {
