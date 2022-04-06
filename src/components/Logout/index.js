@@ -1,23 +1,25 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { StackActions, useNavigation } from '@react-navigation/native';
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useContext } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { AuthContext } from '../../context/Auth';
 import { auth } from '../../services/firebase';
 import styles from './styles';
 
 export const Logout = () => {
   const navigation = useNavigation();
+  const { isSignedIn, setSignedIn } = useContext(AuthContext);
 
   const userLogout = async function () {
     auth
       .signOut()
       .then(() => {
         Alert.alert('Participante deslogado!');
-        navigation.dispatch(StackActions.popToTop());
+        setSignedIn(false);
       })
       .catch(() => {
         Alert.alert('Erro ao deslogar!');
-        navigation.dispatch(StackActions.popToTop());
+        setSignedIn(false);
       });
   };
 

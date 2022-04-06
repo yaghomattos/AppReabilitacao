@@ -1,6 +1,6 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Alert,
   Image,
@@ -11,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
+import { AuthContext } from '../../context/Auth';
 import { auth } from '../../services/firebase';
 import styles from './styles';
 
@@ -19,11 +20,13 @@ export const Login = () => {
 
   const [CPF, setCPF] = useState('');
 
+  const { isSignedIn, setSignedIn } = useContext(AuthContext);
+
   async function doUserLogIn() {
     auth
       .signInWithEmailAndPassword(`${CPF}@participant.com`, '123456')
       .then((user) => {
-        navigation.navigate('Home', CPF);
+        setSignedIn(true);
       })
       .catch(() => {
         Alert.alert('CPF inválido');
