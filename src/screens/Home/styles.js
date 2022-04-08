@@ -5,20 +5,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#76BCAA',
   },
-  header: {
-    flexDirection: 'row',
-    marginTop: 20,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  app_name: {
-    color: '#000',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
   welcome: {
     justifyContent: 'center',
-    marginTop: Dimensions.get('window').height * 0.05,
+    marginTop: Dimensions.get('window').height * 0.03,
     marginLeft: Dimensions.get('window').height * 0.03,
   },
   welcome_text: {

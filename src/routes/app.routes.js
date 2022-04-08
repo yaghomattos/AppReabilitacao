@@ -33,7 +33,7 @@ export function AuthRouter() {
 export function FlowRouter() {
   return (
     <NavigationContainer>
-      <FlowStack.Navigator headerMode="none" initialRouteName="Home">
+      <FlowStack.Navigator headerMode="none" initialRouteName="Drawer">
         <FlowStack.Screen name="Home" component={Home} />
         <FlowStack.Screen name="Chat" component={Chat} />
         <FlowStack.Screen name="Educational" component={Educational} />
@@ -68,7 +68,7 @@ function MenuDrawer() {
       }}
       drawerContent={CustomDrawer}
     >
-      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="App Reabilitação" component={Home} />
     </Drawer.Navigator>
   );
 }

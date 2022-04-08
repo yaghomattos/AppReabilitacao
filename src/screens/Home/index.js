@@ -15,15 +15,20 @@ import {
 } from 'react-native';
 import { Divider } from 'react-native-paper';
 import { Logout } from '../../components/Logout/index';
-import { database } from '../../services/firebase';
+import { auth, database } from '../../services/firebase';
 import styles from './styles';
 
-export function Home(props) {
+export function Home() {
   const navigation = useNavigation();
 
-  const cpf = props.route.params;
-
   const [participant, setParticipant] = useState('');
+
+  const user = auth.currentUser;
+  var cpf = '';
+
+  if (user !== null) {
+    cpf = user.displayName;
+  }
 
   useEffect(() => {
     database
@@ -53,11 +58,6 @@ export function Home(props) {
     <View style={styles.container}>
       <ScrollView>
         <StatusBar barStyle="dark-content" backgroundColor="#76BCAA" />
-        <View style={styles.header}>
-          <Feather name="menu" size={24} color="#000" />
-          <Text style={styles.app_name}>{'App Reabilitação'}</Text>
-          <Feather name="menu" size={24} color="transparent" />
-        </View>
         <View style={styles.welcome}>
           <Text style={styles.welcome_text}>
             {'Olá, '}
