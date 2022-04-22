@@ -1,27 +1,25 @@
 {
   "expo": {
-    "name": "App Reabilitacao-Participante",
-    "slug": "app-reabilitacao-participante",
+    "name": "App Reabilitacao",
+    "slug": "reabilitacao",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#76BCAA"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ufjf.reabilitacao.participante"
     },
-    "android": {},
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "package": "com.ufjf.reabilitacao.participante"
     },
     "description": ""
   }
