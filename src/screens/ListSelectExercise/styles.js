@@ -7,11 +7,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#76BCAA',
   },
   viewTitle: {
-    flex: 1,
     marginTop: Dimensions.get('window').height * 0.035,
+    marginBottom: Dimensions.get('window').height * 0.02,
   },
   title: {
-    marginBottom: Dimensions.get('window').height * 0.035,
     paddingLeft: Dimensions.get('window').width * 0.07,
     fontSize: 14,
     fontWeight: 'bold',
@@ -20,29 +19,35 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  itemContainer: {
-    flexDirection: 'row',
+  touchable: {
     width: Dimensions.get('window').width * 0.88,
-    height: Dimensions.get('window').height * 0.142,
     marginBottom: 10,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#565755',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    borderColor: '#565755',
+  },
+  itemContainer: {
+    width: Dimensions.get('window').width * 0.88,
+  },
+  imagebox: {
+    marginTop: 1,
+    alignItems: 'center',
+  },
+  image: {
+    width: Dimensions.get('window').width * 0.35,
+    height: Dimensions.get('window').height * 0.15,
+    borderRadius: 5,
   },
   listTitle: {
-    fontSize: 14,
+    marginBottom: 10,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   listDescription: {
-    fontSize: 12,
-  },
-  image: {
-    width: Dimensions.get('window').width * 0.3,
-    height: Dimensions.get('window').height * 0.14,
-    marginLeft: -8,
-    borderRadius: 5,
+    marginBottom: -30,
+    fontSize: 14,
   },
 });
 

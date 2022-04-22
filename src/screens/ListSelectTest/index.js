@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { List } from 'react-native-paper';
 import HeaderDate from '../../components/HeaderDate';
 import { database } from '../../services/firebase';
@@ -40,32 +40,38 @@ export const ListSelectTest = (props) => {
   }, [test]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <HeaderDate />
       <View style={styles.viewTitle}>
         <Text style={styles.title}>{'Testes'}</Text>
-        <View style={styles.viewList}>
-          <FlatList
-            data={test}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <List.Item
-                style={styles.itemContainer}
-                title={item.name}
-                titleNumberOfLines={1}
-                titleStyle={styles.listTitle}
-                description={item.description}
-                descriptionStyle={styles.listDescription}
-                descriptionNumberOfLines={100}
-                onPress={() => navigation.navigate('Orientation', item)}
-                left={() => (
-                  <Image style={styles.image} source={{ uri: item.preview }} />
-                )}
-              />
-            )}
-          />
-        </View>
       </View>
-    </SafeAreaView>
+      <View style={styles.viewList}>
+        <FlatList
+          data={test}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Orientation', item)}
+              style={styles.touchable}
+            >
+              <View style={styles.itemContainer}>
+                <View style={styles.imagebox}>
+                  <Image style={styles.image} source={{ uri: item.preview }} />
+                </View>
+
+                <List.Item
+                  title={item.name}
+                  titleNumberOfLines={3}
+                  titleStyle={styles.listTitle}
+                  description={item.description}
+                  descriptionStyle={styles.listDescription}
+                  descriptionNumberOfLines={100}
+                />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    </View>
   );
 };

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Text, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { List } from 'react-native-paper';
 import HeaderDate from '../../components/HeaderDate';
 import { database } from '../../services/firebase';
@@ -50,19 +50,28 @@ export const ListSelectExercise = (props) => {
             data={exercise}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <List.Item
-                style={styles.itemContainer}
-                title={item.name}
-                titleNumberOfLines={1}
-                titleStyle={styles.listTitle}
-                description={item.description}
-                descriptionStyle={styles.listDescription}
-                descriptionNumberOfLines={100}
+              <TouchableOpacity
                 onPress={() => navigation.navigate('Orientation', item)}
-                left={() => (
-                  <Image style={styles.image} source={{ uri: item.preview }} />
-                )}
-              />
+                style={styles.touchable}
+              >
+                <View style={styles.itemContainer}>
+                  <View style={styles.imagebox}>
+                    <Image
+                      style={styles.image}
+                      source={{ uri: item.preview }}
+                    />
+                  </View>
+                  <List.Item
+                    style={styles.itemContainer}
+                    title={item.name}
+                    titleNumberOfLines={3}
+                    titleStyle={styles.listTitle}
+                    description={item.description}
+                    descriptionStyle={styles.listDescription}
+                    descriptionNumberOfLines={100}
+                  />
+                </View>
+              </TouchableOpacity>
             )}
           />
         </View>
