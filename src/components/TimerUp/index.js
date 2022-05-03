@@ -23,10 +23,11 @@ export const TimerUp = () => {
   function restartTimer() {
     setMinutes(0);
     setSeconds(0);
+    setValue(0);
   }
 
   function updateTimer() {
-    setValue(prevState);
+    setValue(minutes * 60 + seconds);
     setSeconds((prevState) => {
       if (prevState + 1 == 60) setMinutes(minutes + 1);
       return prevState + 1;
