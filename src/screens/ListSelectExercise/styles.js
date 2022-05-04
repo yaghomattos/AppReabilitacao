@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   listDescription: {
-    marginBottom: -30,
     fontSize: 14,
   },
 });
