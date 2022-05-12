@@ -6,11 +6,12 @@ import { AuthRouter, FlowRouter } from './src/routes/app.routes';
 import './src/services/firebase';
 
 const App = () => {
-  const [value, setValue] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const [isSignedIn, setSignedIn] = useState(false);
 
   return (
-    <TimerContext.Provider value={{ value, setValue }}>
+    <TimerContext.Provider value={{ minutes, setMinutes, seconds, setSeconds }}>
       <AuthContext.Provider value={{ isSignedIn, setSignedIn }}>
         {!isSignedIn ? <AuthRouter /> : <FlowRouter />}
       </AuthContext.Provider>
