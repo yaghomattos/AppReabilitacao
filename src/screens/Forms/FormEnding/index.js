@@ -20,7 +20,7 @@ LogBox.ignoreLogs(['Setting a timer']);
 export function FormEnding(props) {
   const navigation = useNavigation();
 
-  const { value, setValue } = useContext(TimerContext);
+  const { minutes, setMinutes, seconds, setSeconds } = useContext(TimerContext);
 
   const [reps, setReps] = useState('');
   const [frequency, setFrequency] = useState('');
@@ -90,7 +90,7 @@ export function FormEnding(props) {
       dyspnea: dyspnea,
       fatigue: fatigue,
       reps: reps,
-      timer: value,
+      timer: minutes * 60 + seconds,
       participant: participant,
       className: exerciseOrTest,
       name: results.name,
@@ -123,11 +123,9 @@ export function FormEnding(props) {
               <View style={styles.inputBox}>
                 <Text style={styles.label}>{'Tempo'}</Text>
                 <Text style={styles.label}>
-                  {(Math.floor(value / 60) < 10
-                    ? '0' + Math.floor(value / 60)
-                    : Math.floor(value / 60)) +
+                  {(minutes < 10 ? '0' + minutes : minutes) +
                     ':' +
-                    (value % 60 < 10 ? '0' + (value % 60) : value % 60)}
+                    (seconds < 10 ? '0' + seconds : seconds)}
                 </Text>
               </View>
             )
