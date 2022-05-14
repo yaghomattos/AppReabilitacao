@@ -1,16 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { TimerContext } from '../../context/Timer';
 import styles from './styles';
 
 export const TimerUp = () => {
-  const { value, setValue } = useContext(TimerContext);
-
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-
-  const [customInterval, setCustomInterval] = useState('');
+  const {
+    minutes,
+    setMinutes,
+    seconds,
+    setSeconds,
+    customInterval,
+    setCustomInterval,
+  } = useContext(TimerContext);
 
   function startTimer() {
     setCustomInterval(
@@ -23,11 +25,9 @@ export const TimerUp = () => {
   function restartTimer() {
     setMinutes(0);
     setSeconds(0);
-    setValue(0);
   }
 
   function updateTimer() {
-    setValue(minutes * 60 + seconds);
     setSeconds((prevState) => {
       if (prevState + 1 == 60) setMinutes(minutes + 1);
       return prevState + 1;
