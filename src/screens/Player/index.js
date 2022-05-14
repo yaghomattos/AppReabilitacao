@@ -1,18 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { updateSelectExercise } from '../../components/CRUDs/SelectExercise/index';
-import { updateSelectTest } from '../../components/CRUDs/SelectTest/index';
 import Header from '../../components/Header';
 import { TimerDown } from '../../components/TimerDown/index';
 import { TimerUp } from '../../components/TimerUp/index';
+import { TimerContext } from '../../context/Timer';
 import styles from './styles';
 
 export function Player(props) {
   const navigation = useNavigation();
 
+  const { customInterval, setCustomInterval } = useContext(TimerContext);
+
   const [test, setTest] = useState(false);
-  const [enable, setEnable] = useState(true);
   const [sets, setSets] = useState('');
 
   const propertys = props.route.params;
@@ -21,7 +21,6 @@ export function Player(props) {
   const video = props.route.params.video;
   const reps = props.route.params.reps;
   const timer = props.route.params.timer;
-  const id = props.route.params.id;
   const className = props.route.params.className;
 
   useEffect(() => {
@@ -29,13 +28,10 @@ export function Player(props) {
     else setSets(props.route.params.sets);
   }, []);
 
-  async function Check() {
-    if (test) {
-      updateSelectTest(id);
-    } else {
-      updateSelectExercise(id);
+  function stopTimer() {
+    if (customInterval) {
+      clearInterval(customInterval);
     }
-    setEnable(false);
   }
 
   return (
@@ -60,11 +56,11 @@ export function Player(props) {
               reps != '' ? (
                 <Text style={styles.params}>{reps}</Text>
               ) : (
-                enable && <TimerDown value={timer} />
+                <TimerDown value={timer} />
               )
             ) : sets == '' ? (
               timer == '' ? null : (
-                enable && <TimerDown value={timer} />
+                <TimerDown value={timer} />
               )
             ) : (
               <Text style={styles.params}>{sets}</Text>
@@ -79,14 +75,14 @@ export function Player(props) {
           </Text>
           <View style={test ? null : sets != '' ? styles.paramsBox : ''}>
             {test && reps != '' ? (
-              enable && <TimerUp />
+              <TimerUp />
             ) : (
               <Text style={styles.params}>{sets == '' ? '' : reps}</Text>
             )}
           </View>
           <TouchableOpacity
             onPress={() => {
-              Check();
+              stopTimer();
               navigation.navigate('FormEnding', propertys);
             }}
           >
