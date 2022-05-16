@@ -45,36 +45,32 @@ export const ListSelectExercise = (props) => {
       <HeaderDate />
       <View style={styles.viewTitle}>
         <Text style={styles.title}>{'Exercícios'}</Text>
-        <View style={styles.viewList}>
-          <FlatList
-            data={exercise}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Orientation', item)}
-                style={styles.touchable}
-              >
-                <View style={styles.itemContainer}>
-                  <View style={styles.imagebox}>
-                    <Image
-                      style={styles.image}
-                      source={{ uri: item.preview }}
-                    />
-                  </View>
-                  <List.Item
-                    style={styles.itemContainer}
-                    title={item.name}
-                    titleNumberOfLines={3}
-                    titleStyle={styles.listTitle}
-                    description={item.description}
-                    descriptionStyle={styles.listDescription}
-                    descriptionNumberOfLines={100}
-                  />
+      </View>
+      <View style={styles.viewList}>
+        <FlatList
+          data={exercise}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Orientation', item)}
+              style={styles.touchable}
+            >
+              <View style={styles.itemContainer}>
+                <View style={styles.imagebox}>
+                  <Image style={styles.image} source={{ uri: item.preview }} />
                 </View>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
+                <List.Item
+                  title={item.name}
+                  titleNumberOfLines={3}
+                  titleStyle={styles.listTitle}
+                  description={item.description}
+                  descriptionStyle={styles.listDescription}
+                  descriptionNumberOfLines={100}
+                />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     </View>
   );
