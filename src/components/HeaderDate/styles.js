@@ -18,13 +18,11 @@ const styles = StyleSheet.create({
   header_text: {
     color: '#222222',
     fontSize: 16,
-    paddingLeft: '6%',
   },
   header_text_bold: {
     color: '#222222',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingLeft: '6%',
   },
 });
 
