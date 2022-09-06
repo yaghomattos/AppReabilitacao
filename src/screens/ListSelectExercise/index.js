@@ -12,10 +12,11 @@ export const ListSelectExercise = (props) => {
   const participant = props.route.params;
 
   const [exercise, setExercise] = useState([]);
+  const [refresh, setRefresh] = useState(null);
 
   useEffect(() => {
     var li = [];
-    database
+    const onValueChange = database
       .ref('selectExercise')
       .get()
       .then((snapshot) => {
@@ -36,9 +37,12 @@ export const ListSelectExercise = (props) => {
             });
           }
         });
+        if (refresh === null) setRefresh('');
         setExercise(li);
       });
-  }, [exercise]);
+
+    return () => database.ref('selectExercise').off('value', onValueChange);
+  }, []);
 
   return (
     <View style={styles.container}>

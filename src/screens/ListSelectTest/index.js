@@ -12,32 +12,33 @@ export const ListSelectTest = (props) => {
   const participant = props.route.params;
 
   const [test, setTest] = useState([]);
+  const [refresh, setRefresh] = useState(null);
 
   useEffect(() => {
     var li = [];
-    database
-      .ref('selectTest')
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((child) => {
-          if (child.val().participant == participant.id) {
-            li.push({
-              test: child.val().test,
-              reps: child.val().reps,
-              timer: child.val().timer,
-              name: child.val().name,
-              description: child.val().description,
-              video: child.val().video,
-              preview: child.val().preview,
-              participant: child.val().participant,
-              className: 'test',
-              id: child.key,
-            });
-          }
-        });
-        setTest(li);
+    const onValueChange = database.ref('selectTest').on('value', (snapshot) => {
+      snapshot.forEach((child) => {
+        if (child.val().participant == participant.id) {
+          li.push({
+            test: child.val().test,
+            reps: child.val().reps,
+            timer: child.val().timer,
+            name: child.val().name,
+            description: child.val().description,
+            video: child.val().video,
+            preview: child.val().preview,
+            participant: child.val().participant,
+            className: 'test',
+            id: child.key,
+          });
+        }
       });
-  }, [test]);
+      if (refresh === null) setRefresh('');
+      setTest(li);
+    });
+
+    return () => database.ref('selectTest').off('value', onValueChange);
+  }, []);
 
   return (
     <View style={styles.container}>
