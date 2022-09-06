@@ -8,11 +8,13 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/drawer": "^6.4.1",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/stack": "^5.14.5",
+    "caniuse-lite": "^1.0.30001390",
     "expo": "^44.0.0",
     "firebase": "8.2.3",
     "react": "17.0.1",
