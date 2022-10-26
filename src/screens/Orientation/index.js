@@ -44,22 +44,28 @@ export const Orientation = (props) => {
     <View style={styles.container}>
       <Header title="Orientações" />
       <View style={styles.background}>
-        <View style={styles.viewList}>
-          <FlatList
-            data={orientation}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <View style={styles.itemContainer}>
-                <List.Item
-                  style={styles.item}
-                  title={item.orientation}
-                  titleNumberOfLines={100}
-                  titleStyle={styles.itemTitle}
-                />
-              </View>
-            )}
-          />
-        </View>
+        {orientation.toString() === '' ? (
+          <View style={styles.noOrientation}>
+            <Text style={styles.itemTitle}>{'Sem orientações'}</Text>
+          </View>
+        ) : (
+          <View style={styles.viewList}>
+            <FlatList
+              data={orientation}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <View style={styles.itemContainer}>
+                  <List.Item
+                    style={styles.item}
+                    title={item.orientation}
+                    titleNumberOfLines={100}
+                    titleStyle={styles.itemTitle}
+                  />
+                </View>
+              )}
+            />
+          </View>
+        )}
         <TouchableOpacity
           onPress={() => navigation.navigate('FormStart', propertys)}
         >

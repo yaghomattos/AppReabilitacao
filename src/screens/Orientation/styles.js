@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  noOrientation: {
+    height: Dimensions.get('window').height * 0.34,
+    justifyContent: 'center',
+  },
   viewList: {
     height: Dimensions.get('window').height * 0.68,
   },

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, SafeAreaView, View } from 'react-native';
+import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
 import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
 import Header from '../../components/Header';
@@ -82,24 +82,30 @@ export function Educational(props) {
   return (
     <SafeAreaView style={styles.container}>
       <Header title="Educacional" />
-      <GiftedChat
-        messages={
-          results &&
-          results.map((liveMessage) => ({
-            _id: liveMessage.key,
-            text: liveMessage.content,
-            createdAt: liveMessage.createdAt,
-            user: {
-              _id: 2,
-              name: adminName,
-            },
-          }))
-        }
-        textInputStyle={{ display: 'none' }}
-        scrollToBottomComponent={scrollToBottomComponent}
-        renderLoading={renderLoading}
-        renderBubble={renderBubble}
-      />
+      {results.toString() === '' ? (
+        <View style={styles.noData}>
+          <Text style={styles.itemTitle}>{'Nenhum conteúdo encontrado'}</Text>
+        </View>
+      ) : (
+        <GiftedChat
+          messages={
+            results &&
+            results.map((liveMessage) => ({
+              _id: liveMessage.key,
+              text: liveMessage.content,
+              createdAt: liveMessage.createdAt,
+              user: {
+                _id: 2,
+                name: adminName,
+              },
+            }))
+          }
+          textInputStyle={{ display: 'none' }}
+          scrollToBottomComponent={scrollToBottomComponent}
+          renderLoading={renderLoading}
+          renderBubble={renderBubble}
+        />
+      )}
     </SafeAreaView>
   );
 }
