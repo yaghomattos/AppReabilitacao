@@ -17,7 +17,21 @@ const HeaderHome = ({ title }) => {
           onPress={() => navigation.goBack()}
         />
         <Text style={styles.header_text}>{title}</Text>
-        <Ionicons name="home" size={24} color="transparent" />
+        <Ionicons
+          name="home"
+          size={24}
+          style={styles.back}
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: 'Drawer',
+                },
+              ],
+            })
+          }
+        />
       </View>
     </View>
   );

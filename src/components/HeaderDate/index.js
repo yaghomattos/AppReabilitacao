@@ -10,9 +10,22 @@ const HeaderDate = () => {
 
   return (
     <View style={styles.header}>
-      <Ionicons name="arrow-back" size={24} color="transparent" />
+      <Ionicons
+        name="arrow-back"
+        size={24}
+        color="black"
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Drawer',
+              },
+            ],
+          })
+        }
+      />
       <View style={styles.separate}>
-        <Text style={styles.header_text_bold}>{'Olá, Participante'}</Text>
         <Text style={styles.header_text}>{CurrentDate()}</Text>
       </View>
       <Ionicons
