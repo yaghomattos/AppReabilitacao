@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native';
-import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
+import {
+  Bubble,
+  Composer,
+  GiftedChat,
+  InputToolbar,
+  Send,
+} from 'react-native-gifted-chat';
 import { IconButton } from 'react-native-paper';
 import Header from '../../components/Header';
 import { database } from '../../services/firebase';
@@ -72,7 +78,13 @@ export function Chat(props) {
 
   function renderSend(props) {
     return (
-      <Send {...props}>
+      <Send
+        {...props}
+        containerStyle={{
+          borderWidth: 0,
+          width: '16%',
+        }}
+      >
         <View style={styles.sendingContainer}>
           <IconButton icon="send-circle" size={40} color="#009788" />
         </View>
@@ -120,6 +132,20 @@ export function Chat(props) {
     );
   }
 
+  function renderComposer(props) {
+    return (
+      <Composer
+        {...props}
+        multiline={true}
+        placeholder={'Digite sua mensagem'}
+      />
+    );
+  }
+
+  function renderInputToolbar(props) {
+    return <InputToolbar {...props} containerStyle={styles.inputToolbar} />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -145,12 +171,15 @@ export function Chat(props) {
         user={{
           _id: 1,
         }}
-        placeholder="Digite sua mensagem"
         alwaysShowSend
         renderSend={renderSend}
         scrollToBottomComponent={scrollToBottomComponent}
         renderLoading={renderLoading}
         renderBubble={renderBubble}
+        messagesContainerStyle={styles.messages}
+        dateFormat={'DD/MM/YYYY'}
+        renderComposer={renderComposer}
+        renderInputToolbar={renderInputToolbar}
       />
     </SafeAreaView>
   );
