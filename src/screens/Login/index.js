@@ -41,7 +41,7 @@ export const Login = () => {
           <View style={styles.logo}>
             <Image
               style={styles.icon}
-              source={require('../../assets/reab.png')}
+              source={require('../../assets/icon.png')}
             />
             <Text style={styles.name}>{'Redox'}</Text>
           </View>
