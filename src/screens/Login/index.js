@@ -41,9 +41,9 @@ export const Login = () => {
           <View style={styles.logo}>
             <Image
               style={styles.icon}
-              source={require('../../assets/icon.png')}
+              source={require('../../assets/reab.png')}
             />
-            <Text style={styles.name}>{'App Reabilitação'}</Text>
+            <Text style={styles.name}>{'Redox'}</Text>
           </View>
           <View style={styles.form}>
             <Ionicons name="person" size={24} color="black" />

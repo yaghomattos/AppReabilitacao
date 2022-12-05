@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   name: {
     marginTop: 25,
     color: '#222222',
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
   },
   form: {
