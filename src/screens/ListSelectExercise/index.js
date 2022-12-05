@@ -40,8 +40,6 @@ export const ListSelectExercise = (props) => {
         if (refresh === null) setRefresh('');
         setExercise(li);
       });
-
-    return () => database.ref('selectExercise').off('value', onValueChange);
   }, []);
 
   return (

@@ -36,8 +36,6 @@ export const ListSelectTest = (props) => {
       if (refresh === null) setRefresh('');
       setTest(li);
     });
-
-    return () => database.ref('selectTest').off('value', onValueChange);
   }, []);
 
   return (
