@@ -23,7 +23,7 @@ const Drawer = createDrawerNavigator();
 export function AuthRouter() {
   return (
     <NavigationContainer>
-      <AuthStack.Navigator headerMode="none">
+      <AuthStack.Navigator screenOptions={{ headerShown: false }}>
         <AuthStack.Screen name="Login" component={Login} />
       </AuthStack.Navigator>
     </NavigationContainer>
@@ -33,7 +33,10 @@ export function AuthRouter() {
 export function FlowRouter() {
   return (
     <NavigationContainer>
-      <FlowStack.Navigator headerMode="none" initialRouteName="Drawer">
+      <FlowStack.Navigator
+        screenOptions={{ headerShown: false }}
+        initialRouteName="Drawer"
+      >
         <FlowStack.Screen name="Home" component={Home} />
         <FlowStack.Screen name="Chat" component={Chat} />
         <FlowStack.Screen name="Educational" component={Educational} />
