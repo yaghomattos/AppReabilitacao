@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   viewTitle: {
     marginTop: Dimensions.get('window').height * 0.035,
-    marginBottom: Dimensions.get('window').height * 0.02,
+    marginBottom: Dimensions.get('window').height * 0.01,
   },
   title: {
     paddingLeft: Dimensions.get('window').width * 0.07,
@@ -32,21 +32,21 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.88,
   },
   imagebox: {
-    marginTop: 1,
     alignItems: 'center',
   },
   image: {
-    width: Dimensions.get('window').width * 0.35,
-    height: Dimensions.get('window').height * 0.15,
+    width: Dimensions.get('window').width * 0.875,
+    height: Dimensions.get('window').height * 0.375,
     borderRadius: 5,
   },
   listTitle: {
-    marginBottom: 10,
+    marginBottom: 5,
     fontSize: 16,
     fontWeight: 'bold',
   },
   listDescription: {
     fontSize: 14,
+    textAlign: 'justify',
   },
 });
 
