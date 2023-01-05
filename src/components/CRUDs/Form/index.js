@@ -9,7 +9,11 @@ export async function createPostForm(props) {
 
   const date = new Date();
   const brazilianDate =
-    date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    ('00' + date.getDate()).slice(-2) +
+    '/' +
+    ('00' + (date.getMonth() + 1)).slice(-2) +
+    '/' +
+    date.getFullYear();
 
   formRef
     .push({
@@ -44,7 +48,11 @@ export async function createPreForm(props) {
 
   const date = new Date();
   const brazilianDate =
-    date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    ('00' + date.getDate()).slice(-2) +
+    '/' +
+    ('00' + (date.getMonth() + 1)).slice(-2) +
+    '/' +
+    date.getFullYear();
 
   formRef
     .push({
