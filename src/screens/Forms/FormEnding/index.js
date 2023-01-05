@@ -104,7 +104,7 @@ export function FormEnding(props) {
 
   return (
     <View style={styles.container}>
-      <Header title="Informações finais" />
+      <Header title="Informações Finais" />
       <ScrollView>
         <View style={styles.form}>
           {exerciseOrTest != 'test' ? null : results.reps != '' ? (

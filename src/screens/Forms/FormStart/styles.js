@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     marginTop: Dimensions.get('window').height * 0.1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#222222',
+    backgroundColor: '#000',
   },
   text_label: {
     color: '#fefefe',

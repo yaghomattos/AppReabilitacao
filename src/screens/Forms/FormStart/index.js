@@ -92,7 +92,7 @@ export function FormStart(props) {
 
   return (
     <View style={styles.container}>
-      <Header title="Informações inicias" />
+      <Header title="Informações Iniciais" />
       <ScrollView>
         <View style={styles.form}>
           {results.frequency != false ? (

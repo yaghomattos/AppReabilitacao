@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: '12%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#222222',
+    backgroundColor: '#000',
   },
   text_label: {
     color: '#fefefe',

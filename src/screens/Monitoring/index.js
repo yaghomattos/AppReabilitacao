@@ -61,7 +61,7 @@ export function Monitoring(props) {
         <ScrollView horizontal={false}>
           <ScrollView horizontal={true}>
             <View style={styles.formBox}>
-              <Text style={styles.subTitle}>{'Testes feitos:'}</Text>
+              <Text style={styles.subTitle}>{'Testes Feitos:'}</Text>
               <View style={styles.formContainer}>
                 <FlatList
                   nestedScrollEnabled
@@ -81,7 +81,7 @@ export function Monitoring(props) {
                   )}
                 />
               </View>
-              <Text style={styles.subTitle}>{'Exercícios feitos:'}</Text>
+              <Text style={styles.subTitle}>{'Exercícios Feitos:'}</Text>
               <View style={styles.formContainer}>
                 <FlatList
                   nestedScrollEnabled

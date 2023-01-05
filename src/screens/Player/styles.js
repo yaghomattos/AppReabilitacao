@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height * 0.08,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#222222',
+    backgroundColor: '#000',
   },
   text_label: {
     color: '#fefefe',
